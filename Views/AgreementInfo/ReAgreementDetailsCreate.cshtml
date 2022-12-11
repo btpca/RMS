@@ -1,0 +1,1740 @@
+﻿@model IEnumerable<RMS.Models.AgreementInfoDTO>
+@{
+    ViewBag.Title = "Renewal Agreement Details";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+@Html.AntiForgeryToken()
+@Html.ValidationSummary(true)
+@Html.HiddenFor(model => model.FirstOrDefault().ftrCount)
+@Html.HiddenFor(model => model.FirstOrDefault().AdvanceftrCount)
+@Html.HiddenFor(model => model.FirstOrDefault().RIftrCount)
+@Html.HiddenFor(model => model.FirstOrDefault().LIftrCount)
+@Html.HiddenFor(model => model.FirstOrDefault().CCftrCount)
+@Html.HiddenFor(model => model.FirstOrDefault().UIftrCount)
+<section class="content" style="padding-left:6px;">
+    <h5 style="color:darkcyan;"><b>Renewal Agreement Details</b></h5>
+</section>
+<section class="content">
+    <div class="container-fluid">
+        <div class="card card-info card-tabs">
+            <div class="card-header p-0 pt-1">
+                <div id="spinner" style="display: none; padding-top:40px;">
+                    <img id="img-spinner" src="@Url.Content("~/Content/Images/spinner.gif")" alt="Loading" />
+                </div>
+                <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+                    <li class="pt-1 px-3"><h3 class="card-title fas fa-folder-open"></h3></li>
+                    <li class="nav-item">
+                        <a class="nav-link active nav-icon fas fa-university" id="custom-tabs-one-BasicInfo-tab" data-toggle="pill"
+                           href="#custom-tabs-one-BasicInfo" role="tab" aria-controls="custom-tabs-one-BasicInfo" aria-selected="true">&nbsp;&nbsp;Basic</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fas fa-building" id="custom-tabs-one-AgreementInfo-tab" data-toggle="pill"
+                           href="#custom-tabs-one-AgreementInfo" role="tab" aria-controls="custom-tabs-one-AgreementInfo" aria-selected="false">&nbsp;&nbsp;Agreement</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fas fa-star" id="custom-tabs-one-Advance-tab" data-toggle="pill"
+                           href="#custom-tabs-one-Advance" role="tab" aria-controls="custom-tabs-one-Advance" aria-selected="false">&nbsp;&nbsp;Advance</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fas fa-history" id="custom-tabs-one-ReviewInfo-tab" data-toggle="pill"
+                           href="#custom-tabs-one-ReviewInfo" role="tab" aria-controls="custom-tabs-one-ReviewInfo" aria-selected="false">&nbsp;&nbsp;Enhancement</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fas fa-users" id="custom-tabs-one-LandlordInfo-tab" data-toggle="pill"
+                           href="#custom-tabs-one-LandlordInfo" role="tab" aria-controls="custom-tabs-one-LandlordInfo" aria-selected="false">&nbsp;&nbsp;Landlord</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fas fa-tasks" id="custom-tabs-one-CostAllocations-tab" data-toggle="pill"
+                           href="#custom-tabs-one-CostAllocations" role="tab" aria-controls="custom-tabs-one-CostAllocations" aria-selected="false">&nbsp;&nbsp;Cost Center</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fas fa-briefcase" id="custom-tabs-one-Utility-tab" data-toggle="pill"
+                           href="#custom-tabs-one-Utility" role="tab" aria-controls="custom-tabs-one-Utility" aria-selected="false">&nbsp;&nbsp;Utility</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fas fa-plug" id="custom-tabs-one-ControlData-tab" data-toggle="pill"
+                           href="#custom-tabs-one-ControlData" role="tab" aria-controls="custom-tabs-one-ControlData" aria-selected="false">&nbsp;&nbsp;Control Data</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fas fa-paperclip" id="custom-tabs-one-AttachDocuments-tab" data-toggle="pill"
+                           href="#custom-tabs-one-AttachDocuments" role="tab" aria-controls="custom-tabs-one-AttachDocuments" aria-selected="false">&nbsp;&nbsp;Attach Files</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-body">
+                <div class="tab-content" id="custom-tabs-one-tabContent">
+                    <div class="tab-pane fade show active" id="custom-tabs-one-BasicInfo" role="tabpanel" aria-labelledby="custom-tabs-one-BasicInfo-tab">
+                        @*//==Basic Info*@
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card card-info">
+                                        <div class="card-header">
+                                            <h3 class="card-title fas fa-folder-open">&nbsp;&nbsp;Basic Information</h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                <div class="required col-xs-12 col-sm-4 col-md-3">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().PremiseTypeSLNo, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.DropDownListFor(model => model.FirstOrDefault().PremiseTypeSLNo, new SelectList(ViewBag.PremiseTypeList, "PremiseTypeSLNo", "PremiseType", Model.FirstOrDefault().PremiseTypeSLNo), "Select Premise Type", new { disabled = "disabled", @class = "form-control input-sm", id = "ddlPremiseType" })
+                                                </div>
+                                                <div class="required col-xs-12 col-sm-4 col-md-3" style="padding-left:40px">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().PremiseName, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().PremiseName, new { @readonly = "readonly", autocomplete = "off", @class = "form-control input-sm", id = "txtPremiseName" })
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                <div class="required col-xs-12 col-sm-4 col-md-3">
+                                                    @Html.Label("Premise Address (English)", new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextAreaFor(model => model.FirstOrDefault().PremiseAddress, new { @readonly = "readonly", rows = 1, cols = 50, @class = "form-control input-sm", id = "txtPremiseAddress" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-4 col-md-3" style="padding-left:40px">
+                                                    @Html.Label("Premise Address (Bangla)", new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextAreaFor(model => model.FirstOrDefault().PremiseAddressBangla, new { @readonly = "readonly", rows = 1, cols = 50, @class = "form-control input-sm" })
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                <div class="col-xs-12 col-sm-4 col-md-3">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().ClusterGroup, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().ClusterGroup, new { @readonly = "readonly", @class = "form-control input-sm", id = "txtClusterGroup" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-4 col-md-3" style="padding-left:40px">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().ConcernBranch, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().ConcernBranch, new { @readonly = "readonly", @class = "form-control input-sm", id = "txtConcernBranch" })
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                <div class="col-xs-12 col-sm-4 col-md-3">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().InspectorName, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().InspectorName, new { @readonly = "readonly", @class = "form-control input-sm", id = "txtInspectorName" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-4 col-md-3" style="padding-left:40px">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().InspectorContactNo, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().InspectorContactNo, new { @readonly = "readonly", @class = "form-control input-sm", id = "txtInspectorContactNo" })
+                                                </div>
+                                            </div>
+                                            @* ========= *@
+                                            <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                <div class="col-xs-12 col-sm-4 col-md-3">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().AreaStatus, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.DropDownListFor(model => model.FirstOrDefault().AreaStatus, new SelectList(ViewBag.AreaStatusList, "Value", "Text", Model.FirstOrDefault().AreaStatus), new { disabled = "disabled", @class = "form-control input-sm" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-4 col-md-3" style="padding-left:40px">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().RegionalOffice, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.DropDownListFor(model => model.FirstOrDefault().RegionalOffice, new SelectList(ViewBag.RegionalOfficeList, "Description", "Description", Model.FirstOrDefault().RegionalOffice), "Select Regional Office", new { disabled = "disabled", @class = "form-control input-sm" })
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                <div class="col-xs-12 col-sm-4 col-md-3">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().PrimarySOL, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.DropDownListFor(model => model.FirstOrDefault().PrimarySOL, new SelectList(ViewBag.PrimarySOLList, "Description", "Description", Model.FirstOrDefault().PrimarySOL), "Select Primary SOL", new { disabled = "disabled", @class = "form-control input-sm" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-4 col-md-3" style="padding-left:40px">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().AttachedControl, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.DropDownListFor(model => model.FirstOrDefault().AttachedControl, new SelectList(ViewBag.AttachedControlList, "Description", "Description", Model.FirstOrDefault().AttachedControl), "Select Attached Control", new { disabled = "disabled", @class = "form-control input-sm" })
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                <div class="col-xs-12 col-sm-4 col-md-3">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().ControllerOfficeDistance, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().ControllerOfficeDistance, new { @readonly = "readonly", autocomplete = "off", @class = "form-control input-sm" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-4 col-md-3" style="padding-left:40px">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().RoutingNumber, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().RoutingNumber, new { @readonly = "readonly", autocomplete = "off", @class = "form-control input-sm" })
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                <div class="col-xs-12 col-sm-4 col-md-3">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().Division, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.DropDownListFor(model => model.FirstOrDefault().Division, new SelectList(ViewBag.DivisionList, "Description", "Description", Model.FirstOrDefault().Division), "Select Division", new { disabled = "disabled", @class = "form-control input-sm" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-4 col-md-3" style="padding-left:40px">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().District, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.DropDownListFor(model => model.FirstOrDefault().District, new SelectList(ViewBag.DistrictList, "Description", "Description", Model.FirstOrDefault().District), "Select District", new { disabled = "disabled", @class = "form-control input-sm" })
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                <div class="col-xs-12 col-sm-4 col-md-3">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().Upazila, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.DropDownListFor(model => model.FirstOrDefault().Upazila, new SelectList(ViewBag.UpazilaList, "Description", "Description", Model.FirstOrDefault().Upazila), "Select Upazila", new { disabled = "disabled", @class = "form-control input-sm" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-4 col-md-3" style="padding-left:40px">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().Thana, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.DropDownListFor(model => model.FirstOrDefault().Thana, new SelectList(ViewBag.ThanaList, "Description", "Description", Model.FirstOrDefault().Thana), "Select Thana", new { disabled = "disabled", @class = "form-control input-sm" })
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                <div class="col-xs-12 col-sm-4 col-md-3">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().ThanaCode, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().ThanaCode, new { @readonly = "readonly", autocomplete = "off", @class = "form-control input-sm" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-4 col-md-3" style="padding-left:40px">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().Pourasabha, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().Pourasabha, new { @readonly = "readonly", autocomplete = "off", @class = "form-control input-sm" })
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                <div class="col-xs-12 col-sm-4 col-md-3">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().PourasabhaType, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().PourasabhaType, new { @readonly = "readonly", autocomplete = "off", @class = "form-control input-sm" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-4 col-md-3" style="padding-left:40px">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().UnionName, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().UnionName, new { @readonly = "readonly", autocomplete = "off", @class = "form-control input-sm" })
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                <div class="col-xs-12 col-sm-4 col-md-3">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().WardNo, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().WardNo, new { @readonly = "readonly", autocomplete = "off", @class = "form-control input-sm" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-4 col-md-3" style="padding-left:40px">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().PremisesTypeforAccounts, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.DropDownListFor(model => model.FirstOrDefault().PremisesTypeforAccounts, new SelectList(ViewBag.PremisesTypeforAccountsList, "Description", "Description", Model.FirstOrDefault().PremisesTypeforAccounts), "Select Premises Type for Accounts", new { disabled = "disabled", @class = "form-control input-sm" })
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                <div class="col-xs-12 col-sm-4 col-md-3">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().ParentAgreementCode, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().ParentAgreementCode, new { @readonly = "readonly", autocomplete = "off", @class = "form-control input-sm" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-4 col-md-3" style="padding-left:40px">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().ElectricityLoad, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().ElectricityLoad, new { @readonly = "readonly", autocomplete = "off", @class = "form-control input-sm" })
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                <div class="col-xs-12 col-sm-4 col-md-3">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().ElectricityProvidedBy, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.DropDownListFor(model => model.FirstOrDefault().ElectricityProvidedBy, new SelectList(ViewBag.ProvidedByList, "Value", "Text", Model.FirstOrDefault().ElectricityProvidedBy), new { disabled = "disabled", @class = "form-control input-sm" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-4 col-md-3" style="padding-left:40px">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().AITBourneBy, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.DropDownListFor(model => model.FirstOrDefault().AITBourneBy, new SelectList(ViewBag.ProvidedByList, "Value", "Text", Model.FirstOrDefault().AITBourneBy), new { disabled = "disabled", @class = "form-control input-sm" })
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                <div class="col-xs-12 col-sm-4 col-md-3">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().CommercialPermission, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.DropDownListFor(model => model.FirstOrDefault().CommercialPermission, new SelectList(ViewBag.YesNoList, "Value", "Text", Model.FirstOrDefault().CommercialPermission), new { disabled = "disabled", @class = "form-control input-sm" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-4 col-md-3" style="padding-left:40px">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().BuildingPlan, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.DropDownListFor(model => model.FirstOrDefault().BuildingPlan, new SelectList(ViewBag.YesNoList, "Value", "Text", Model.FirstOrDefault().BuildingPlan), new { disabled = "disabled", @class = "form-control input-sm" })
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                <div class="col-xs-12 col-sm-4 col-md-3">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().PremisesSituatedFloor, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().PremisesSituatedFloor, new { @readonly = "readonly", autocomplete = "off", @class = "form-control input-sm" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-4 col-md-3" style="padding-left:40px">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().BangladeshBankApproval, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.DropDownListFor(model => model.FirstOrDefault().BangladeshBankApproval, new SelectList(ViewBag.YesNoList, "Value", "Text", Model.FirstOrDefault().BangladeshBankApproval), new { disabled = "disabled", @class = "form-control input-sm" })
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                <div class="col-xs-12 col-sm-4 col-md-3">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().BangladeshBankReference, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().BangladeshBankReference, new { @readonly = "readonly", autocomplete = "off", @class = "form-control input-sm" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-4 col-md-3" style="padding-left:40px">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().ITTowerRentClause, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextAreaFor(model => model.FirstOrDefault().ITTowerRentClause, new { rows = 1, cols = 50, @readonly = "readonly", @class = "form-control input-sm" })
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                <div class="col-xs-12 col-sm-4 col-md-3">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().TerminationClause, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextAreaFor(model => model.FirstOrDefault().TerminationClause, new { rows = 1, cols = 50, @readonly = "readonly", @class = "form-control input-sm" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-4 col-md-3" style="padding-left:40px">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().TerminationNoticePeriod, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().TerminationNoticePeriod, new { @readonly = "readonly", @type = "number", @min = "0", @step = "0.01", @class = "form-control input-sm" })
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                <div class="col-xs-12 col-sm-4 col-md-3">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().WaterBillType, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.DropDownListFor(model => model.FirstOrDefault().WaterBillType, new SelectList(ViewBag.WaterBillTypeList, "Value", "Text", Model.FirstOrDefault().WaterBillType), new { disabled = "disabled", @class = "form-control input-sm" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-4 col-md-3" style="padding-left:40px">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().WaterBillAmount, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().WaterBillAmount, new { @readonly = "readonly", @style = "text-align: right;", @type = "number", @min = "0", @step = "0.01", @class = "form-control input-sm" })
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                <div class="col-xs-12 col-sm-4 col-md-3">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().PremisesOpeningDate, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().PremisesOpeningDate, "{0:dd/MM/yyyy}", new { @readonly = "readonly", autocomplete = "off", @placeholder = "dd/mm/yyyy", @class = "form-control input-sm", id = "txtPremisesOpeningDate" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-4 col-md-3" style="padding-left:40px">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().Remarks, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextAreaFor(model => model.FirstOrDefault().Remarks, new { rows = 1, cols = 50, @readonly = "readonly", @class = "form-control input-sm" })
+                                                </div>
+                                            </div>
+                                            @* ========= *@
+                                            <hr />
+                                            <h6 style="color:darkblue;"><b>List of Space Allocations</b></h6>
+                                            <table class="table  table-bordered table-condensed table-striped table-hover table-responsive btnRemove" id="TableSpaceInfo">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width: 200px;">
+                                                            @Html.DisplayName("Sub Premises Type")
+                                                        </th>
+                                                        <th class="text-right" style="width: 150px;">
+                                                            @Html.DisplayName("Area")
+                                                        </th>
+                                                        <th class="text-right" style="width: 150px;">
+                                                            @Html.DisplayName("Rate")
+                                                        </th>
+                                                        <th class="text-right" style="width: 150px;">
+                                                            @Html.DisplayName("Monthly Rent")
+                                                        </th>
+                                                        <th class="text-right" style="width: 150px;">
+                                                            @Html.DisplayName("Total Advance")
+                                                        </th>
+                                                        <th class="text-right" style="width: 150px;">
+                                                            @Html.DisplayName("Monthly Adv Adj")
+                                                        </th>
+                                                        <th style="width: 200px;">
+                                                            @Html.DisplayName("Remarks")
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (RMS.Models.SpaceInfoDTO item in ViewBag.lstSpace)
+                                                    {
+                                                        <tr>
+                                                            <td class="SpaceTypeCell">
+                                                                @Html.TextBoxFor(x => item.SpaceType, new { style = "width: 200px;", @class = "SpaceTypeValue", id = "gtxtSpaceType" + item.SpaceRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            <td class="SpaceAreaCell">
+                                                                @Html.TextBoxFor(x => item.SpaceArea, new { Value = String.Format("{0:n2}", item.SpaceArea), style = "width: 150px;", @class = "SpaceAreaValue text-right", id = "gtxtSpaceArea" + item.SpaceRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            <td class="SpaceRateCell">
+                                                                @Html.TextBoxFor(x => item.SpaceRate, new { Value = String.Format("{0:n2}", item.SpaceRate), style = "width: 150px;", @class = "SpaceRateValue text-right", id = "gtxtSpaceRate" + item.SpaceRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            <td class="SpaceRentCell">
+                                                                @Html.TextBoxFor(x => item.SpaceRent, new { Value = String.Format("{0:n2}", item.SpaceRent), style = "width: 150px;", @class = "SpaceRentValue text-right", id = "gtxtSpaceRent" + item.SpaceRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            <td class="SpaceTotalAdvanceCell">
+                                                                @Html.TextBoxFor(x => item.SpaceTotalAdvance, new { Value = String.Format("{0:n2}", item.SpaceTotalAdvance), style = "width: 150px;", @class = "SpaceTotalAdvanceValue text-right", id = "gtxtSpaceTotalAdvance" + item.SpaceRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            <td class="SpaceTotalAdjustmentCell">
+                                                                @Html.TextBoxFor(x => item.SpaceTotalAdjustment, new { Value = String.Format("{0:n2}", item.SpaceTotalAdjustment), style = "width: 150px;", @class = "SpaceTotalAdjustmentValue text-right", id = "gtxtSpaceTotalAdjustment" + item.SpaceRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            <td class="SpaceRemarksCell">
+                                                                @Html.TextBoxFor(x => item.SpaceRemarks, new { style = "width: 200px;", @class = "SpaceRemarksValue", id = "gtxtSpaceRemarks" + item.SpaceRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                            </table>
+                                            @* ========= *@
+                                        </div>
+                                        <!-- /.card-body -->
+                                        <div class="card-footer">
+                                            
+                                        </div>
+                                    </div>
+                                    <!-- /.card -->
+                                </div>
+                            </div>
+                        </div>
+                        @*//==End*@
+                    </div>
+                    <div class="tab-pane fade" id="custom-tabs-one-AgreementInfo" role="tabpanel" aria-labelledby="custom-tabs-one-AgreementInfo-tab">
+                        @*//==Agreement Info*@
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card card-info">
+                                        <div class="card-header">
+                                            <h3 class="card-title fas fa-edit">&nbsp;&nbsp;Agreement Information</h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                <div class="col-xs-12 col-sm-4 col-md-3">
+                                                    @Html.Label("Agreement Code", new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @*@Html.TextBox("AgreementCode", null, new { @placeholder = "Auto Generate", @class = "form-control input-sm", @readonly = "readonly", id = "txtAgreementCode" })*@
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().AliasCode, new { @class = "form-control input-sm ", @readonly = "readonly", id = "txtAgreementCode" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-4 col-md-3" style="padding-left:40px">
+                                                    @Html.Label("Special Agreement", new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.CheckBoxFor(model => model.FirstOrDefault().Special, new { @class = "CheckboxLarger", @disabled = "disabled" })
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                <div class="col-xs-12 col-sm-4 col-md-3">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().AgreementName, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().AgreementName, new { autocomplete = "off", @placeholder = "Agreement Name", @readonly = "readonly", @class = "form-control input-sm ", id = "txtAgreementName" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-4 col-md-3" style="padding-left:40px">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().DocumentDate, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().DocumentDate, "{0:dd/MM/yyyy}", new { @readonly = "readonly", autocomplete = "off", @placeholder = "dd/mm/yyyy", @class = "form-control input-sm", id = "txtDocumentDate" })
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                <div class="col-xs-12 col-sm-4 col-md-3">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().AgreementStartDate, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().AgreementStartDate, "{0:dd/MM/yyyy}", new { autocomplete = "off", @placeholder = "dd/mm/yyyy", @readonly = "readonly", @class = "form-control input-sm", id = "txtAgreementStartDate" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-4 col-md-3" style="padding-left:40px">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().AgreementEndDate, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().AgreementEndDate, "{0:dd/MM/yyyy}", new { autocomplete = "off", @placeholder = "dd/mm/yyyy", @readonly = "readonly", @class = "form-control input-sm", id = "txtAgreementEndDate" })
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                <div class="col-xs-12 col-sm-4 col-md-3">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().AgreementPeriod, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().AgreementPeriod, new { @readonly = "readonly", @placeholder = "12 Months", @style = "text-align: right;", @class = "form-control input-sm", id = "txtAgreementPeriod" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-4 col-md-3" style="padding-left:40px">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().RentDueDay, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().RentDueDay, new { @placeholder = "7 Days", @readonly = "readonly", @style = "text-align: right;", @type = "number", @min = "0", @step = "0.01", @class = "form-control input-sm", id = "txtRentDueDay" })
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                <div class="required col-xs-12 col-sm-4 col-md-3">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().CalculationMethod, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.DropDownListFor(model => model.FirstOrDefault().CalculationMethod, new SelectList(ViewBag.CalculationMethodList, "Value", "Text", Model.FirstOrDefault().CalculationMethod), new { disabled = "disabled", @class = "form-control input-sm" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-4 col-md-3" style="padding-left:40px">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().PaymentMethod, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.DropDownListFor(model => model.FirstOrDefault().PaymentMethod, new SelectList(ViewBag.PaymentMethodList, "Description", "Description", Model.FirstOrDefault().PaymentMethod), "Select Payment Method", new { disabled = "disabled", @class = "form-control input-sm" })
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                <div class="col-xs-12 col-sm-4 col-md-3">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().UOM, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.DropDownListFor(model => model.FirstOrDefault().UOM, new SelectList(ViewBag.UOMList, "Value", "Text", Model.FirstOrDefault().UOM), new { disabled = "disabled", @class = "form-control input-sm", id = "ddlUOM" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-4 col-md-3" style="padding-left:40px">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().TotalArea, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().TotalArea, new { @placeholder = "2,000.00", @readonly = "readonly", @style = "text-align: right;", @type = "number", @min = "0", @step = "0.01", @class = "form-control input-sm", id = "txtTotalArea" })
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                <div class="col-xs-12 col-sm-4 col-md-3">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().RentAmount, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().RentAmount, new { Value = String.Format("{0:n2}", Model.FirstOrDefault().RentAmount), @readonly = "readonly", @style = "text-align: right;", @class = "form-control input-sm", id = "txtRentAmount" })
+                                                </div>
+                                                <div class="required col-xs-12 col-sm-4 col-md-3" style="padding-left:40px">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().CostPerUnit, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().CostPerUnit, new { @placeholder = "100.00", @style = "text-align: right;", @readonly = "readonly", @type = "number", @min = "0", @step = "0.01", @class = "form-control input-sm", id = "txtCostPerUnit" })
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                <div class="required col-xs-12 col-sm-4 col-md-3">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().TaxPercentage, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().TaxPercentage, new { @placeholder = "10%", @style = "text-align: right;", @readonly = "readonly", @type = "number", @min = "0", @step = "0.01", @class = "form-control input-sm", id = "txtTaxPercentage" })
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                <div class="required col-xs-12 col-sm-4 col-md-3">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().TaxType, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.DropDownListFor(model => model.FirstOrDefault().TaxType, new SelectList(ViewBag.TaxTypeList, "Value", "Text", Model.FirstOrDefault().TaxType), new { @readonly = "readonly", @class = "form-control input-sm", id = "ddlTaxType" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-4 col-md-3" style="padding-left:40px">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().TaxAmount, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().TaxAmount, new { Value = String.Format("{0:n2}", Model.FirstOrDefault().TaxAmount), @readonly = "readonly", @placeholder = "20,000.00", @style = "text-align: right;", @class = "form-control input-sm", id = "txtTaxAmount" })
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                <div class="required col-xs-12 col-sm-4 col-md-3">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().VATPercentage, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().VATPercentage, new { @placeholder = "15%", @style = "text-align: right;", @readonly = "readonly", @type = "number", @min = "0", @step = "0.01", @class = "form-control input-sm", id = "txtVATPercentage" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-4 col-md-3" style="padding-left:40px">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().VATAmount, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().VATAmount, new { Value = String.Format("{0:n2}", Model.FirstOrDefault().VATAmount), @readonly = "readonly", @placeholder = "30,000.00", @style = "text-align: right;", @class = "form-control input-sm", id = "txtVATAmount" })
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                <div class="required col-xs-12 col-sm-4 col-md-3">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().VatType, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.DropDownListFor(model => model.FirstOrDefault().VatType, new SelectList(ViewBag.VatTypeList, "Value", "Text", Model.FirstOrDefault().VatType), new { @readonly = "readonly", @class = "form-control input-sm", id = "ddlVatType" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-4 col-md-3" style="padding-left:40px">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().TotalRentAmount, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().TotalRentAmount, new { Value = String.Format("{0:n2}", Model.FirstOrDefault().TotalRentAmount), @placeholder = "200,000.00", @readonly = "readonly", @style = "text-align: right;", @class = "form-control input-sm", id = "txtTotalRentAmount" })
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                <div class="col-xs-12 col-sm-4 col-md-3">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().AdditionalExpense, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().AdditionalExpense, new { @readonly = "readonly", @style = "text-align: right;", @type = "number", @min = "0", @step = "0.01", @class = "form-control input-sm" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-4 col-md-3" style="padding-left:40px">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().InitialDirectCost, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().InitialDirectCost, new { @readonly = "readonly", @style = "text-align: right;", @class = "form-control input-sm" })
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                <div class="col-xs-12 col-sm-4 col-md-3">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().DismantlingCost, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().DismantlingCost, new { @readonly = "readonly", @style = "text-align: right;", @type = "number", @min = "0", @step = "0.01", @class = "form-control input-sm" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-4 col-md-3" style="padding-left:40px">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().WithHoldingCode, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().WithHoldingCode, new { @readonly = "readonly", autocomplete = "off", @class = "form-control input-sm " })
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                <div class="col-xs-12 col-sm-4 col-md-3">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().AgreementRemarks, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextAreaFor(model => model.FirstOrDefault().AgreementRemarks, new { @readonly = "readonly", rows = 1, cols = 50, @class = "form-control input-sm" })
+                                                </div>
+                                            </div>
+                                            <hr />
+                                            <h6 style="color:darkblue;"><b>IFRS 16</b></h6>
+                                            <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                <div class="col-xs-12 col-sm-4 col-md-3">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().IsIFRSEnable, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.CheckBoxFor(model => model.FirstOrDefault().IsIFRSEnable, new { @class = "CheckboxLarger", @disabled = "disabled" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-4 col-md-3" style="padding-left:40px">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().IFRSEffectiveDate, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().IFRSEffectiveDate, "{0:dd/MM/yyyy}", new { @readonly = "readonly", autocomplete = "off", @placeholder = "dd/mm/yyyy", @class = "form-control input-sm", id = "txtIFRSEffectiveDate" })
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                <div class="col-xs-12 col-sm-4 col-md-3">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().BorrowingRate, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().BorrowingRate, new { @readonly = "readonly", @style = "text-align: right;", @type = "number", @min = "0", @step = "0.01", @class = "form-control input-sm" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-4 col-md-3" style="padding-left:40px">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().CorporateTaxRate, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().CorporateTaxRate, new { @readonly = "readonly", @style = "text-align: right;", @type = "number", @min = "0", @step = "0.01", @class = "form-control input-sm" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /.card-body -->
+                                        <div class="card-footer">
+                                            
+                                        </div>
+                                    </div>
+                                    <!-- /.card -->
+                                </div>
+                            </div>
+                        </div>
+                        @*//==End*@
+                    </div>
+                    <div class="tab-pane fade" id="custom-tabs-one-Advance" role="tabpanel" aria-labelledby="custom-tabs-one-Advance-tab">
+                        @*//==Advance Info*@
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card card-info">
+                                        <div class="card-header">
+                                            <h3 class="card-title fas fa-folder-open">&nbsp;&nbsp;Advance Information</h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                <div class="col-xs-12 col-sm-4 col-md-3">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().SecurityDepositAmount, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().SecurityDepositAmount, new { @readonly = "readonly", @placeholder = "300,000.00", @style = "text-align: right;", @type = "number", @min = "0", @step = "0.01", @class = "form-control input-sm", id = "txtSecurityDepositAmount" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-4 col-md-3" style="padding-left:40px">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().AdvanceRemarks, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextAreaFor(model => model.FirstOrDefault().AdvanceRemarks, new { @readonly = "readonly", rows = 1, cols = 50, @class = "form-control input-sm" })
+                                                </div>
+                                            </div>
+                                            <hr />
+                                            <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                <div class=" col-xs-12 col-sm-4 col-md-3">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().AdvanceAmount, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().AdvanceAmount, new { @readonly = "readonly", @placeholder = "150,000.00", @style = "text-align: right;", @type = "number", @min = "0", @step = "0.01", @class = "form-control input-sm", id = "txtAdvanceAmount" })
+                                                </div>
+                                            </div>
+                                            <hr />
+                                            <h6 style="color:darkblue;"><b>List of Advance Adjustments</b></h6>
+                                            <table class="table  table-bordered table-condensed table-striped table-hover table-responsive btnRemove" id="TableAdvanceInfo">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width: 150px;">
+                                                            @Html.DisplayName("Advance No")
+                                                        </th>
+                                                        <th style="width: 150px;">
+                                                            @Html.DisplayName("Start Date")
+                                                        </th>
+                                                        <th style="width: 150px;">
+                                                            @Html.DisplayName("End Date")
+                                                        </th>
+                                                        <th style="width: 150px;">
+                                                            @Html.DisplayName("Schedule No")
+                                                        </th>
+                                                        <th class="text-right" style="width: 250px;">
+                                                            @Html.DisplayName("Adj Amount")
+                                                        </th>
+                                                        <th style="width: 250px;">
+                                                            @Html.DisplayName("Note")
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (RMS.Models.AdvanceInfoDTO item in ViewBag.lstAdvance)
+                                                    {
+                                                        <tr>
+                                                            <td class="AdvanceNoCell">
+                                                                @Html.TextBoxFor(x => item.AdvanceNo, new { style = "width: 150px;", @class = "AdvanceNoValue", id = "gtxtAdvanceNo" + item.AdvanceRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            <td class="AdvanceStartDateCell">
+                                                                @Html.TextBoxFor(x => item.StartDate, new { style = "width: 150px;", @class = "AdvanceStartDateValue", id = "gtxtAdvanceStartDate" + item.AdvanceRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            <td class="AdvanceEndDateCell">
+                                                                @Html.TextBoxFor(x => item.EndDate, new { style = "width: 150px;", @class = "AdvanceEndDateValue", id = "gtxtAdvanceEndDate" + item.AdvanceRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            <td class="AdvancePeriodCell">
+                                                                @Html.TextBoxFor(x => item.AdvanceSlotPeriod, new { style = "width: 150px;", @class = "AdvanceSlotPeriodValue", id = "gtxtAdvanceSlotPeriod" + item.AdvanceRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            <td class="AdvanceAmountCell">
+                                                                @Html.TextBoxFor(x => item.AdvanceSlotAmount, new { Value = String.Format("{0:n12}", item.AdvanceSlotAmount), style = "width: 250px;", @class = "AdvanceSlotAmountValue text-right", id = "gtxtAdvanceSlotAmount" + item.AdvanceRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            <td class="AdvanceNoteCell">
+                                                                @Html.TextBoxFor(x => item.AdvanceNote, new { style = "width: 250px;", @class = "AdvanceNoteValue", id = "gtxtAdvanceNote" + item.AdvanceRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <!-- /.card-body -->
+                                        <div class="card-footer">
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.card -->
+                            </div>
+                        </div>
+                        @*//==End*@
+                    </div>
+                    <div class="tab-pane fade" id="custom-tabs-one-ReviewInfo" role="tabpanel" aria-labelledby="custom-tabs-one-ReviewInfo-tab">
+                        @*//==Review Info*@
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card card-info">
+                                        <div class="card-header">
+                                            <h3 class="card-title fas fa-folder-open">&nbsp;&nbsp;Enhancement Information</h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                <div class="col-xs-12 col-sm-4 col-md-3">
+                                                    @Html.Label("Enhancement Frequency", new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().ReviewFrequency, new { @readonly = "readonly", @placeholder = "12 Months", @style = "text-align: right;", @type = "number", @min = "1", @step = "0.01", @class = "form-control input-sm", id = "txtReviewFrequency" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-4 col-md-3" style="padding-left:40px">
+                                                    @Html.Label("Enhancement Increase %", new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().ReviewPercentage, new { @readonly = "readonly", @placeholder = "10%", @style = "text-align: right;", @type = "number", @min = "1", @step = "0.01", @class = "form-control input-sm", id = "txtReviewPercentage" })
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                <div class="col-xs-12 col-sm-4 col-md-3">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().ReviewRemarks, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextAreaFor(model => model.FirstOrDefault().ReviewRemarks, new { @readonly = "readonly", rows = 1, cols = 50, @class = "form-control input-sm" })
+                                                </div>
+                                            </div>
+                                            <hr />
+                                            <h6 style="color:darkblue;"><b>List of Enhancement Declarations</b></h6>
+                                            <table class="table  table-bordered table-condensed table-striped table-hover table-responsive btnRemove" id="TableReviewInfo">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width: 150px;">
+                                                            @Html.DisplayName("Enhancement No")
+                                                        </th>
+                                                        <th style="width: 150px;">
+                                                            @Html.DisplayName("Start Date")
+                                                        </th>
+                                                        <th style="width: 150px;">
+                                                            @Html.DisplayName("End Date")
+                                                        </th>
+                                                        <th style="width: 150px;">
+                                                            @Html.DisplayName("Schedule No")
+                                                        </th>
+                                                        <th class="text-right" style="width: 200px;">
+                                                            @Html.DisplayName("Increase Amount")
+                                                        </th>
+                                                        <th class="text-right" style="width: 200px;">
+                                                            @Html.DisplayName("Increase %")
+                                                        </th>
+                                                        <th style="width: 150px;">
+                                                            @Html.DisplayName("Note")
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (RMS.Models.ReviewInfoDTO item in ViewBag.lstReview)
+                                                    {
+                                                        <tr>
+                                                            <td class="ReviewNoCell">
+                                                                @Html.TextBoxFor(x => item.ReviewNo, new { style = "width: 150px;", @class = "ReviewNoValue", id = "gtxtReviewNo" + item.ReviewRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            <td class="ReviewStartDateCell">
+                                                                @Html.TextBoxFor(x => item.StartDate, new { style = "width: 150px;", @class = "ReviewStartDateValue", id = "gtxtReviewStartDate" + item.ReviewRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            <td class="ReviewEndDateCell">
+                                                                @Html.TextBoxFor(x => item.EndDate, new { style = "width: 150px;", @class = "ReviewEndDateValue", id = "gtxtReviewEndDate" + item.ReviewRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            <td class="ReviewPeriodCell">
+                                                                @Html.TextBoxFor(x => item.Period, new { style = "width: 150px;", @class = "ReviewPeriodValue", id = "gtxtReviewPeriod" + item.ReviewRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            <td class="ReviewIncreaseAmountCell">
+                                                                @Html.TextBoxFor(x => item.IncreaseAmount, new { Value = String.Format("{0:n2}", item.IncreaseAmount), style = "width: 190px;", @class = "ReviewIncreaseAmountValue text-right", id = "gtxtReviewIncreaseAmount" + item.ReviewRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            <td class="ReviewIncreasePercentageCell">
+                                                                @Html.TextBoxFor(x => item.IncreasePercentage, new { Value = String.Format("{0:n2}", item.IncreasePercentage), style = "width: 190px;", @class = "ReviewIncreasePercentageValue text-right", id = "gtxtReviewIncreasePercentage" + item.ReviewRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            <td class="ReviewNoteCell">
+                                                                @Html.TextBoxFor(x => item.ReviewNote, new { style = "width: 150px;", @class = "ReviewNoteValue", id = "gtxtReviewNote" + item.ReviewRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <!-- /.card-body -->
+                                        <div class="card-footer">
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.card -->
+                            </div>
+                        </div>
+                        @*//==End*@
+                    </div>
+                    <div class="tab-pane fade" id="custom-tabs-one-LandlordInfo" role="tabpanel" aria-labelledby="custom-tabs-one-LandlordInfo-tab">
+                        @*//==LandLord Info*@
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card card-warning">
+                                        <div class="card-header">
+                                            <h3 class="card-title fas fa-folder-open">&nbsp;&nbsp;Landlord Information</h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                <div class="col-xs-12 col-sm-4 col-md-3">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().LLRemarks, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextAreaFor(model => model.FirstOrDefault().LLRemarks, new { @readonly = "readonly", rows = 1, cols = 50, @class = "form-control input-sm" })
+                                                </div>
+                                            </div>
+                                            <hr />
+                                            <h6 style="color:darkblue;"><b>List of Landlords</b></h6>
+                                            <table class="table  table-bordered table-condensed table-striped table-hover table-responsive btnRemove" id="TableVendorInfo">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width: 100px;">
+                                                            @Html.DisplayName("Code")
+                                                        </th>
+                                                        <th style="width: 100px;">
+                                                            @Html.DisplayName("Name")
+                                                        </th>
+                                                        <th style="width: 100px;">
+                                                            @Html.DisplayName("Mode")
+                                                        </th>
+                                                        <th class="text-right" style="width: 100px;">
+                                                            @Html.DisplayName("Adv %")
+                                                        </th>
+                                                        <th class="text-right" style="width: 100px;">
+                                                            @Html.DisplayName("Adv Amt")
+                                                        </th>
+                                                        <th class="text-right" style="width: 100px;">
+                                                            @Html.DisplayName("Adj %")
+                                                        </th>
+                                                        <th class="text-right" style="width: 100px;">
+                                                            @Html.DisplayName("Tax %")
+                                                        </th>
+                                                        <th class="text-right" style="width: 100px;">
+                                                            @Html.DisplayName("Tax Amt")
+                                                        </th>
+                                                        <th class="text-right" style="width: 100px;">
+                                                            @Html.DisplayName("VAT %")
+                                                        </th>
+                                                        <th class="text-right" style="width: 100px;">
+                                                            @Html.DisplayName("VAT Amt")
+                                                        </th>
+                                                        <th class="text-right" style="width: 100px;">
+                                                            @Html.DisplayName("Rent %")
+                                                        </th>
+                                                        <th style="width: 100px;">
+                                                            @Html.DisplayName("Address")
+                                                        </th>
+                                                        <th style="width: 100px;">
+                                                            @Html.DisplayName("Contact No")
+                                                        </th>
+                                                        <th style="width: 100px;">
+                                                            @Html.DisplayName("Email")
+                                                        </th>
+                                                        <th style="width: 100px;">
+                                                            @Html.DisplayName("A/C No")
+                                                        </th>
+                                                        <th style="width: 100px;">
+                                                            @Html.DisplayName("Bank")
+                                                        </th>
+                                                        <th style="width: 100px;">
+                                                            @Html.DisplayName("Branch")
+                                                        </th>
+                                                        <th style="width: 100px;">
+                                                            @Html.DisplayName("Routing No")
+                                                        </th>
+                                                        @*<th class="text-center">Action</th>*@
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (RMS.Models.LandlordInfoDTO item in ViewBag.lstLandlord)
+                                                    {
+                                                        <tr>
+                                                            <td class="VendorCodeCell">
+                                                                @Html.TextBoxFor(x => item.VendorCode, new { style = "width: 100px;", @class = "VendorCodeValue", id = "gtxtVendorCode" + item.LIRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            <td class="LandlordNameCell">
+                                                                @Html.TextBoxFor(x => item.LandlordName, new { style = "width: 100px;", @class = "LandlordNameValue", id = "gtxtLandlordName" + item.LIRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            <td class="ModeOfPaymentCell">
+                                                                @Html.TextBoxFor(x => item.ModeOfPaymentText, new { style = "width: 100px;", @class = "ModeOfPaymentValue", id = "gtxtModeOfPayment" + item.LIRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            <td class="VendorAdvancePCCell">
+                                                                @Html.TextBoxFor(x => item.VendorAdvancePC, new { style = "width: 100px;", @class = "AdvancePCValue text-right", id = "gtxtVendorAdvancePC" + item.LIRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            <td class="VendorAdvanceAmountCell">
+                                                                @Html.TextBoxFor(x => item.VendorAdvanceAmount, new { Value = String.Format("{0:n2}", item.VendorAdvanceAmount), style = "width: 100px;", @class = "AdvanceAmountValue text-right", id = "gtxtVendorAdvanceAmount" + item.LIRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            <td class="VendorAdvanceAdjustmentPCCell">
+                                                                @Html.TextBoxFor(x => item.VendorAdvanceAdjustmentPC, new { style = "width: 100px;", @class = "AdvanceAdjustmentPCValue text-right", id = "gtxtVendorAdvanceAdjustmentPC" + item.LIRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            <td class="VendorTaxPCCell">
+                                                                @Html.TextBoxFor(x => item.VendorTaxPC, new { style = "width: 100px;", @class = "TaxPCValue text-right", id = "gtxtVendorTaxPC" + item.LIRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            <td class="VendorTaxAmountCell">
+                                                                @Html.TextBoxFor(x => item.VendorTaxAmount, new { Value = String.Format("{0:n2}", item.VendorTaxAmount), style = "width: 100px;", @class = "TaxPCValue text-right", id = "gtxtVendorTaxPC" + item.LIRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            <td class="VendorVATPCCell">
+                                                                @Html.TextBoxFor(x => item.VendorVATPC, new { style = "width: 100px;", @class = "VATPCValue text-right", id = "gtxtVendorVATPC" + item.LIRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            <td class="VendorVATAmountCell">
+                                                                @Html.TextBoxFor(x => item.VendorVATAmount, new { Value = String.Format("{0:n2}", item.VendorVATAmount), style = "width: 100px;", @class = "VATAmountValue text-right", id = "gtxtVendorVATAmount" + item.LIRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            <td class="VendorRentPCCell">
+                                                                @Html.TextBoxFor(x => item.VendorRentPC, new { style = "width: 100px;", @class = "RentPCValue text-right", id = "gtxtVendorRentPC" + item.LIRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            <td class="AddressCell">
+                                                                @Html.TextBoxFor(x => item.LLAddress, new { style = "width: 100px;", @class = "AddressValue", id = "gtxtAddress" + item.LIRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            <td class="ContactNoCell">
+                                                                @Html.TextBoxFor(x => item.LLContactNo, new { style = "width: 100px;", @class = "ContactNoValue", id = "gtxtContactNo" + item.LIRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            <td class="EmailCell">
+                                                                @Html.TextBoxFor(x => item.LLEmail, new { style = "width: 100px;", @class = "EmailValue", id = "gtxtEmail" + item.LIRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            <td class="ACNoCell">
+                                                                @Html.TextBoxFor(x => item.ACNo, new { style = "width: 100px;", @class = "ACNoValue", id = "gtxtACNo" + item.LIRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            <td class="BankNameCell">
+                                                                @Html.TextBoxFor(x => item.BankName, new { style = "width: 100px;", @class = "BankNameValue", id = "gtxtBankName" + item.LIRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            <td class="BranchNameCell">
+                                                                @Html.TextBoxFor(x => item.BranchName, new { style = "width: 100px;", @class = "BranchNameValue", id = "gtxtBranchName" + item.LIRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            <td class="RoutingNoCell">
+                                                                @Html.TextBoxFor(x => item.RoutingNo, new { style = "width: 100px;", @class = "RoutingNoValue", id = "gtxtRoutingNo" + item.LIRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            @*<td class="text-center">
+            <button type="button" class="btnVendorRemove btn btn-danger" id='btnVendorDelete @item.LIRowNumber'><span class='nav-icon fas fa-trash'></span></button>
+        </td>*@
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="card-footer">
+                                            @**@
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @*//==End*@
+                    </div>
+                    <div class="tab-pane fade" id="custom-tabs-one-CostAllocations" role="tabpanel" aria-labelledby="custom-tabs-one-CostAllocations-tab">
+                        @*//==Cost Allocation*@
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card card-warning">
+                                        <div class="card-header">
+                                            <h3 class="card-title fas fa-folder-open">&nbsp;&nbsp;Cost Allocation</h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                <div class="col-xs-12 col-sm-4 col-md-3">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().CCRemarks, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextAreaFor(model => model.FirstOrDefault().CCRemarks, new { @readonly = "readonly", rows = 1, cols = 50, @class = "form-control input-sm" })
+                                                </div>
+                                            </div>
+                                            <hr />
+                                            <h6 style="color:darkblue;"><b>List of Cost Allocations</b></h6>
+                                            <table class="table  table-bordered table-condensed table-striped table-hover table-responsive btnRemove" id="TableCostCenterInfo">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width: 100px;">
+                                                            @Html.DisplayName("CC Code")
+                                                        </th>
+                                                        <th style="width: 200px;">
+                                                            @Html.DisplayName("CC Name")
+                                                        </th>
+                                                        <th style="width: 100px;">
+                                                            @Html.DisplayName("SOL Code")
+                                                        </th>
+                                                        <th style="width: 200px;">
+                                                            @Html.DisplayName("SOL Name")
+                                                        </th>
+                                                        <th class="text-right" style="width: 250px;">
+                                                            @Html.DisplayName("Share %")
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (RMS.Models.CostCenterInfoDTO item in ViewBag.lstCC)
+                                                    {
+                                                        <tr>
+                                                            <td class="CCCodeCell">
+                                                                @Html.TextBoxFor(x => item.CCCode, new { style = "width: 100px;", @class = "CCCodeValue", id = "gtxtCCCode" + item.CCRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            <td class="CCNameCell">
+                                                                @Html.TextBoxFor(x => item.CCName, new { style = "width: 200px;", @class = "CCNameValue", id = "gtxtCCName" + item.CCRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            <td class="SOLCodeCell">
+                                                                @Html.TextBoxFor(x => item.SOLCode, new { style = "width: 100px;", @class = "SOLCodeValue", id = "gtxtSOLCode" + item.CCRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            <td class="SOLNameCell">
+                                                                @Html.TextBoxFor(x => item.SOLName, new { style = "width: 200px;", @class = "SOLNameValue", id = "gtxtSOLName" + item.CCRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            <td class="CCShareAllotmentCell">
+                                                                @Html.TextBoxFor(x => item.CCShareAllotment, new { style = "width: 250px;", @class = "CCShareAllotmentValue text-right", id = "gtxtCCShareAllotment" + item.CCRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <!-- /.card-body -->
+                                        <div class="card-footer">
+                                            @**@
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.card -->
+                            </div>
+                        </div>
+                        @*//==End*@
+                    </div>
+                    <div class="tab-pane fade" id="custom-tabs-one-Utility" role="tabpanel" aria-labelledby="custom-tabs-one-Utility-tab">
+                        @*//==Utility Info*@
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card card-warning">
+                                        <div class="card-header">
+                                            <h3 class="card-title fas fa-edit">&nbsp;&nbsp;Utility Information</h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                <div class="col-xs-12 col-sm-4 col-md-3">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().ServiceCharge, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().ServiceCharge, new { @readonly = "readonly", @placeholder = "10,000.00", @style = "text-align: right;", @type = "number", @min = "0", @step = "0.01", @class = "form-control input-sm", id = "txtServiceCharge" })
+                                                </div>
+                                                <div class=" col-xs-12 col-sm-4 col-md-3" style="padding-left:40px">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().OnlineTower, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().OnlineTower, new { @readonly = "readonly", @placeholder = "15,000.00", @style = "text-align: right;", @type = "number", @min = "0", @step = "0.01", @class = "form-control input-sm", id = "txtOnlineTower" })
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                <div class="col-xs-12 col-sm-4 col-md-3">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().GeneratorSpace, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().GeneratorSpace, new { @readonly = "readonly", @placeholder = "12,000.00", @style = "text-align: right;", @type = "number", @min = "0", @step = "0.01", @class = "form-control input-sm", id = "txtGeneratorSpace" })
+                                                </div>
+                                                <div class=" col-xs-12 col-sm-4 col-md-3" style="padding-left:40px">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().CarParking, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().CarParking, new { @readonly = "readonly", @placeholder = "5,000.00", @style = "text-align: right;", @type = "number", @min = "0", @step = "0.01", @class = "form-control input-sm", id = "txtCarParking" })
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                <div class="col-xs-12 col-sm-4 col-md-3">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().UtilityRemarks, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextAreaFor(model => model.FirstOrDefault().UtilityRemarks, new { @readonly = "readonly", rows = 1, cols = 50, @class = "form-control input-sm" })
+                                                </div>
+                                            </div>
+                                            <hr />
+                                            <h6 style="color:darkblue;"><b>List of Utility Allocation</b></h6>
+                                            <table class="table  table-bordered table-condensed table-striped table-hover table-responsive btnRemove" id="TableUtilityInfo">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width: 100px;">
+                                                            @Html.DisplayName("Code")
+                                                        </th>
+                                                        <th style="width: 100px;">
+                                                            @Html.DisplayName("Name")
+                                                        </th>
+                                                        <th style="width: 100px;">
+                                                            @Html.DisplayName("Mode")
+                                                        </th>
+                                                        <th class="text-right" style="width: 100px;">
+                                                            @Html.DisplayName("Service %")
+                                                        </th>
+                                                        <th class="text-right" style="width: 100px;">
+                                                            @Html.DisplayName("Service Amt")
+                                                        </th>
+                                                        <th class="text-right" style="width: 100px;">
+                                                            @Html.DisplayName("Tower %")
+                                                        </th>
+                                                        <th class="text-right" style="width: 100px;">
+                                                            @Html.DisplayName("Tower Amt")
+                                                        </th>
+                                                        <th class="text-right" style="width: 100px;">
+                                                            @Html.DisplayName("Generator %")
+                                                        </th>
+                                                        <th class="text-right" style="width: 100px;">
+                                                            @Html.DisplayName("Generator Amt")
+                                                        </th>
+                                                        <th class="text-right" style="width: 100px;">
+                                                            @Html.DisplayName("Parking %")
+                                                        </th>
+                                                        <th class="text-right" style="width: 100px;">
+                                                            @Html.DisplayName("Parking Amt")
+                                                        </th>
+                                                        <th class="text-right" style="width: 100px;">
+                                                            @Html.DisplayName("Tax %")
+                                                        </th>
+                                                        <th class="text-right" style="width: 100px;">
+                                                            @Html.DisplayName("Tax Amt")
+                                                        </th>
+                                                        <th class="text-right" style="width: 100px;">
+                                                            @Html.DisplayName("VAT %")
+                                                        </th>
+                                                        <th class="text-right" style="width: 100px;">
+                                                            @Html.DisplayName("VAT Amt")
+                                                        </th>
+                                                        <th style="width: 100px;">
+                                                            @Html.DisplayName("A/C No")
+                                                        </th>
+                                                        <th style="width: 100px;">
+                                                            @Html.DisplayName("Bank")
+                                                        </th>
+                                                        <th style="width: 100px;">
+                                                            @Html.DisplayName("Branch")
+                                                        </th>
+                                                        <th style="width: 100px;">
+                                                            @Html.DisplayName("Routing No")
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (RMS.Models.UtilityInfoDTO item in ViewBag.lstUtility)
+                                                    {
+                                                        <tr>
+                                                            <td class="UtilityVendorCodeCell">
+                                                                @Html.TextBoxFor(x => item.UtilityVendorCode, new { style = "width: 100px;", @class = "UtilityVendorCodeValue", id = "gtxtUtilityVendorCode" + item.UtilityRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            <td class="UtilityLandlordNameCell">
+                                                                @Html.TextBoxFor(x => item.UtilityLandlordName, new { style = "width: 100px;", @class = "UtilityLandlordNameValue", id = "gtxtUtilityLandlordName" + item.UtilityRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            <td class="UtilityModeOfPaymentCell">
+                                                                @Html.TextBoxFor(x => item.UtilityModeOfPaymentText, new { style = "width: 100px;", @class = "UtilityModeOfPaymentValue", id = "gtxtUtilityModeOfPayment" + item.UtilityRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            <td class="ServiceChargePCCell">
+                                                                @Html.TextBoxFor(x => item.ServiceChargePC, new { Value = String.Format("{0:n2}", item.ServiceChargePC), style = "width: 100px;", @class = "ServiceChargePCValue text-right", id = "gtxtServiceChargePC" + item.UtilityRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            <td class="ServiceChargeAmountCell">
+                                                                @Html.TextBoxFor(x => item.ServiceChargeAmount, new { Value = String.Format("{0:n2}", item.ServiceChargeAmount), style = "width: 100px;", @class = "ServiceChargeAmountValue text-right", id = "gtxtServiceChargeAmount" + item.UtilityRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            <td class="OnlineTowerPCCell">
+                                                                @Html.TextBoxFor(x => item.OnlineTowerPC, new { Value = String.Format("{0:n2}", item.OnlineTowerPC), style = "width: 100px;", @class = "OnlineTowerPCValue text-right", id = "gtxtOnlineTowerPC" + item.UtilityRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            <td class="OnlineTowerAmountCell">
+                                                                @Html.TextBoxFor(x => item.OnlineTowerAmount, new { Value = String.Format("{0:n2}", item.OnlineTowerAmount), style = "width: 100px;", @class = "OnlineTowerAmountValue text-right", id = "gtxtOnlineTowerAmount" + item.UtilityRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            <td class="GeneratorSpacePCCell">
+                                                                @Html.TextBoxFor(x => item.GeneratorSpacePC, new { Value = String.Format("{0:n2}", item.GeneratorSpacePC), style = "width: 100px;", @class = "GeneratorSpacePCValue text-right", id = "gtxtGeneratorSpacePC" + item.UtilityRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            <td class="GeneratorSpaceAmountCell">
+                                                                @Html.TextBoxFor(x => item.GeneratorSpaceAmount, new { Value = String.Format("{0:n2}", item.GeneratorSpaceAmount), style = "width: 100px;", @class = "GeneratorSpaceAmountValue text-right", id = "gtxtGeneratorSpaceAmount" + item.UtilityRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            <td class="CarParkingPCCell">
+                                                                @Html.TextBoxFor(x => item.CarParkingPC, new { Value = String.Format("{0:n2}", item.CarParkingPC), style = "width: 100px;", @class = "CarParkingPCValue text-right", id = "gtxtCarParkingPC" + item.UtilityRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            <td class="CarParkingAmountCell">
+                                                                @Html.TextBoxFor(x => item.CarParkingAmount, new { Value = String.Format("{0:n2}", item.CarParkingAmount), style = "width: 100px;", @class = "CarParkingAmountValue text-right", id = "gtxtCarParkingAmount" + item.UtilityRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            <td class="UtilityTaxPCCell">
+                                                                @Html.TextBoxFor(x => item.UtilityTaxPC, new { Value = String.Format("{0:n2}", item.UtilityTaxPC), style = "width: 100px;", @class = "UtilityTaxPCValue text-right", id = "gtxtUtilityTaxPC" + item.UtilityRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            <td class="UtilityTaxAmountCell">
+                                                                @Html.TextBoxFor(x => item.UtilityTaxAmount, new { Value = String.Format("{0:n2}", item.UtilityTaxAmount), style = "width: 100px;", @class = "UtilityTaxAmountValue text-right", id = "gtxtUtilityTaxAmount" + item.UtilityRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            <td class="UtilityVATPCCell">
+                                                                @Html.TextBoxFor(x => item.UtilityVATPC, new { Value = String.Format("{0:n2}", item.UtilityVATPC), style = "width: 100px;", @class = "UtilityVATPCValue text-right", id = "gtxtUtilityVATPC" + item.UtilityRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            <td class="UtilityVATAmountCell">
+                                                                @Html.TextBoxFor(x => item.UtilityVATAmount, new { Value = String.Format("{0:n2}", item.UtilityVATAmount), style = "width: 100px;", @class = "UtilityVATAmountValue text-right", id = "gtxtUtilityVATAmount" + item.UtilityRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            <td class="UtilityACNoCell">
+                                                                @Html.TextBoxFor(x => item.UtilityACNo, new { style = "width: 100px;", @class = "UtilityACNoValue", id = "gtxtUtilityACNo" + item.UtilityRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            <td class="UtilityBankNameCell">
+                                                                @Html.TextBoxFor(x => item.UtilityBankName, new { style = "width: 100px;", @class = "UtilityBankNameValue", id = "gtxtUtilityBankName" + item.UtilityRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            <td class="UtilityBranchNameCell">
+                                                                @Html.TextBoxFor(x => item.UtilityBranchName, new { style = "width: 100px;", @class = "UtilityBranchNameValue", id = "gtxtUtilityBranchName" + item.UtilityRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            <td class="UtilityRoutingNoCell">
+                                                                @Html.TextBoxFor(x => item.UtilityRoutingNo, new { style = "width: 100px;", @class = "UtilityRoutingNoValue", id = "gtxtUtilityRoutingNo" + item.UtilityRowNumber, disabled = "disabled" })
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="card-footer">
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @*//==End*@
+                    </div>
+                    <div class="tab-pane fade" id="custom-tabs-one-ControlData" role="tabpanel" aria-labelledby="custom-tabs-one-ControlData-tab">
+                        @*//==Control Data*@
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card card-danger">
+                                        <div class="card-header">
+                                            <h3 class="card-title fas fa-folder-open">&nbsp;&nbsp;Control Information</h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                <div class="required col-xs-12 col-sm-4 col-md-3">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().CashGLCode, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().CashGLCode, new { @readonly = "readonly", @style = "text-align: left;", @class = "form-control input-sm", id = "txtCashGLCode" })
+                                                </div>
+                                                <div class="required col-xs-12 col-sm-4 col-md-3" style="padding-left:40px">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().BankGLCode, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().BankGLCode, new { @readonly = "readonly", @style = "text-align: left;", @class = "form-control input-sm", id = "txtBankGLCode" })
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                <div class="required col-xs-12 col-sm-4 col-md-3">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().AdvanceGLCode, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().AdvanceGLCode, new { @readonly = "readonly", @style = "text-align: left;", @class = "form-control input-sm", id = "txtAdvanceGLCode" })
+                                                </div>
+                                                <div class="required col-xs-12 col-sm-4 col-md-3" style="padding-left:40px">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().AdvanceAdjustmentGLCode, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().AdvanceAdjustmentGLCode, new { @readonly = "readonly", @style = "text-align: left;", @class = "form-control input-sm", id = "txtAdvanceAdjustmentGLCode" })
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                <div class="required col-xs-12 col-sm-4 col-md-3">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().RentGLCode, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().RentGLCode, new { @readonly = "readonly", @style = "text-align: left;", @class = "form-control input-sm", id = "txtRentGLCode" })
+                                                </div>
+                                                <div class="required col-xs-12 col-sm-4 col-md-3" style="padding-left:40px">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().ServiceChargeGLCode, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().ServiceChargeGLCode, new { @readonly = "readonly", @style = "text-align: left;", @class = "form-control input-sm", id = "txtServiceChargeGLCode" })
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                <div class="required col-xs-12 col-sm-4 col-md-3">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().TaxGLCode, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().TaxGLCode, new { @readonly = "readonly", @style = "text-align: left;", @class = "form-control input-sm", id = "txtTaxGLCode" })
+                                                </div>
+                                                <div class="required col-xs-12 col-sm-4 col-md-3" style="padding-left:40px">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().VATGLCode, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().VATGLCode, new { @readonly = "readonly", @style = "text-align: left;", @class = "form-control input-sm", id = "txtVATGLCode" })
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                <div class="col-xs-12 col-sm-4 col-md-3">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().ProvisionGLTax, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().ProvisionGLTax, new { @readonly = "readonly", @style = "text-align: left;", @class = "form-control input-sm", id = "txtProvisionGLTax" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-4 col-md-3" style="padding-left:40px">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().ProvisionGLAP, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().ProvisionGLAP, new { @readonly = "readonly", @style = "text-align: left;", @class = "form-control input-sm", id = "txtProvisionGLAP" })
+                                                </div>
+                                            </div>
+                                            @* ========== *@
+                                            <hr />
+                                            <h6 style="color:darkblue;"><b>Mode Of Payment GL</b></h6>
+                                            <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                <div class="col-xs-12 col-sm-4 col-md-3">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().RTGSGL, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().RTGSGL, new { @readonly = "readonly", @style = "text-align: left;", @class = "form-control input-sm", id = "txtRTGSGL" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-4 col-md-3" style="padding-left:40px">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().EFTNGL, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().EFTNGL, new { @readonly = "readonly", @style = "text-align: left;", @class = "form-control input-sm", id = "txtEFTNGL" })
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                <div class="col-xs-12 col-sm-4 col-md-3">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().PayOrderGL, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().PayOrderGL, new { @readonly = "readonly", @style = "text-align: left;", @class = "form-control input-sm", id = "txtPayOrderGL" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-4 col-md-3" style="padding-left:40px">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().IBBPaymentGL, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().IBBPaymentGL, new { @readonly = "readonly", @style = "text-align: left;", @class = "form-control input-sm", id = "txtIBBPaymentGL" })
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                <div class="col-xs-12 col-sm-4 col-md-3">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().CityBrokerageGL, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().CityBrokerageGL, new { @readonly = "readonly", @style = "text-align: left;", @class = "form-control input-sm", id = "txtCityBrokerageGL" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-4 col-md-3" style="padding-left:40px">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().CityCapitalGL, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().CityCapitalGL, new { @readonly = "readonly", @style = "text-align: left;", @class = "form-control input-sm", id = "txtCityCapitalGL" })
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                <div class="col-xs-12 col-sm-4 col-md-3">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().OthersGL, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextBoxFor(model => model.FirstOrDefault().OthersGL, new { @readonly = "readonly", @style = "text-align: left;", @class = "form-control input-sm", id = "txtOthersGL" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-4 col-md-3" style="padding-left:40px">
+                                                    @Html.LabelFor(model => model.FirstOrDefault().ControlDataRemarks, new { @class = "control-label" })
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8 col-md-3">
+                                                    @Html.TextAreaFor(model => model.FirstOrDefault().ControlDataRemarks, new { @readonly = "readonly", rows = 1, cols = 50, @class = "form-control input-sm" })
+                                                </div>
+                                            </div>
+                                            @* ========== *@
+                                        </div>
+                                        <!-- /.card-body -->
+                                        <div class="card-footer">
+                                            
+                                        </div>
+                                    </div>
+                                    <!-- /.card -->
+                                </div>
+                            </div>
+                        </div>
+                        @*//==End*@
+                    </div>
+                    <div class="tab-pane fade" id="custom-tabs-one-AttachDocuments" role="tabpanel" aria-labelledby="custom-tabs-one-AttachDocuments-tab">
+                        @*//==Attach Document*@
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card card-danger">
+                                        <div class="card-header">
+                                            <h3 class="card-title fas fa-edit">&nbsp;&nbsp;Attach Documents</h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <h6 style="color:darkblue;"><b>List of Attached Documents</b></h6>
+                                            <table class="table  table-bordered table-condensed table-striped table-hover table-responsive btnRemove" id="TableFileUploadInfo">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width: 1000px;">
+                                                            @Html.DisplayName("File Name")
+                                                        </th>
+                                                        <th class="text-center">Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (RMS.Models.FileUploadInfoDTO item in ViewBag.lstFU)
+                                                    {
+                                                        <tr>
+                                                            <td class="FUFileNameCell">
+                                                                @Html.TextBoxFor(x => item.FileName, new { style = "width: 1000px;", @class = "FUFileNameValue", id = "gtxtFUFileName" + item.FURowNumber, disabled = "disabled" })
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <a href="~/Content/FileUpload/@Model.FirstOrDefault().AliasCode/@item.FileName" download class="btn btn-primary" style="margin-top:3px;">
+                                                                    <i class="nav-icon fas fa-download"></i>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="card-footer">
+                                            <span>Attach single or multiple documents.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @*//==End*@
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer" style="text-align:right;">
+                <button type="button" class="btn btn-warning" style="float: right;"
+                        id="btnFormBack" onclick="return BackValidator();">
+                    <i class="fas fa-reply"></i>
+                    <span>&nbsp;Back to List</span>
+                </button>
+
+            </div>
+        </div>
+    </div>
+</section>
+<style>
+    input.CheckboxLarger {
+        width: 30px;
+        height: 30px;
+    }
+</style>
+<style type="text/css">
+    .form-control {
+        width: auto;
+    }
+
+    .required:after {
+        content: "*";
+        font-weight: bold;
+        color: red;
+    }
+</style>
+<style type="text/css" media="screen">
+    #spinner {
+        position: fixed;
+        top: -18%;
+        left: 30%;
+    }
+</style>
+
+<script src="~/Scripts/jquery-3.6.0.js"></script>
+<script src="~/Template/plugins/jquery-ui/jquery-ui.js"></script>
+<script src="~/Scripts/notify.js"></script>
+<script src="~/Scripts/SweetAlert2/sweetalert2.all.min.js"></script>
+<script src="~/Scripts/SweetAlert2/sweetalert2.min.js"></script>
+
+<script src="~/Template/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/Template/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="~/Template/plugins/jszip/jszip.min.js"></script>
+<script src="~/Template/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="~/Template/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="~/Template/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="~/Template/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="~/Template/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<script src="~/Template/plugins/datatables-select/js/dataTables.select.min.js"></script>
+
+<link href="~/Template/plugins/jquery-ui/jquery-ui.css" rel="stylesheet" />
+<link href="~/Template/plugins/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="~/Template/plugins/buttons.dataTables.css" rel="stylesheet" />
+<link href="~/Template/plugins/dataTables.bootstrap5.css" rel="stylesheet" />
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="~/Template/plugins/fontawesome-free/css/all.min.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="~/Template/dist/css/adminlte.min.css">
+<!-- overlayScrollbars -->
+<link rel="stylesheet" href="~/Template/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+
+<!-- dropzonejs -->
+<script src="~/Template/plugins/dropzone/min/dropzone.min.js"></script>
+
+<link href="~/Content/chosen.min.css" rel="stylesheet" />
+<script src="~/Scripts/chosen.jquery.js"></script>
+
+<script type="text/javascript">
+    $(".chosen").chosen({ max_selected_options: 2 });
+    $(".chosen-deselect").chosen({ allow_single_deselect: true });
+    $(".chosen").chosen().change();
+    $(".chosen").trigger('liszt:updated');
+</script>
+<script>
+    //==
+    // DropzoneJS Demo Code Start
+    Dropzone.autoDiscover = false;
+
+    // Get the template HTML and remove it from the doumenthe template HTML and remove it from the doument
+    var previewNode = document.querySelector("#template");
+    previewNode.id = "";
+    var previewTemplate = previewNode.parentNode.innerHTML;
+    previewNode.parentNode.removeChild(previewNode);
+
+    var myDropzone = new Dropzone(document.body, { // Make the whole body a dropzone
+        url: "/target-url", // Set the url
+        thumbnailWidth: 80,
+        thumbnailHeight: 80,
+        parallelUploads: 20,
+        previewTemplate: previewTemplate,
+        autoQueue: false, // Make sure the files aren't queued until manually added
+        previewsContainer: "#previews", // Define the container to display the previews
+        clickable: ".fileinput-button" // Define the element that should be used as click trigger to select files.
+    });
+
+    myDropzone.on("addedfile", function (file) {
+        // Hookup the start button
+        file.previewElement.querySelector(".start").onclick = function () { myDropzone.enqueueFile(file); };
+    });
+
+    // Update the total progress bar
+    myDropzone.on("totaluploadprogress", function (progress) {
+        document.querySelector("#total-progress .progress-bar").style.width = progress + "%";
+    });
+
+    myDropzone.on("sending", function (file) {
+        // Show the total progress bar when upload starts
+        document.querySelector("#total-progress").style.opacity = "1";
+        // And disable the start button
+        file.previewElement.querySelector(".start").setAttribute("disabled", "disabled");
+    });
+
+    // Hide the total progress bar when nothing's uploading anymore0
+    myDropzone.on("queuecomplete", function (progress) {
+        document.querySelector("#total-progress").style.opacity = "0";
+    });
+
+    // Setup the buttons for all transfers
+    // The "add files" button doesn't need to be setup because the config
+    // `clickable` has already been specified.
+    document.querySelector("#actions .start").onclick = function () {
+        myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED));
+    };
+    document.querySelector("#actions .cancel").onclick = function () {
+        myDropzone.removeAllFiles(true);
+    };
+    // DropzoneJS Demo Code End
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#ddlPremiseType").focus();
+        var TotalArea = parseFloat($("#txtTotalArea").val());
+        $("#txtTotalArea").val(parseFloat(TotalArea).toFixed(12));
+        var SecurityDepositAmount = parseFloat($("#txtSecurityDepositAmount").val());
+        $("#txtSecurityDepositAmount").val(parseFloat(SecurityDepositAmount).toFixed(12));
+        var AdvanceAmount = parseFloat($("#txtAdvanceAmount").val());
+        $("#txtAdvanceAmount").val(parseFloat(AdvanceAmount).toFixed(12));
+        var BorrowingRate = parseFloat($("#BorrowingRate").val());
+        $("#BorrowingRate").val(parseFloat(BorrowingRate).toFixed(12));
+        var AdditionalExpense = parseFloat($("#AdditionalExpense").val());
+        $("#AdditionalExpense").val(parseFloat(AdditionalExpense).toFixed(12));
+        var InitialDirectCost = parseFloat($("#InitialDirectCost").val());
+        $("#InitialDirectCost").val(parseFloat(InitialDirectCost).toFixed(12));
+        var DismantlingCost = parseFloat($("#DismantlingCost").val());
+        $("#DismantlingCost").val(parseFloat(DismantlingCost).toFixed(12));
+        $("#txtVendorCode").val("");
+        $("#txtLandlordName").val("");
+        $("#txtVendorAdvancePC").val("0.00");
+        $("#txtVendorAdvanceAmount").val("0.00");
+        $("#txtVendorAdvanceAdjustmentPC").val("0.00");
+        $("#txtVendorAdvanceAdjustmentAmount").val("0.00");
+        $("#txtVendorTaxPC").val("0.00");
+        $("#txtVendorTaxAmount").val("0.00");
+        $("#txtVendorVATPC").val("0.00");
+        $("#txtVendorVATAmount").val("0.00");
+        $("#txtVendorRentPC").val("0.00");
+        $("#txtVendorRentAmount").val("0.00");
+        $("#txtACNo").val("");
+        $("#txtBankName").val("");
+        $("#txtBranchName").val("");
+        $("#txtCCCode").val("");
+        $("#txtCCName").val("");
+        $("#txtCCShareAllotment").val("0.00");
+        $("#txtCCText").val("");
+        var ServiceCharge = parseFloat($("#txtServiceCharge").val());
+        $("#txtServiceCharge").val(parseFloat(ServiceCharge).toFixed(12));
+        var OnlineTower = parseFloat($("#txtOnlineTower").val());
+        $("#txtOnlineTower").val(parseFloat(OnlineTower).toFixed(12));
+        var GeneratorSpace = parseFloat($("#txtGeneratorSpace").val());
+        $("#txtGeneratorSpace").val(parseFloat(GeneratorSpace).toFixed(12));
+        var CarParking = parseFloat($("#txtCarParking").val());
+        $("#txtCarParking").val(parseFloat(CarParking).toFixed(12));
+        $('#TableSpaceInfo').DataTable({
+            responsive: true,
+            AutoWidth: true,
+            pageLength: -1,
+            searching: false,
+            sorting: false,
+            paging: false,
+            info: false,
+        });
+        $('#TableAdvanceInfo').DataTable({
+            responsive: true,
+            AutoWidth: true,
+            pageLength: -1,
+            searching: false,
+            sorting: false,
+            paging: false,
+            info: false,
+        });
+        $('#TableReviewInfo').DataTable({
+            responsive: true,
+            AutoWidth: true,
+            pageLength: -1,
+            searching: false,
+            sorting: false,
+            paging: false,
+            info: false,
+        });
+        $('#TableVendorInfo').DataTable({
+            responsive: true,
+            AutoWidth: true,
+            pageLength: -1,
+            searching: false,
+            sorting: false,
+            paging: false,
+            info: false,
+        });
+        $('#TableCostCenterInfo').DataTable({
+            responsive: true,
+            AutoWidth: true,
+            pageLength: -1,
+            searching: false,
+            sorting: false,
+            paging: false,
+            info: false,
+        });
+        $('#TableUtilityInfo').DataTable({
+            responsive: true,
+            AutoWidth: true,
+            pageLength: -1,
+            searching: false,
+            sorting: false,
+            paging: false,
+            info: false,
+        });
+        //==Attach Documents DataTables
+        $('#TableFileUploadInfo').DataTable({
+            responsive: true,
+            AutoWidth: true,
+            pageLength: -1,
+            searching: false,
+            sorting: false,
+            paging: false,
+            info: false,
+        });
+    });
+</script>
+<script type="text/javascript">
+    function BackValidator() {
+        var ClickIndex = @Html.Raw(Json.Encode(ViewBag.ClickIndex));
+        if (ClickIndex == 1) {
+            window.location.href = "/AgreementInfo/RedirectReAgreementIndex?ViewID=1";
+        }
+        else if (ClickIndex == 3) {
+            window.location.href = "/AgreementInfo/RedirectReAgreementIndex?ViewID=3";
+        }
+        else if (ClickIndex == 4) {
+            window.location.href = "/AgreementInfo/RedirectReAgreementIndex?ViewID=4";
+        }
+        else if (ClickIndex == 10) {
+            window.location.href = "/AgreementInfo/RedirectReAgreementIndex?ViewID=10";
+        }
+        else if (ClickIndex == 15) {
+            window.location.href = "/AgreementInfo/RedirectReAgreementIndex?ViewID=5";
+        }
+        else {
+            alert('Check');
+        }
+    }
+</script>

@@ -1,0 +1,538 @@
+﻿@model IEnumerable<RMS.Models.LandlordScheduleDTO>
+@{
+    ViewBag.Title = "Rent Hold Payment by Vendor";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+@Html.AntiForgeryToken()
+<section class="content" style="padding-top:15px;">
+    <div class="container-fluid">
+        <div class="col-md-12">
+            <div class="card card-info">
+                <div class="card-header">
+                    <h3 class="card-title"><i class="fas fa-lock"></i><span>&nbsp;&nbsp;Rent Hold Payment by Vendor - @ViewBag.DateRange</span></h3>
+                    <div id="spinner" style="display: none;padding-top:50px; padding-bottom:20px; padding-left:100px;">
+                        <img id="img-spinner" src="@Url.Content("~/Content/Images/spinner.gif")" alt="Loading" />
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table id="summary1" class="display compact table table-striped table-bordered mt-2">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayName("SL No")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Agr Code")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Terminated Status")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Terminated Date")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Agr Name")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Premise Type")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Premise Name")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Vendor Code")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Landlord Name")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Start Date")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("End Date")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Schedule No")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Month No")
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Year)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Month)
+                                </th>
+                                <th class="text-right">
+                                    @Html.DisplayName("Enhancement No")
+                                </th>
+                                <th class="text-right">
+                                    @Html.DisplayName("CPU")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Total Area")
+                                </th>
+                                <th class="text-right">
+                                    @Html.DisplayName("Total Rent")
+                                </th>
+                                <th class="text-right">
+                                    @Html.DisplayName("Agr Advance")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Advance Adjustment")
+                                </th>
+                                <th class="text-right">
+                                    @Html.DisplayName("Agr Adv Adjustment")
+                                </th>
+                                <th class="text-right">
+                                    @Html.DisplayName("Adv Adj%")
+                                </th>
+                                <th class="text-right">
+                                    @Html.DisplayName("Landlord Adv Adj")
+                                </th>
+                                <th class="text-right">
+                                    @Html.DisplayName("Agr Tax%")
+                                </th>
+                                <th class="text-right">
+                                    @Html.DisplayName("Agr Tax")
+                                </th>
+                                <th class="text-right">
+                                    @Html.DisplayName("Landlord Tax%")
+                                </th>
+                                <th class="text-right">
+                                    @Html.DisplayName("Landlord Tax")
+                                </th>
+                                <th class="text-right">
+                                    @Html.DisplayName("Agr VAT%")
+                                </th>
+                                <th class="text-right">
+                                    @Html.DisplayName("Agr VAT")
+                                </th>
+                                <th class="text-right">
+                                    @Html.DisplayName("Landlord VAT%")
+                                </th>
+                                <th class="text-right">
+                                    @Html.DisplayName("Landlord VAT")
+                                </th>
+                                <th class="text-right">
+                                    @Html.DisplayName("Landlord Rent%")
+                                </th>
+                                <th class="text-right">
+                                    @Html.DisplayName("Landlord Net Rent")
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.UserID)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.EntryDate)
+                                </th>
+                                <th>
+                                    @Html.DisplayName("AP")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("AP Posting ID")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("AP Posting Date")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Payment")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Pay Posting ID")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Pay Posting")
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.SLNO)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.AliasCode)
+                                    </td>
+                                    <td>
+                                        @if (item.BlockText == "Open")
+                                        {
+                                            @Html.DisplayFor(modelItem => item.BlockText)
+                                        }
+                                        else
+                                        {
+                                            <span style="color:red; font-weight:bold;">@Html.DisplayFor(modelItem => item.BlockText)</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (item.BlockDate == null)
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            @Convert.ToDateTime(item.BlockDate).ToString("dd/MM/yyyy")
+                                        }
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.AgreementName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PremiseType)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PremiseName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.VendorCode)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.LandlordName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.AgreementStartDate, "{0:dd/MM/yyyy}")
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.AgreementEndDate, "{0:dd/MM/yyyy}")
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.AgreementPeriod)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.MonthNo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Year)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Month)
+                                    </td>
+                                    <td class="text-right">
+                                        @Html.DisplayFor(modelItem => item.ReviewNo)
+                                    </td>
+                                    <td class="text-right">
+                                        @Html.DisplayFor(modelItem => item.CostPerUnit)
+                                    </td>
+                                    <td class="text-right">
+                                        @Html.DisplayFor(modelItem => item.TotalArea)
+                                    </td>
+                                    <td class="text-right">
+                                        @Html.DisplayFor(modelItem => item.TotalRentAmount)
+                                    </td>
+                                    <td class="text-right">
+                                        @Html.DisplayFor(modelItem => item.AdvanceAmount)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.AdvanceAdjustmentPeriod)
+                                    </td>
+                                    <td class="text-right">
+                                        @Html.DisplayFor(modelItem => item.AiAdvanceAdjustmentAmount)
+                                    </td>
+                                    <td class="text-right">
+                                        @Html.DisplayFor(modelItem => item.AdvanceAdjustmentPC)
+                                    </td>
+                                    <td class="text-right">
+                                        @Html.DisplayFor(modelItem => item.AdvanceAdjustmentAmount)
+                                    </td>
+                                    <td class="text-right">
+                                        @Html.DisplayFor(modelItem => item.AiTaxPercentage)
+                                    </td>
+                                    <td class="text-right">
+                                        @Html.DisplayFor(modelItem => item.AiTaxAmount)
+                                    </td>
+                                    <td class="text-right">
+                                        @Html.DisplayFor(modelItem => item.TaxPercentage)
+                                    </td>
+                                    <td class="text-right">
+                                        @Html.DisplayFor(modelItem => item.TaxAmount)
+                                    </td>
+                                    <td class="text-right">
+                                        @Html.DisplayFor(modelItem => item.AiVATPercentage)
+                                    </td>
+                                    <td class="text-right">
+                                        @Html.DisplayFor(modelItem => item.AiVATAmount)
+                                    </td>
+                                    <td class="text-right">
+                                        @Html.DisplayFor(modelItem => item.VATPercentage)
+                                    </td>
+                                    <td class="text-right">
+                                        @Html.DisplayFor(modelItem => item.VATAmount)
+                                    </td>
+                                    <td class="text-right">
+                                        @Html.DisplayFor(modelItem => item.RentPercentage)
+                                    </td>
+                                    <td class="text-right">
+                                        @Html.DisplayFor(modelItem => item.NetRentAmount)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.UserID)
+                                    </td>
+                                    @*//==AP Post Status*@
+                                    <td class="text-right">
+                                        @Html.DisplayFor(modelItem => item.EntryDate, "{0:dd/MM/yyyy}")
+                                    </td>
+                                    <td>
+                                        @if (item.PostText == "Unposted")
+                                        {
+                                            @Html.DisplayFor(modelItem => item.PostText)
+                                        }
+                                        else
+                                        {
+                                            <span style="color:blueviolet; font-weight:bold;">@Html.DisplayFor(modelItem => item.PostText)</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (item.PostingID == null)
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            @Html.DisplayFor(modelItem => item.PostingID)
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (item.PostingDate == null)
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            @Convert.ToDateTime(item.PostingDate).ToString("dd/MM/yyyy")
+                                        }
+                                    </td>
+                                    @*//==Payment Post Status*@
+                                    <td>
+                                        @if (item.PJPostText == "Unposted")
+                                        {
+                                            @Html.DisplayFor(modelItem => item.PJPostText)
+                                        }
+                                        else
+                                        {
+                                            <span style="color:blueviolet; font-weight:bold;">@Html.DisplayFor(modelItem => item.PJPostText)</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (item.PJPostingID == null)
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            @Html.DisplayFor(modelItem => item.PJPostingID)
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (item.PJPostingDate == "")
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            @Convert.ToDateTime(item.PJPostingDate).ToString("dd/MM/yyyy")
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer">
+                    <span>Click the &nbsp;</span><span style="color:darkblue;" class="card-title fas fa-check-circle float-lg-none">&nbsp;Copy-Excel-PDF-Print-Column-Visibility</span><span>&nbsp; button at the top left to export the report.</span>
+                    <button type="button" class="btn btn-warning" style="float: right;"
+                            id="btnFormBack" onclick="return BackValidator();">
+                        <i class="fas fa-reply"></i>
+                        <span>&nbsp;Back</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<style type="text/css">
+    .form-control {
+        width: auto;
+    }
+
+    .required:after {
+        content: "*";
+        font-weight: bold;
+        color: red;
+    }
+</style>
+<style type="text/css" media="screen">
+    #spinner {
+        position: fixed;
+        top: -18%;
+        left: 30%;
+    }
+</style>
+<style type="text/css" media="screen">
+    /*    .dt-button-collection .dt-button.buttons-columnVisibility {
+        background: none !important;
+        background-color: transparent !important;
+        box-shadow: none !important;
+        border: none !important;
+        padding: 0.25em 1em !important;
+        margin: 0 !important;
+        text-align: left !important;
+    }*/
+
+    .dt-button-collection .buttons-columnVisibility:before,
+    .dt-button-collection .buttons-columnVisibility.active span:before {
+        display: block;
+        position: absolute;
+        top: 1.2em;
+        left: 0;
+        width: 12px;
+        height: 12px;
+        box-sizing: border-box;
+    }
+
+    .dt-button-collection .buttons-columnVisibility:before {
+        content: ' ';
+        margin-top: -8px;
+        margin-left: 10px;
+        border: 1px solid black;
+        border-radius: 3px;
+    }
+
+    .dt-button-collection .buttons-columnVisibility.active span:before {
+        color: green;
+        font-family: 'Arial' !important;
+        content: '\2714';
+        margin-top: -15px;
+        margin-left: 12px;
+        text-align: center;
+        text-shadow: 1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
+    }
+
+    .dt-button-collection .buttons-columnVisibility span {
+        margin-left: 17px;
+    }
+</style>
+
+<script src="~/Scripts/jquery-3.6.0.js"></script>
+<script src="~/Template/plugins/jquery-ui/jquery-ui.js"></script>
+<script src="~/Scripts/notify.js"></script>
+<script src="~/Scripts/SweetAlert2/sweetalert2.all.min.js"></script>
+<script src="~/Scripts/SweetAlert2/sweetalert2.min.js"></script>
+
+<script src="~/Template/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/Template/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="~/Template/plugins/jszip/jszip.min.js"></script>
+<script src="~/Template/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="~/Template/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="~/Template/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="~/Template/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="~/Template/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<script src="~/Template/plugins/datatables-select/js/dataTables.select.min.js"></script>
+
+<link href="~/Template/plugins/jquery-ui/jquery-ui.css" rel="stylesheet" />
+<link href="~/Template/plugins/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="~/Template/plugins/buttons.dataTables.css" rel="stylesheet" />
+<link href="~/Template/plugins/dataTables.bootstrap5.css" rel="stylesheet" />
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="~/Template/plugins/fontawesome-free/css/all.min.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="~/Template/dist/css/adminlte.min.css">
+<!-- overlayScrollbars -->
+<link rel="stylesheet" href="~/Template/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function () {
+        $('#spinner').show();
+        $('#summary1').DataTable({
+            dom: 'Blfrtip',
+            responsive: true,
+            AutoWidth: true,
+            select: true,
+            searching: true,
+            //pageLength: -1,
+            paging: true,
+            order: [[1, "asc"]],
+            lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+            columnDefs: [
+                { "visible": false, "targets": 0 },
+                { "visible": false, "targets": 3 },
+                { "visible": false, "targets": 5 },
+                { "visible": false, "targets": 9 },
+                { "visible": false, "targets": 10 },
+                { "visible": false, "targets": 11 },
+                { "visible": false, "targets": 12 },
+                { "visible": false, "targets": 15 },
+                { "visible": false, "targets": 16 },
+                { "visible": false, "targets": 17 },
+                { "visible": false, "targets": 18 },
+                { "visible": false, "targets": 19 },
+                { "visible": false, "targets": 20 },
+                { "visible": false, "targets": 21 },
+                { "visible": false, "targets": 22 },
+                { "visible": false, "targets": 24 },
+                { "visible": false, "targets": 25 },
+                { "visible": false, "targets": 26 },
+                { "visible": false, "targets": 28 },
+                { "visible": false, "targets": 29 },
+                { "visible": false, "targets": 30 },
+                { "visible": false, "targets": 32 },
+                { "visible": false, "targets": 34 },
+                { "visible": false, "targets": 35 },
+                { "visible": false, "targets": 37 },
+                { "visible": false, "targets": 38 },
+                { "visible": false, "targets": 40 },
+                { "visible": false, "targets": 41 },
+            ],
+            buttons: [
+                {
+                    extend: 'copyHtml5',
+                    orientation: 'landscape',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'excelHtml5',
+                    orientation: 'landscape',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'pdfHtml5',
+                    orientation: 'landscape',
+                    exportOptions: {
+                        columns: ':visible'
+                        //columns: [0, 1, 2, 5]
+                    }
+                },
+                {
+                    extend: 'print',
+                    orientation: 'landscape',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'colvis',
+                    orientation: 'landscape',
+                    collectionLayout: 'fixed three-column'
+                },
+                {
+                    extend: 'colvisGroup',
+                    text: 'Show all columns',
+                    show: ':hidden'
+                },
+            ],
+        });
+        $('#spinner').hide();
+    });
+</script>
+
+<script type="text/javascript">
+    function BackValidator() {
+        window.location.href = "/AgreementInfo/RentHoldPayment";
+    }
+</script>

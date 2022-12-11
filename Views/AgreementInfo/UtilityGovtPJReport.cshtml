@@ -1,0 +1,145 @@
+﻿@model RMS.Models.UtilityScheduleDTO
+@{
+    ViewBag.Title = "Utility Pay to Govt.";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+@using (Html.BeginForm("UtilityGovtPJReport", "AgreementInfo", FormMethod.Post, new { id = "frmSubmit", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.Year)
+    <section class="content" style="padding-top:15px;">
+        <div class="container-fluid">
+            <div class="col-md-12">
+                <div class="card card-info">
+                    <div class="card-header">
+                        <h3 class="card-title"><i class="fas fa-map"></i><span>&nbsp;&nbsp;Utility Pay to Govt.</span></h3>
+                        <div id="spinner" style="display: none;padding-top:50px; padding-bottom:20px; padding-left:100px;">
+                            <img id="img-spinner" src="@Url.Content("~/Content/Images/spinner.gif")" alt="Loading" />
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row" style="padding-top:10px;">
+                            <div class="required col-xs-12 col-sm-4 col-md-3">
+                                @Html.Label("Year", new { @class = "control-label" })
+                            </div>
+                            <div class="col-xs-12 col-sm-8 col-md-3">
+                                @Html.DropDownList("YearA", new SelectList(ViewBag.Year, "Value", "Text", @ViewBag.SelectedYear), new { @class = "chosen form-control input-sm", style = "width: 350px;", id = "ddlYear" })
+                            </div>
+                        </div>
+                        <div class="row" style="padding-top:10px;">
+                            <div class="required col-xs-12 col-sm-4 col-md-3">
+                                @Html.Label("From Month", new { @class = "control-label" })
+                            </div>
+                            <div class="col-xs-12 col-sm-8 col-md-3">
+                                @Html.DropDownListFor(model => model.FromMonthName, new SelectList(ViewBag.MonthList, "Value", "Text", "January"), new { @class = "chosen form-control input-sm", style = "width: 350px;", id = "ddlFromMonthName" })
+                            </div>
+                        </div>
+                        <div class="row" style="padding-top:10px;">
+                            <div class="required col-xs-12 col-sm-4 col-md-3">
+                                @Html.Label("To Month", new { @class = "control-label" })
+                            </div>
+                            <div class="col-xs-12 col-sm-8 col-md-3">
+                                @Html.DropDownListFor(model => model.ToMonthName, new SelectList(ViewBag.MonthList, "Value", "Text", @ViewBag.CurrentMonth), new { @class = "chosen form-control input-sm", style = "width: 350px;", id = "ddlToMonthName" })
+                            </div>
+                        </div>
+                        <hr />
+                        <b>By All Agreements</b>
+                        <hr />
+                        <b>OR</b>
+                        <div class="row" style="padding-top:10px;">
+                            <div class="col-xs-12 col-sm-4 col-md-3">
+                                @Html.Label("By Agreement", new { @class = "control-label" })
+                            </div>
+                            <div class="col-xs-12 col-sm-8 col-md-3">
+                                @Html.DropDownListFor(model => model.AgreementSLNoCheckList, new SelectList(ViewBag.AgreementList, "AgreementSLNo", "FullName"), new { data_placeholder = "Select single or multiple Agreements", @multiple = true, @class = "chosen form-control input-sm", style = "width: 350px;", id = "ddlAgreement" })
+                            </div>
+                        </div>
+                        <hr />
+                        <b>OR</b>
+                        <div class="row" style="padding-top:10px;">
+                            <div class="col-xs-12 col-sm-4 col-md-3">
+                                @Html.Label("By Premise Type", new { @class = "control-label" })
+                            </div>
+                            <div class="col-xs-12 col-sm-8 col-md-3">
+                                @Html.DropDownListFor(model => model.PremiseTypeSLNoCheckList, new SelectList(ViewBag.PremiseTypeList, "PremiseTypeSLNo", "FullName"), new { data_placeholder = "Select single or multiple Premise Types", @multiple = true, @class = "chosen form-control input-sm", style = "width: 350px;", id = "ddlPremiseType" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <span>Fields marked with an asterisk &nbsp;</span><span style="color:red;"><b>*</b></span><span>&nbsp; are mandatory.</span>
+                        <button type="submit" class="btn btn-info" style="float: right;"
+                                id="btnShowReport" onclick="return Validator();">
+                            <i class="fas fa-bolt"></i>
+                            <span>&nbsp;Show Report</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+<style type="text/css">
+    .required:after {
+        content: "*";
+        font-weight: bold;
+        color: red;
+    }
+</style>
+<style type="text/css" media="screen">
+    #spinner {
+        position: fixed;
+        top: -18%;
+        left: 30%;
+    }
+</style>
+
+<script src="~/Scripts/jquery-3.6.0.js"></script>
+<script src="~/Template/plugins/jquery-ui/jquery-ui.js"></script>
+<script src="~/Scripts/notify.js"></script>
+<script src="~/Scripts/SweetAlert2/sweetalert2.all.min.js"></script>
+<script src="~/Scripts/SweetAlert2/sweetalert2.min.js"></script>
+
+<script src="~/Template/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/Template/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="~/Template/plugins/jszip/jszip.min.js"></script>
+<script src="~/Template/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="~/Template/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="~/Template/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="~/Template/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="~/Template/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<script src="~/Template/plugins/datatables-select/js/dataTables.select.min.js"></script>
+
+<link href="~/Template/plugins/jquery-ui/jquery-ui.css" rel="stylesheet" />
+<link href="~/Template/plugins/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="~/Template/plugins/buttons.dataTables.css" rel="stylesheet" />
+<link href="~/Template/plugins/dataTables.bootstrap5.css" rel="stylesheet" />
+
+<link rel="stylesheet" type="text/css" href="~/Content/chosen.min.css" />
+<script type="text/javascript" src="~/Scripts/chosen.jquery.min.js"></script>
+
+<script type="text/javascript">
+    //$(".chosen").chosen({ max_selected_options: 2 });
+    $(".chosen-deselect").chosen({ allow_single_deselect: true });
+    $(".chosen").chosen().change();
+    $(".chosen").trigger('liszt:updated');
+</script>
+
+<script>
+    function Validator() {
+        //var Agreement = document.getElementById("ddlAgreement").value;
+        //var Vendor = document.getElementById("ddlVendor").value;
+        //if ((Agreement == 0 || Agreement == "" || Agreement == null) && (Vendor == 0 || Vendor == "" || Vendor == null)) {
+        //    Swal.fire({
+        //        icon: 'warning',
+        //        title: 'Please Select the Agreement or Vendor!',
+        //        text: 'Validation Message!',
+        //    })
+        //    return false;
+        //}
+        $('#spinner').show();
+        //$('#txtVendorCodeCheckList').val((Array.from(document.getElementById('ddlVendor').selectedOptions).map(x => x.value)));
+        var SelectedYear = document.getElementById('ddlYear').value;
+        document.getElementById('Year').value = SelectedYear;
+    }
+</script>

@@ -1,0 +1,407 @@
+﻿@model IEnumerable<RMS.Models.UserInfoDTO>
+@{
+    ViewBag.Title = "Edit User";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+@using (Html.BeginForm("Edit", "UserInfo", FormMethod.Post, new { id = "frmSubmit", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.FirstOrDefault().UserSLNo, new { id = "txtUserSLNo" })
+    @Html.HiddenFor(model => model.FirstOrDefault().UserID, new { id = "txtOldUserID" })
+    @Html.HiddenFor(model => model.FirstOrDefault().Email, new { id = "txtOldEmail" })
+    <section class="content" style="padding-top:15px;">
+        <div class="container-fluid">
+            <div class="card card-blue card-tabs">
+                <div class="card-header p-0 pt-1">
+                    <div id="spinner" style="display: none;padding-top:50px; padding-bottom:20px; padding-left:100px;">
+                        <img id="img-spinner" src="@Url.Content("~/Content/Images/spinner.gif")" alt="Loading" />
+                    </div>
+                    <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+                        <li class="pt-1 px-3"><h3 class="card-title"><i class="fas fa-edit"></i><span>&nbsp;&nbsp;Edit User</span></h3></li>
+                        <li class="nav-item">
+                            <a class="nav-link active fas fa-user" id="profile-tab" data-toggle="pill"
+                               href="#profile" role="tab" aria-controls="profile" aria-selected="true">&nbsp;&nbsp;User Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fas fa-street-view" id="permission-tab" data-toggle="pill"
+                               href="#permission" role="tab" aria-controls="permission" aria-selected="false">&nbsp;&nbsp;User Permissions</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <div class="tab-content" id="custom-tabs-one-tabContent">
+                        <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                            @*//==General Info*@
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="card card-olive">
+                                            <div class="card-header">
+                                                <h3 class="card-title"><i class="fas fa-edit"></i><span>&nbsp;&nbsp;General Information</span></h3>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                    <div class="required col-xs-12 col-sm-4 col-md-3">
+                                                        @Html.LabelFor(model => model.FirstOrDefault().UserID, new { @class = "control-label" })
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-8 col-md-3">
+                                                        @Html.TextBoxFor(model => model.FirstOrDefault().UserID, new { @autocomplete = "off", @autofocus = "autofocus", @type = "number", @min = "0", @step = "0.01", @class = "form-control input-sm", id = "txtNewUserID" })
+                                                    </div>
+                                                    <div class="required col-xs-12 col-sm-4 col-md-3" style="padding-left:40px">
+                                                        @Html.LabelFor(model => model.FirstOrDefault().Email, new { @class = "control-label" })
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-8 col-md-3">
+                                                        @Html.TextBoxFor(model => model.FirstOrDefault().Email, new { @autocomplete = "off", @autofocus = "autofocus", @class = "form-control input-sm", id = "txtEmail" })
+                                                    </div>
+                                                </div>
+                                                @*<div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                        <div class="required col-xs-12 col-sm-4 col-md-3">
+                                                            @Html.LabelFor(model => model.FirstOrDefault().Password, new { @class = "control-label" })
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-8 col-md-3">
+                                                            @Html.PasswordFor(model => model.FirstOrDefault().Password, new { autocomplete = "off", @class = "form-control input-sm", id = "txtPassword", Textmode = "Password", value = Model.FirstOrDefault().Password })
+                                                        </div>
+                                                        <div class="required col-xs-12 col-sm-4 col-md-3" style="padding-left:40px">
+                                                            @Html.Label("Confirm Password", new { @class = "control-label" })
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-8 col-md-3">
+                                                            @Html.PasswordFor(model => model.FirstOrDefault().Password, new { @autocomplete = "off", @class = "form-control input-sm", id = "txtConfirmPassword", Textmode = "Password", value = Model.FirstOrDefault().Password })
+                                                        </div>
+                                                    </div>*@
+                                                <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                    <div class="required col-xs-12 col-sm-4 col-md-3">
+                                                        @Html.LabelFor(model => model.FirstOrDefault().FirstName, new { @class = "control-label" })
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-8 col-md-3">
+                                                        @Html.TextBoxFor(model => model.FirstOrDefault().FirstName, new { @class = "form-control input-sm", id = "txtFirstName" })
+                                                    </div>
+                                                    <div class="required col-xs-12 col-sm-4 col-md-3" style="padding-left:40px">
+                                                        @Html.LabelFor(model => model.FirstOrDefault().LastName, new { @class = "control-label" })
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-8 col-md-3">
+                                                        @Html.TextBoxFor(model => model.FirstOrDefault().LastName, new { @class = "form-control input-sm", id = "txtLastName" })
+                                                    </div>
+                                                </div>
+                                                <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                    <div class="required col-xs-12 col-sm-4 col-md-3">
+                                                        @Html.LabelFor(model => model.FirstOrDefault().ContactNo1, new { @class = "control-label" })
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-8 col-md-3">
+                                                        @Html.TextBoxFor(model => model.FirstOrDefault().ContactNo1, new { @class = "form-control input-sm", id = "txtContactNo1" })
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-4 col-md-3" style="padding-left:40px">
+                                                        @Html.LabelFor(model => model.FirstOrDefault().ContactNo2, new { @class = "control-label" })
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-8 col-md-3">
+                                                        @Html.TextBoxFor(model => model.FirstOrDefault().ContactNo2, new { @class = "form-control input-sm", id = "txtContactNo2" })
+                                                    </div>
+                                                </div>
+                                                <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                    <div class="col-xs-12 col-sm-4 col-md-3">
+                                                        @Html.LabelFor(model => model.FirstOrDefault().Address, new { @class = "control-label" })
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-8 col-md-3">
+                                                        @Html.EditorFor(model => model.FirstOrDefault().Address, additionalViewData: new { htmlAttributes = new { @class = "form-control input-sm", rows = 1, id = "txtAddress" } })
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-4 col-md-3" style="padding-left:40px">
+                                                        @Html.LabelFor(model => model.FirstOrDefault().Designation, new { @class = "control-label" })
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-8 col-md-3">
+                                                        @Html.TextBoxFor(model => model.FirstOrDefault().Designation, new { @class = "form-control input-sm", id = "txtDesignation" })
+                                                    </div>
+                                                </div>
+                                                <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                                                    <div class="col-xs-12 col-sm-4 col-md-3">
+                                                        @Html.LabelFor(model => model.FirstOrDefault().Status, new { @class = "control-label" })
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-8 col-md-3">
+                                                        @foreach (var item in ViewBag.Status)
+                                                        {
+                                                            Int32 id = item.StatusValue;
+                                                            @Html.RadioButtonFor(model => model.FirstOrDefault().Status, id) <text> &nbsp; </text> @item.StatusName <text> &nbsp; </text>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card-footer">
+                                                <span>Fields marked with an asterisk &nbsp;</span><span style="color:red;"><b>*</b></span><span>&nbsp; are mandatory.</span>
+                                            </div>
+                                        </div>
+                                        <!-- /.card -->
+                                    </div>
+                                </div>
+                            </div>
+                            @*//==End*@
+                        </div>
+                        <div class="tab-pane fade" id="permission" role="tabpanel" aria-labelledby="permission-tab">
+                            @*//==User Permissions*@
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="card card-olive">
+                                            <div class="card-header">
+                                                <h3 class="card-title"><i class="fas fa-edit"></i><span>&nbsp;&nbsp;Permission Tree</span></h3>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div id="tree"></div>
+                                                </div>
+                                            </div>
+                                            <div class="card-footer">
+                                                <span>Expand the tree and&nbsp;</span><span class="card-title fas fa-check-square float-lg-none">&nbsp;check/uncheck the tree menu to set user permission.</span>
+                                            </div>
+                                        </div>
+                                        <!-- /.card -->
+                                    </div>
+                                </div>
+                            </div>
+                            @*//==End*@
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer" style="text-align:right;">
+                    <button type="button" class="btn btn-success" style="margin-right: 15px; float: right;"
+                            id="btnSave">
+                        <i class="fas fa-save"></i>
+                        <span>&nbsp;Update User</span>
+                    </button>
+
+                    <button type="button" class="btn btn-warning" style="float: left;"
+                            id="btnCancel">
+                        <i class="fas fa-reply"></i>
+                        <span>&nbsp;Back to List</span>
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </section>
+}
+<style type="text/css">
+    .required:after {
+        content: "*";
+        font-weight: bold;
+        color: red;
+    }
+</style>
+<style type="text/css" media="screen">
+    #spinner {
+        position: fixed;
+        top: -18%;
+        left: 30%;
+    }
+</style>
+
+<script src="~/Scripts/jquery-3.6.0.js"></script>
+<script src="~/Template/plugins/jquery-ui/jquery-ui.js"></script>
+<link href="~/Template/plugins/jquery-ui/jquery-ui.css" rel="stylesheet" />
+
+<script src="~/Scripts/notify.js"></script>
+<script src="~/Scripts/SweetAlert2/sweetalert2.all.min.js"></script>
+<script src="~/Scripts/SweetAlert2/sweetalert2.min.js"></script>
+
+<script src="~/Scripts/gijgo/modular/tree.js"></script>
+<script src="~/Scripts/gijgo/combined/gijgo.min.js"></script>
+<link href="~/Content/gijgo/combined/gijgo.min.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="~/Template/plugins/fontawesome-free/css/all.min.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="~/Template/dist/css/adminlte.min.css">
+<!-- overlayScrollbars -->
+<link rel="stylesheet" href="~/Template/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#spinner').show();
+        var tree = $('#tree').tree({
+            primaryKey: 'Childid',
+            uiLibrary: 'bootstrap4',
+            dataSource: '/UserInfo/GetUserPermissionList?UserSLNo=' + $('#txtUserSLNo').val(),
+            checkboxes: true
+        });
+        //$("#txtEmail").focusout(function () {
+        //    var email = document.getElementById("txtEmail").value;
+        //    var name = email.substring(0, email.lastIndexOf("@@"));
+        //    $("#txtNewUserID").val(name);
+        //});
+        $('#spinner').hide();
+
+        $('#btnSave').on('click', function () {
+            var Email = $('#txtEmail').val();
+            var UserID = $('#txtNewUserID').val();
+            var Password = $('#txtPassword').val();
+            var ConfirmPassword = $('#txtConfirmPassword').val();
+            var FirstName = $('#txtFirstName').val();
+            var LastName = $('#txtLastName').val();
+            var ContactNo1 = $('#txtContactNo1').val();
+
+            if (Email == "" || Email == null) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Email cannot be blank!',
+                    text: 'Validation Message!',
+                })
+                return false;
+            }
+            else {
+                if (validateEmail(Email)) {
+
+                } else {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Please input valid Email!',
+                        text: 'Validation Message!',
+                    })
+                    return false;
+                }
+            }
+            if (UserID == "" || UserID == null) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'User ID cannot be blank!',
+                    text: 'Validation Message!',
+                })
+                return false;
+            }
+            if (FirstName == "" || FirstName == null) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'First Name cannot be blank!',
+                    text: 'Validation Message!',
+                })
+                return false;
+            }
+            if (LastName == "" || LastName == null) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Last Name cannot be blank!',
+                    text: 'Validation Message!',
+                })
+                return false;
+            }
+            if (ContactNo1 == "" || ContactNo1 == null) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Contact No cannot be blank!',
+                    text: 'Validation Message!',
+                })
+                return false;
+            }
+            //==Save to Submit Form
+            Swal.fire({
+                title: "Are you sure to update the user information?",
+                text: "Please review all required information entered!",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes,&nbsp;Update User'
+            }).then((result) => {
+                if (result.value) {
+                    //==Check User Exist
+                    $('#spinner').show();
+                    $.ajax({
+                        type: "GET",
+                        url: "/UserInfo/CheckUserExist",
+                        data: { CheckFor: "Edit", OldUserID: $("#txtOldUserID").val(), NewUserID: $("#txtNewUserID").val(), OldEmail: $("#txtOldEmail").val(), NewEmail: $("#txtEmail").val() },
+                        contentType: 'application/json; charset=utf-8',
+                        dataType: 'json',
+                        success: function (response) {
+                            $('#spinner').hide();
+                            if (response.UserExist == true) {
+                                if (response.CheckType == "Exist") {
+                                    Swal.fire({
+                                        icon: 'warning',
+                                        title: 'The user ID already exists!',
+                                        text: 'Something went wrong!',
+                                    })
+                                }
+                                else {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Error, execution not possible!',
+                                        text: 'Something went wrong!',
+                                    })
+                                }
+                            }
+                            else if (response.EmailExist == true) {
+                                if (response.CheckType == "Exist") {
+                                    Swal.fire({
+                                        icon: 'warning',
+                                        title: 'The email already exists!',
+                                        text: 'Something went wrong!',
+                                    })
+                                }
+                                else {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Error, execution not possible!',
+                                        text: 'Something went wrong!',
+                                    })
+                                }
+                            }
+                            else {
+                                //==Submit Post
+                                var checkedIds = tree.getCheckedNodes();
+                                var headers = { __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val() };
+                                $.ajax({
+                                    type: "POST",
+                                    headers: headers,
+                                    url: "/UserInfo/Edit",
+                                    data: { checkedIds: checkedIds, userslno: $("#txtUserSLNo").val(), email: $("#txtEmail").val(), userid: $("#txtNewUserID").val(), password: "NA", firstname: $("#txtFirstName").val(), lastname: $("#txtLastName").val(), contactno1: $("#txtContactNo1").val(), contactno2: $("#txtContactNo2").val(), address: $("#txtAddress").val(), designation: $("#txtDesignation").val(), status: $("input[name='Status']:checked").val() },
+                                    success: function (response) {
+                                        $('#spinner').hide();
+                                        if (response.CheckStatus == true) {
+                                            Swal.fire({
+                                                icon: 'success',
+                                                title: 'User account has been updated.',
+                                                text: 'Redirecting in 3 seconds.',
+                                                timer: 3000,
+                                                showConfirmButton: false
+                                            }).then(function () {
+                                                window.location.href = "/UserInfo/RedirectUserIndex?ViewID=2";
+                                            });
+                                        }
+                                        else {
+                                            Swal.fire({
+                                                icon: 'error',
+                                                title: 'User account not updated, execution not possible!',
+                                                text: 'Something went wrong!',
+                                            })
+                                        }
+                                    },
+                                    failure: function (response) {
+                                        alert(response.responseText);
+                                    },
+                                    error: function (response) {
+                                        alert(response.responseText);
+                                    }
+                                });
+                            }
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+                    //==
+                }
+            });
+        });
+
+        $('#btnCancel').on('click', function () {
+            window.location.href = "/UserInfo/RedirectUserIndex?ViewID=2";
+        });
+    });
+</script>
+<script>
+    function validateEmail(email) {
+        var re = /^(([^<>()[\]\\.,;:\s@@\"]+(\.[^<>()[\]\\.,;:\s@@\"]+)*)|(\".+\"))@@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+    }
+</script>

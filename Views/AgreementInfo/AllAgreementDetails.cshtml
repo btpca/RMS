@@ -1,0 +1,2253 @@
+﻿@model IEnumerable<RMS.Models.AgreementInfoDTO>
+@{
+    ViewBag.Title = "All Agreement Details";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+@Html.AntiForgeryToken()
+<section class="content" style="padding-top:15px;">
+    <div class="container-fluid">
+        <div class="col-md-12">
+            <div class="card card-info card-tabs">
+                <div class="card-header p-0 pt-1">
+                    <div id="spinner" style="display: none;padding-top:50px; padding-bottom:20px; padding-left:100px;">
+                        <img id="img-spinner" src="@Url.Content("~/Content/Images/spinner.gif")" alt="Loading" />
+                    </div>
+                    <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+                        <li class="pt-1 px-3"><h3 class="card-title"><i class="fas fa-building"></i><span>&nbsp;&nbsp;All Agreement Details</span></h3></li>
+                        <li class="nav-item">
+                            <a class="nav-link active nav-icon fas fa-check" id="custom-tabs-one-AgreementInfo-tab" data-toggle="pill"
+                               href="#custom-tabs-one-AgreementInfo" role="tab" aria-controls="custom-tabs-one-AgreementInfo" aria-selected="true">&nbsp;&nbsp;Agreement List</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fas fa-check" id="custom-tabs-one-SpaceInfo-tab" data-toggle="pill"
+                               href="#custom-tabs-one-SpaceInfo" role="tab" aria-controls="custom-tabs-one-SpaceInfo" aria-selected="false">&nbsp;&nbsp;Space Info</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fas fa-check" id="custom-tabs-one-AdvanceInfo-tab" data-toggle="pill"
+                               href="#custom-tabs-one-AdvanceInfo" role="tab" aria-controls="custom-tabs-one-AdvanceInfo" aria-selected="false">&nbsp;&nbsp;Advance Info</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fas fa-check" id="custom-tabs-one-ReviewInfo-tab" data-toggle="pill"
+                               href="#custom-tabs-one-ReviewInfo" role="tab" aria-controls="custom-tabs-one-ReviewInfo" aria-selected="false">&nbsp;&nbsp;Enhancement Info</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fas fa-check" id="custom-tabs-one-LandlordInfo-tab" data-toggle="pill"
+                               href="#custom-tabs-one-LandlordInfo" role="tab" aria-controls="custom-tabs-one-LandlordInfo" aria-selected="false">&nbsp;&nbsp;Landlord List</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fas fa-check" id="custom-tabs-one-CostCenterInfo-tab" data-toggle="pill"
+                               href="#custom-tabs-one-CostCenterInfo" role="tab" aria-controls="custom-tabs-one-CostCenterInfo" aria-selected="false">&nbsp;&nbsp;Cost Center List</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fas fa-check" id="custom-tabs-one-UtilityInfo-tab" data-toggle="pill"
+                               href="#custom-tabs-one-UtilityInfo" role="tab" aria-controls="custom-tabs-one-UtilityInfo" aria-selected="false">&nbsp;&nbsp;Utility List</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <div class="tab-content" id="custom-tabs-one-tabContent">
+                        <div class="tab-pane fade show active" id="custom-tabs-one-AgreementInfo" role="tabpanel" aria-labelledby="custom-tabs-one-AgreementInfo-tab">
+                            @*//==Agreement List*@
+                            <div class="container-fluid">
+                                <div class="col-md-12">
+                                    <div class="card card-info">
+                                        <div class="card-header">
+                                            <h3 class="card-title"><i class="fas fa-check"></i><span>&nbsp;&nbsp;Agreement List</span></h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <table class="table  table-bordered table-condensed table-striped table-hover table-responsive btnRemove" id="TableAgreementInfo">
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            @Html.DisplayName("Agr Code")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Agr Name")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Agr Status")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Agr Type")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Premise Type")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Premise Name")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Premise Address")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Start Date")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("End Date")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Schedule No")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Due Days")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Total Area")
+                                                        </th>
+                                                        <th class="text-right">
+                                                            @Html.DisplayName("CPU")
+                                                        </th>
+                                                        <th class="text-right">
+                                                            @Html.DisplayName("Net Rent")
+                                                        </th>
+                                                        <th class="text-right">
+                                                            @Html.DisplayName("Security Deposit")
+                                                        </th>
+                                                        <th class="text-right">
+                                                            @Html.DisplayName("Advance")
+                                                        </th>
+                                                        <th class="text-right">
+                                                            @Html.DisplayName("Tax %")
+                                                        </th>
+                                                        <th class="text-right">
+                                                            @Html.DisplayName("Tax")
+                                                        </th>
+                                                        <th class="text-right">
+                                                            @Html.DisplayName("VAT %")
+                                                        </th>
+                                                        <th class="text-right">
+                                                            @Html.DisplayName("VAT")
+                                                        </th>
+                                                        <th class="text-right">
+                                                            @Html.DisplayName("Total Rent")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Tax Type")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("VAT Type")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Text")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Enh Frequency")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Enh %")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Cash GL")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Bank GL")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Advance GL")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Adv Adj GL")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Rent GL")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Utility GL")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Tax GL")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("VAT GL")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Provision GL Tax")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Provision GL AP")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("RTGS GL")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("EFTN GL")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Pay Order GL")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("IBB Payment GL")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("City Brokerage GL")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("City Capital GL")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Others GL")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Service Charge")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Online Tower")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Generator Space")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Car Parking")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Rent Amount")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Agr Special")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Calculation Method")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Water Bill Type")
+                                                        </th>
+                                                        <th class="text-right">
+                                                            @Html.DisplayName("Water Bill Amount")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("IFRS Reporting")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("IFRS Effective Date")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Borrowing Rate %")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Corporate Tax Rate %")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Create By")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Create Date")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Edit By")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Edit Date")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Activate By")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Activate Date")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Terminated Status")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Terminated By")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Terminated Date")
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (var item in Model)
+                                                    {
+                                                        <tr>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.AliasCode)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.AgreementName)
+                                                            </td>
+                                                            <td>
+                                                                @if (item.AgreementStatus == 1)
+                                                                {
+                                                                    @Html.DisplayName("Created")
+                                                                }
+
+                                                                else if (item.AgreementStatus == 2)
+                                                                {
+                                                                    @Html.DisplayName("Activate")
+                                                                }
+                                                                else if (item.AgreementStatus == 3)
+                                                                {
+                                                                    @Html.DisplayName("Renewal")
+                                                                }
+                                                            </td>
+                                                            <td>
+                                                                @if (item.AgreementType == 1)
+                                                                {
+                                                                    @Html.DisplayName("Basic Agreement")
+                                                                }
+
+                                                                else if (item.AgreementType == 2)
+                                                                {
+                                                                    @Html.DisplayName("Renewal Agreement")
+                                                                }
+                                                                else if (item.AgreementType == 3)
+                                                                {
+                                                                    @Html.DisplayName("Modified Agreement")
+                                                                }
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.PremiseType)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.PremiseName)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.PremiseAddress)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.AgreementStartDate, "{0:dd/MM/yyyy}")
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.AgreementEndDate, "{0:dd/MM/yyyy}")
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.AgreementPeriod)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.RentDueDay)
+                                                            </td>
+                                                            <td>
+                                                                @if (item.UOM == 1)
+                                                                {
+                                                                    @Html.DisplayFor(modelItem => item.TotalArea)
+                                                                }
+                                                                else
+                                                                {
+                                                                    @Html.DisplayFor(modelItem => item.TotalArea)
+                                                                }
+                                                            </td>
+                                                            <td class="text-right">
+                                                                @Html.DisplayFor(modelItem => item.CostPerUnit)
+                                                            </td>
+                                                            <td class="text-right">
+                                                                @Html.DisplayFor(modelItem => item.NetRentAmount)
+                                                            </td>
+                                                            <td class="text-right">
+                                                                @Html.DisplayFor(modelItem => item.SecurityDepositAmount)
+                                                            </td>
+                                                            <td class="text-right">
+                                                                @Html.DisplayFor(modelItem => item.AdvanceAmount)
+                                                            </td>
+                                                            <td class="text-right">
+                                                                @Html.DisplayFor(modelItem => item.TaxPercentage)
+                                                            </td>
+                                                            <td class="text-right">
+                                                                @Html.DisplayFor(modelItem => item.TaxAmount)
+                                                            </td>
+                                                            <td class="text-right">
+                                                                @Html.DisplayFor(modelItem => item.VATPercentage)
+                                                            </td>
+                                                            <td class="text-right">
+                                                                @Html.DisplayFor(modelItem => item.VATAmount)
+                                                            </td>
+                                                            <td class="text-right">
+                                                                @Html.DisplayFor(modelItem => item.TotalRentAmount)
+                                                            </td>
+                                                            <td>
+                                                                @if (item.TaxType == 1)
+                                                                {
+                                                                    <span>Inclusive</span>
+                                                                }
+                                                                else if (item.TaxType == 2)
+                                                                {
+                                                                    <span>Exclusive</span>
+                                                                }
+                                                                else if (item.TaxType == 3)
+                                                                {
+                                                                    <span>Exempted</span>
+                                                                }
+                                                            </td>
+                                                            <td>
+                                                                @if (item.VatType == 1)
+                                                                {
+                                                                    <span>Inclusive</span>
+                                                                }
+                                                                else if (item.VatType == 2)
+                                                                {
+                                                                    <span>Exclusive</span>
+                                                                }
+                                                                else if (item.VatType == 3)
+                                                                {
+                                                                    <span>Exempted</span>
+                                                                }
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.AgreementText)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.ReviewFrequency)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.ReviewPercentage)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.CashGLCode)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.BankGLCode)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.AdvanceGLCode)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.AdvanceAdjustmentGLCode)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.RentGLCode)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.ServiceChargeGLCode)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.TaxGLCode)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.VATGLCode)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.ProvisionGLTax)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.ProvisionGLAP)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.RTGSGL)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.EFTNGL)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.PayOrderGL)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.IBBPaymentGL)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.CityBrokerageGL)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.CityCapitalGL)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.OthersGL)
+                                                            </td>
+                                                            <td class="text-right">
+                                                                @Html.DisplayFor(modelItem => item.ServiceCharge)
+                                                            </td>
+                                                            <td class="text-right">
+                                                                @Html.DisplayFor(modelItem => item.OnlineTower)
+                                                            </td>
+                                                            <td class="text-right">
+                                                                @Html.DisplayFor(modelItem => item.GeneratorSpace)
+                                                            </td>
+                                                            <td class="text-right">
+                                                                @Html.DisplayFor(modelItem => item.CarParking)
+                                                            </td>
+                                                            <td class="text-right">
+                                                                @Html.DisplayFor(modelItem => item.RentAmount)
+                                                            </td>
+                                                            <td>
+                                                                @if (item.Special == true)
+                                                                {
+                                                                    <span>Yes</span>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <span>No</span>
+                                                                }
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.CalculationMethod)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.WaterBillType)
+                                                            </td>
+                                                            <td class="text-right">
+                                                                @Html.DisplayFor(modelItem => item.WaterBillAmount)
+                                                            </td>
+                                                            <td>
+                                                                @if (item.IsIFRSEnable == true)
+                                                                {
+                                                                    <span>Yes</span>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <span>No</span>
+                                                                }
+                                                            </td>
+                                                            <td>
+                                                                @if (item.IFRSEffectiveDate != null)
+                                                                {
+                                                                    @Html.DisplayFor(modelItem => item.IFRSEffectiveDate, "{0:dd/MM/yyyy}")
+                                                                }
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.BorrowingRate)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.CorporateTaxRate)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.UserID)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.EntryDate, "{0:dd/MM/yyyy}")
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.EditBy)
+                                                            </td>
+                                                            <td>
+                                                                @if (item.strEditDate != null)
+                                                                {
+                                                                    @Html.DisplayFor(modelItem => item.strEditDate, "{0:dd/MM/yyyy}")
+                                                                }
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.ActivateBy)
+                                                            </td>
+                                                            <td>
+                                                                @if (item.strActivateDate != null)
+                                                                {
+                                                                    @Html.DisplayFor(modelItem => item.strActivateDate, "{0:dd/MM/yyyy}")
+                                                                }
+                                                            </td>
+                                                            <td>
+                                                                @if (item.BlockText == "Open")
+                                                                {
+                                                                    @Html.DisplayFor(modelItem => item.BlockText)
+                                                                }
+                                                                else
+                                                                {
+                                                                    <span style="color:red; font-weight:bold;">@Html.DisplayFor(modelItem => item.BlockText)</span>
+                                                                }
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.TerminatedBy)
+                                                            </td>
+                                                            <td>
+                                                                @if (item.BlockDate != null)
+                                                                {
+                                                                    @Convert.ToDateTime(item.BlockDate).ToString("dd/MM/yyyy")
+                                                                }
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                            </table>
+                                        </div>
+                                        <div class="card-footer">
+                                            <span>Click the &nbsp;</span><span style="color:darkblue;" class="card-title fas fa-check-circle float-lg-none">&nbsp;Copy-Excel-PDF-Print-Column-Visibility</span><span>&nbsp; button at the top left to export the report.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @*//==End*@
+                        </div>
+                        <div class="tab-pane fade" id="custom-tabs-one-SpaceInfo" role="tabpanel" aria-labelledby="custom-tabs-one-SpaceInfo-tab">
+                            @*//==Space List*@
+                            <div class="container-fluid">
+                                <div class="col-md-12">
+                                    <div class="card card-info">
+                                        <div class="card-header">
+                                            <h3 class="card-title"><i class="fas fa-check"></i><span>&nbsp;&nbsp;Space Info</span></h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <table class="table  table-bordered table-condensed table-striped table-hover table-responsive btnRemove" id="TableSpaceInfo">
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            @Html.DisplayName("Agr Code")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Agr Name")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Agr Type")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Premise Type")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Premise Name")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Premise Address")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Start Date")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("End Date")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Sub Premises Type")
+                                                        </th>
+                                                        <th class="text-right">
+                                                            @Html.DisplayName("Area")
+                                                        </th>
+                                                        <th class="text-right">
+                                                            @Html.DisplayName("Rate")
+                                                        </th>
+                                                        <th class="text-right">
+                                                            @Html.DisplayName("Monthly Rent")
+                                                        </th>
+                                                        <th class="text-right">
+                                                            @Html.DisplayName("Total Advance")
+                                                        </th>
+                                                        <th class="text-right">
+                                                            @Html.DisplayName("Monthly Adv Adj")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Remarks")
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (RMS.Models.SpaceInfoDTO item in ViewBag.lstSpace)
+                                                    {
+                                                        <tr>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.AliasCode)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.AgreementName)
+                                                            </td>
+                                                            <td>
+                                                                @if (item.AgreementType == 1)
+                                                                {
+                                                                    @Html.DisplayName("Basic Agreement")
+                                                                }
+
+                                                                else if (item.AgreementType == 2)
+                                                                {
+                                                                    @Html.DisplayName("Renewal Agreement")
+                                                                }
+                                                                else if (item.AgreementType == 3)
+                                                                {
+                                                                    @Html.DisplayName("Modified Agreement")
+                                                                }
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.PremiseType)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.PremiseName)
+                                                            </td>
+
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.PremiseAddress)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.AgreementStartDate, "{0:dd/MM/yyyy}")
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.AgreementEndDate, "{0:dd/MM/yyyy}")
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.SpaceType)
+                                                            </td>
+                                                            <td class="text-right">
+                                                                @Html.DisplayFor(modelItem => item.SpaceArea)
+                                                            </td>
+                                                            <td class="text-right">
+                                                                @Html.DisplayFor(modelItem => item.SpaceRate)
+                                                            </td>
+                                                            <td class="text-right">
+                                                                @Html.DisplayFor(modelItem => item.SpaceRent)
+                                                            </td>
+                                                            <td class="text-right">
+                                                                @Html.DisplayFor(modelItem => item.SpaceTotalAdvance)
+                                                            </td>
+                                                            <td class="text-right">
+                                                                @Html.DisplayFor(modelItem => item.SpaceTotalAdjustment)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.SpaceRemarks)
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                            </table>
+                                        </div>
+                                        <div class="card-footer">
+                                            <span>Click the &nbsp;</span><span style="color:darkblue;" class="card-title fas fa-check-circle float-lg-none">&nbsp;Copy-Excel-PDF-Print-Column-Visibility</span><span>&nbsp; button at the top left to export the report.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @*//==End*@
+                        </div>
+                        <div class="tab-pane fade" id="custom-tabs-one-AdvanceInfo" role="tabpanel" aria-labelledby="custom-tabs-one-AdvanceInfo-tab">
+                            @*//==Advance List*@
+                            <div class="container-fluid">
+                                <div class="col-md-12">
+                                    <div class="card card-info">
+                                        <div class="card-header">
+                                            <h3 class="card-title"><i class="fas fa-check"></i><span>&nbsp;&nbsp;Advance Info</span></h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <table class="table table-bordered table-condensed table-striped table-hover table-responsive btnRemove" id="TableAdvanceInfo">
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            @Html.DisplayName("Agr Code")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Agr Name")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Agr Type")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Premise Type")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Premise Name")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Premise Address")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Agr Start Date")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Agr End Date")
+                                                        </th>
+                                                        <th class="text-right">
+                                                            @Html.DisplayName("Advance Amount")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Advance No")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Adv Start Date")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Adv End Date")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Schedule No")
+                                                        </th>
+                                                        <th class="text-right">
+                                                            @Html.DisplayName("Adv Adj Amount")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Note")
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (RMS.Models.AdvanceInfoDTO item in ViewBag.lstAdvance)
+                                                    {
+                                                        <tr>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.AliasCode)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.AgreementName)
+                                                            </td>
+                                                            <td>
+                                                                @if (item.AgreementType == 1)
+                                                                {
+                                                                    @Html.DisplayName("Basic Agreement")
+                                                                }
+
+                                                                else if (item.AgreementType == 2)
+                                                                {
+                                                                    @Html.DisplayName("Renewal Agreement")
+                                                                }
+                                                                else if (item.AgreementType == 3)
+                                                                {
+                                                                    @Html.DisplayName("Modified Agreement")
+                                                                }
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.PremiseType)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.PremiseName)
+                                                            </td>
+
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.PremiseAddress)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.AgreementStartDate, "{0:dd/MM/yyyy}")
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.AgreementEndDate, "{0:dd/MM/yyyy}")
+                                                            </td>
+                                                            <td class="text-right">
+                                                                @Html.DisplayFor(modelItem => item.AdvanceAmount)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.AdvanceNo)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.StartDate, "{0:dd/MM/yyyy}")
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.EndDate, "{0:dd/MM/yyyy}")
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.AdvanceSlotPeriod)
+                                                            </td>
+                                                            <td class="text-right">
+                                                                @Html.DisplayFor(modelItem => item.AdvanceSlotAmount)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.AdvanceNote)
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                            </table>
+                                        </div>
+                                        <div class="card-footer">
+                                            <span>Click the &nbsp;</span><span style="color:darkblue;" class="card-title fas fa-check-circle float-lg-none">&nbsp;Copy-Excel-PDF-Print-Column-Visibility</span><span>&nbsp; button at the top left to export the report.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @*//==End*@
+                        </div>
+                        <div class="tab-pane fade" id="custom-tabs-one-ReviewInfo" role="tabpanel" aria-labelledby="custom-tabs-one-ReviewInfo-tab">
+                            @*//==Review List*@
+                            <div class="container-fluid">
+                                <div class="col-md-12">
+                                    <div class="card card-info">
+                                        <div class="card-header">
+                                            <h3 class="card-title"><i class="fas fa-check"></i><span>&nbsp;&nbsp;Enhancement Info</span></h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <table class="table table-bordered table-condensed table-striped table-hover table-responsive btnRemove" id="TableReviewInfo">
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            @Html.DisplayName("Agr Code")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Agr Name")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Agr Type")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Premise Type")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Premise Name")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Premise Address")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Agr Start Date")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Agr End Date")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Enh No")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Start Date")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("End Date")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Schedule No")
+                                                        </th>
+                                                        <th class="text-right">
+                                                            @Html.DisplayName("Increase Amount")
+                                                        </th>
+                                                        <th class="text-right">
+                                                            @Html.DisplayName("Increase %")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Note")
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (RMS.Models.ReviewInfoDTO item in ViewBag.lstReview)
+                                                    {
+                                                        <tr>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.AliasCode)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.AgreementName)
+                                                            </td>
+                                                            <td>
+                                                                @if (item.AgreementType == 1)
+                                                                {
+                                                                    @Html.DisplayName("Basic Agreement")
+                                                                }
+
+                                                                else if (item.AgreementType == 2)
+                                                                {
+                                                                    @Html.DisplayName("Renewal Agreement")
+                                                                }
+                                                                else if (item.AgreementType == 3)
+                                                                {
+                                                                    @Html.DisplayName("Modified Agreement")
+                                                                }
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.PremiseType)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.PremiseName)
+                                                            </td>
+
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.PremiseAddress)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.AgreementStartDate, "{0:dd/MM/yyyy}")
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.AgreementEndDate, "{0:dd/MM/yyyy}")
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.ReviewNo)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.StartDate, "{0:dd/MM/yyyy}")
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.EndDate, "{0:dd/MM/yyyy}")
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.Period)
+                                                            </td>
+                                                            <td class="text-right">
+                                                                @Html.DisplayFor(modelItem => item.IncreaseAmount)
+                                                            </td>
+                                                            <td class="text-right">
+                                                                @Html.DisplayFor(modelItem => item.IncreasePercentage)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.ReviewNote)
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                            </table>
+                                        </div>
+                                        <div class="card-footer">
+                                            <span>Click the &nbsp;</span><span style="color:darkblue;" class="card-title fas fa-check-circle float-lg-none">&nbsp;Copy-Excel-PDF-Print-Column-Visibility</span><span>&nbsp; button at the top left to export the report.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @*//==End*@
+                        </div>
+                        <div class="tab-pane fade" id="custom-tabs-one-LandlordInfo" role="tabpanel" aria-labelledby="custom-tabs-one-LandlordInfo-tab">
+                            @*//==Landlord List*@
+                            <div class="container-fluid">
+                                <div class="col-md-12">
+                                    <div class="card card-info">
+                                        <div class="card-header">
+                                            <h3 class="card-title"><i class="fas fa-check"></i><span>&nbsp;&nbsp;Landlord List</span></h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <table class="table  table-bordered table-condensed table-striped table-hover table-responsive btnRemove" id="TableVendorInfo">
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            @Html.DisplayName("Agr Code")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Agr Name")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Agr Type")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Premise Type")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Premise Name")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Premise Address")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Agr Start Date")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Agr End Date")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Vendor Code")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Lanlord Name")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Mode")
+                                                        </th>
+                                                        <th class="text-right">
+                                                            @Html.DisplayName("Adv %")
+                                                        </th>
+                                                        <th class="text-right">
+                                                            @Html.DisplayName("Adv Amt")
+                                                        </th>
+                                                        <th class="text-right">
+                                                            @Html.DisplayName("Adj %")
+                                                        </th>
+                                                        <th class="text-right">
+                                                            @Html.DisplayName("Tax %")
+                                                        </th>
+                                                        <th class="text-right">
+                                                            @Html.DisplayName("Tax Amt")
+                                                        </th>
+                                                        <th class="text-right">
+                                                            @Html.DisplayName("VAT %")
+                                                        </th>
+                                                        <th class="text-right">
+                                                            @Html.DisplayName("VAT Amt")
+                                                        </th>
+                                                        <th class="text-right">
+                                                            @Html.DisplayName("Rent %")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("A/C No")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Bank")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Branch")
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (RMS.Models.LandlordInfoDTO item in ViewBag.lstLandlord)
+                                                    {
+                                                        <tr>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.AliasCode)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.AgreementName)
+                                                            </td>
+                                                            <td>
+                                                                @if (item.AgreementType == 1)
+                                                                {
+                                                                    @Html.DisplayName("Basic Agreement")
+                                                                }
+
+                                                                else if (item.AgreementType == 2)
+                                                                {
+                                                                    @Html.DisplayName("Renewal Agreement")
+                                                                }
+                                                                else if (item.AgreementType == 3)
+                                                                {
+                                                                    @Html.DisplayName("Modified Agreement")
+                                                                }
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.PremiseType)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.PremiseName)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.PremiseAddress)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.AgreementStartDate, "{0:dd/MM/yyyy}")
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.AgreementEndDate, "{0:dd/MM/yyyy}")
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.VendorCode)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.LandlordName)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.ModeOfPaymentText)
+                                                            </td>
+                                                            <td class="text-right">
+                                                                @Html.DisplayFor(modelItem => item.VendorAdvancePC)
+                                                            </td>
+                                                            <td class="text-right">
+                                                                @Html.DisplayFor(modelItem => item.VendorAdvanceAmount)
+                                                            </td>
+                                                            <td class="text-right">
+                                                                @Html.DisplayFor(modelItem => item.VendorAdvanceAdjustmentPC)
+                                                            </td>
+                                                            <td class="text-right">
+                                                                @Html.DisplayFor(modelItem => item.VendorTaxPC)
+                                                            </td>
+                                                            <td class="text-right">
+                                                                @Html.DisplayFor(modelItem => item.VendorTaxAmount)
+                                                            </td>
+                                                            <td class="text-right">
+                                                                @Html.DisplayFor(modelItem => item.VendorVATPC)
+                                                            </td>
+                                                            <td class="text-right">
+                                                                @Html.DisplayFor(modelItem => item.VendorVATAmount)
+                                                            </td>
+                                                            <td class="text-right">
+                                                                @Html.DisplayFor(modelItem => item.VendorRentPC)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.ACNo)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.BankName)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.BranchName)
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                            </table>
+                                        </div>
+                                        <div class="card-footer">
+                                            <span>Click the &nbsp;</span><span style="color:darkblue;" class="card-title fas fa-check-circle float-lg-none">&nbsp;Copy-Excel-PDF-Print-Column-Visibility</span><span>&nbsp; button at the top left to export the report.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @*//==End*@
+                        </div>
+                        <div class="tab-pane fade" id="custom-tabs-one-CostCenterInfo" role="tabpanel" aria-labelledby="custom-tabs-one-CostCenterInfo-tab">
+                            @*//==CostCenter List*@
+                            <div class="container-fluid">
+                                <div class="col-md-12">
+                                    <div class="card card-info">
+                                        <div class="card-header">
+                                            <h3 class="card-title"><i class="fas fa-check"></i><span>&nbsp;&nbsp;Cost Center List</span></h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <table class="table  table-bordered table-condensed table-striped table-hover table-responsive btnRemove" id="TableCostCenterInfo">
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            @Html.DisplayName("Agr Code")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Agr Name")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Agr Type")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Premise Type")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Premise Name")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Premise Address")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Agr Start Date")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Agr End Date")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("CC Code")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("CC Name")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("SOL Code")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("SOL Name")
+                                                        </th>
+                                                        <th class="text-right">
+                                                            @Html.DisplayName("Share %")
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (RMS.Models.CostCenterInfoDTO item in ViewBag.lstCC)
+                                                    {
+                                                        <tr>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.AliasCode)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.AgreementName)
+                                                            </td>
+                                                            <td>
+                                                                @if (item.AgreementType == 1)
+                                                                {
+                                                                    @Html.DisplayName("Basic Agreement")
+                                                                }
+
+                                                                else if (item.AgreementType == 2)
+                                                                {
+                                                                    @Html.DisplayName("Renewal Agreement")
+                                                                }
+                                                                else if (item.AgreementType == 3)
+                                                                {
+                                                                    @Html.DisplayName("Modified Agreement")
+                                                                }
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.PremiseType)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.PremiseName)
+                                                            </td>
+
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.PremiseAddress)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.AgreementStartDate, "{0:dd/MM/yyyy}")
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.AgreementEndDate, "{0:dd/MM/yyyy}")
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.CCCode)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.CCName)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.SOLCode)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.SOLName)
+                                                            </td>
+                                                            <td class="text-right">
+                                                                @Html.DisplayFor(modelItem => item.CCShareAllotment)
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                            </table>
+                                        </div>
+                                        <div class="card-footer">
+                                            <span>Click the &nbsp;</span><span style="color:darkblue;" class="card-title fas fa-check-circle float-lg-none">&nbsp;Copy-Excel-PDF-Print-Column-Visibility</span><span>&nbsp; button at the top left to export the report.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @*//==End*@
+                        </div>
+                        <div class="tab-pane fade" id="custom-tabs-one-UtilityInfo" role="tabpanel" aria-labelledby="custom-tabs-one-UtilityInfo-tab">
+                            @*//==Utility List*@
+                            <div class="container-fluid">
+                                <div class="col-md-12">
+                                    <div class="card card-info">
+                                        <div class="card-header">
+                                            <h3 class="card-title"><i class="fas fa-check"></i><span>&nbsp;&nbsp;Utility List</span></h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <table class="table  table-bordered table-condensed table-striped table-hover table-responsive btnRemove" id="TableUtilityInfo">
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            @Html.DisplayName("Agr Code")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Agr Name")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Agr Type")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Premise Type")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Premise Name")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Premise Address")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Agr Start Date")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Agr End Date")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Vendor Code")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Name")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Mode")
+                                                        </th>
+                                                        <th class="text-right">
+                                                            @Html.DisplayName("Service %")
+                                                        </th>
+                                                        <th class="text-right">
+                                                            @Html.DisplayName("Service Amt")
+                                                        </th>
+                                                        <th class="text-right">
+                                                            @Html.DisplayName("Tower %")
+                                                        </th>
+                                                        <th class="text-right">
+                                                            @Html.DisplayName("Tower Amt")
+                                                        </th>
+                                                        <th class="text-right">
+                                                            @Html.DisplayName("Generator %")
+                                                        </th>
+                                                        <th class="text-right">
+                                                            @Html.DisplayName("Generator Amt")
+                                                        </th>
+                                                        <th class="text-right">
+                                                            @Html.DisplayName("Parking %")
+                                                        </th>
+                                                        <th class="text-right">
+                                                            @Html.DisplayName("Parking Amt")
+                                                        </th>
+                                                        <th class="text-right">
+                                                            @Html.DisplayName("Tax %")
+                                                        </th>
+                                                        <th class="text-right">
+                                                            @Html.DisplayName("Tax Amt")
+                                                        </th>
+                                                        <th class="text-right">
+                                                            @Html.DisplayName("VAT %")
+                                                        </th>
+                                                        <th class="text-right">
+                                                            @Html.DisplayName("VAT Amt")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("A/C No")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Bank")
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayName("Branch")
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (RMS.Models.UtilityInfoDTO item in ViewBag.lstUtility)
+                                                    {
+                                                        <tr>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.AliasCode)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.AgreementName)
+                                                            </td>
+                                                            <td>
+                                                                @if (item.AgreementType == 1)
+                                                                {
+                                                                    @Html.DisplayName("Basic Agreement")
+                                                                }
+
+                                                                else if (item.AgreementType == 2)
+                                                                {
+                                                                    @Html.DisplayName("Renewal Agreement")
+                                                                }
+                                                                else if (item.AgreementType == 3)
+                                                                {
+                                                                    @Html.DisplayName("Modified Agreement")
+                                                                }
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.PremiseType)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.PremiseName)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.PremiseAddress)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.AgreementStartDate, "{0:dd/MM/yyyy}")
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.AgreementEndDate, "{0:dd/MM/yyyy}")
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.UtilityVendorCode)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.UtilityLandlordName)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.UtilityModeOfPaymentText)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.ServiceChargePC)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.ServiceChargeAmount)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.OnlineTowerPC)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.OnlineTowerAmount)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.GeneratorSpacePC)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.GeneratorSpaceAmount)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.CarParkingPC)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.CarParkingAmount)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.UtilityTaxPC)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.UtilityTaxAmount)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.UtilityVATPC)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.UtilityVATAmount)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.UtilityACNo)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.UtilityBankName)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.UtilityBranchName)
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                            </table>
+                                        </div>
+                                        <div class="card-footer">
+                                            <span>Click the &nbsp;</span><span style="color:darkblue;" class="card-title fas fa-check-circle float-lg-none">&nbsp;Copy-Excel-PDF-Print-Column-Visibility</span><span>&nbsp; button at the top left to export the report.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @*//==End*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<style type="text/css">
+    .form-control {
+        width: auto;
+    }
+
+    .required:after {
+        content: "*";
+        font-weight: bold;
+        color: red;
+    }
+</style>
+<style type="text/css" media="screen">
+    #spinner {
+        position: fixed;
+        top: -18%;
+        left: 30%;
+    }
+</style>
+<style type="text/css" media="screen">
+    /*    .dt-button-collection .dt-button.buttons-columnVisibility {
+        background: none !important;
+        background-color: transparent !important;
+        box-shadow: none !important;
+        border: none !important;
+        padding: 0.25em 1em !important;
+        margin: 0 !important;
+        text-align: left !important;
+    }*/
+
+    .dt-button-collection .buttons-columnVisibility:before,
+    .dt-button-collection .buttons-columnVisibility.active span:before {
+        display: block;
+        position: absolute;
+        top: 1.2em;
+        left: 0;
+        width: 12px;
+        height: 12px;
+        box-sizing: border-box;
+    }
+
+    .dt-button-collection .buttons-columnVisibility:before {
+        content: ' ';
+        margin-top: -8px;
+        margin-left: 10px;
+        border: 1px solid black;
+        border-radius: 3px;
+    }
+
+    .dt-button-collection .buttons-columnVisibility.active span:before {
+        color: green;
+        font-family: 'Arial' !important;
+        content: '\2714';
+        margin-top: -15px;
+        margin-left: 12px;
+        text-align: center;
+        text-shadow: 1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
+    }
+
+    .dt-button-collection .buttons-columnVisibility span {
+        margin-left: 17px;
+    }
+</style>
+
+<script src="~/Scripts/jquery-3.6.0.js"></script>
+<script src="~/Template/plugins/jquery-ui/jquery-ui.js"></script>
+<script src="~/Scripts/notify.js"></script>
+<script src="~/Scripts/SweetAlert2/sweetalert2.all.min.js"></script>
+<script src="~/Scripts/SweetAlert2/sweetalert2.min.js"></script>
+
+<script src="~/Template/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/Template/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="~/Template/plugins/jszip/jszip.min.js"></script>
+<script src="~/Template/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="~/Template/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="~/Template/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="~/Template/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="~/Template/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<script src="~/Template/plugins/datatables-select/js/dataTables.select.min.js"></script>
+<script src="~/Template/plugins/datatables-colreorder/js/dataTables.colReorder.min.js"></script>
+
+<link href="~/Template/plugins/jquery-ui/jquery-ui.css" rel="stylesheet" />
+<link href="~/Template/plugins/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="~/Template/plugins/buttons.dataTables.css" rel="stylesheet" />
+<link href="~/Template/plugins/dataTables.bootstrap5.css" rel="stylesheet" />
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="~/Template/plugins/fontawesome-free/css/all.min.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="~/Template/dist/css/adminlte.min.css">
+<!-- overlayScrollbars -->
+<link rel="stylesheet" href="~/Template/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function () {
+        $('#spinner').show();
+        $('#TableAgreementInfo').DataTable({
+            dom: 'Blfrtip',
+            responsive: true,
+            colReorder: true,
+            AutoWidth: true,
+            select: true,
+            searching: true,
+            //pageLength: -1,
+            paging: true,
+            order: [[3, "asc"]],
+            lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+            initComplete: function () {
+                this.api().columns().every(function (i) {
+                    var column = this;
+                    if (i == 3 || i == 4 || i == 56) {
+                        var select = $('<select><option value="..."></option></select>')
+                            .appendTo($(column.footer()).empty())
+                            .on('change', function () {
+                                var val = $(this).val();
+
+                                column.search(val, true, false)
+                                    .draw(true);
+                            });
+                        column.data().unique().sort().each(function (d, j) {
+                            select.append('<option value="' + d + '">' + d + '</option>')
+                        });
+                    }
+
+                });
+            },
+            buttons: [
+                {
+                    extend: 'copyHtml5',
+                    orientation: 'landscape',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'excelHtml5',
+                    orientation: 'landscape',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'pdfHtml5',
+                    orientation: 'landscape',
+                    exportOptions: {
+                        columns: ':visible'
+                        //columns: [0, 1, 2, 5]
+                    }
+                },
+                {
+                    extend: 'print',
+                    orientation: 'landscape',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'colvis',
+                    orientation: 'landscape',
+                    collectionLayout: 'fixed three-column'
+                },
+                {
+                    extend: 'colvisGroup',
+                    text: 'Show all columns',
+                    show: ':hidden'
+                },
+            ],
+        });
+        $('#TableSpaceInfo').DataTable({
+            dom: 'Blfrtip',
+            responsive: true,
+            colReorder: true,
+            AutoWidth: true,
+            select: true,
+            searching: true,
+            //pageLength: -1,
+            paging: true,
+            order: [[2, "asc"]],
+            lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+            initComplete: function () {
+                this.api().columns().every(function (i) {
+                    var column = this;
+                    if (i == 2 || i == 3) {
+                        var select = $('<select><option value="..."></option></select>')
+                            .appendTo($(column.footer()).empty())
+                            .on('change', function () {
+                                var val = $(this).val();
+
+                                column.search(val, true, false)
+                                    .draw(true);
+                            });
+                        column.data().unique().sort().each(function (d, j) {
+                            select.append('<option value="' + d + '">' + d + '</option>')
+                        });
+                    }
+
+                });
+            },
+            buttons: [
+                {
+                    extend: 'copyHtml5',
+                    orientation: 'landscape',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'excelHtml5',
+                    orientation: 'landscape',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'pdfHtml5',
+                    orientation: 'landscape',
+                    exportOptions: {
+                        columns: ':visible'
+                        //columns: [0, 1, 2, 5]
+                    }
+                },
+                {
+                    extend: 'print',
+                    orientation: 'landscape',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'colvis',
+                    orientation: 'landscape',
+                    collectionLayout: 'fixed three-column'
+                },
+                {
+                    extend: 'colvisGroup',
+                    text: 'Show all columns',
+                    show: ':hidden'
+                },
+            ],
+        });
+        $('#TableAdvanceInfo').DataTable({
+            dom: 'Blfrtip',
+            responsive: true,
+            colReorder: true,
+            AutoWidth: true,
+            select: true,
+            searching: true,
+            //pageLength: -1,
+            paging: true,
+            order: [[2, "asc"]],
+            lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+            initComplete: function () {
+                this.api().columns().every(function (i) {
+                    var column = this;
+                    if (i == 2 || i == 3) {
+                        var select = $('<select><option value="..."></option></select>')
+                            .appendTo($(column.footer()).empty())
+                            .on('change', function () {
+                                var val = $(this).val();
+
+                                column.search(val, true, false)
+                                    .draw(true);
+                            });
+                        column.data().unique().sort().each(function (d, j) {
+                            select.append('<option value="' + d + '">' + d + '</option>')
+                        });
+                    }
+
+                });
+            },
+            buttons: [
+                {
+                    extend: 'copyHtml5',
+                    orientation: 'landscape',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'excelHtml5',
+                    orientation: 'landscape',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'pdfHtml5',
+                    orientation: 'landscape',
+                    exportOptions: {
+                        columns: ':visible'
+                        //columns: [0, 1, 2, 5]
+                    }
+                },
+                {
+                    extend: 'print',
+                    orientation: 'landscape',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'colvis',
+                    orientation: 'landscape',
+                    collectionLayout: 'fixed three-column'
+                },
+                {
+                    extend: 'colvisGroup',
+                    text: 'Show all columns',
+                    show: ':hidden'
+                },
+            ],
+        });
+        $('#TableReviewInfo').DataTable({
+            dom: 'Blfrtip',
+            responsive: true,
+            colReorder: true,
+            AutoWidth: true,
+            select: true,
+            searching: true,
+            //pageLength: -1,
+            paging: true,
+            order: [[2, "asc"]],
+            lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+            initComplete: function () {
+                this.api().columns().every(function (i) {
+                    var column = this;
+                    if (i == 2 || i == 3) {
+                        var select = $('<select><option value="..."></option></select>')
+                            .appendTo($(column.footer()).empty())
+                            .on('change', function () {
+                                var val = $(this).val();
+
+                                column.search(val, true, false)
+                                    .draw(true);
+                            });
+                        column.data().unique().sort().each(function (d, j) {
+                            select.append('<option value="' + d + '">' + d + '</option>')
+                        });
+                    }
+
+                });
+            },
+            buttons: [
+                {
+                    extend: 'copyHtml5',
+                    orientation: 'landscape',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'excelHtml5',
+                    orientation: 'landscape',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'pdfHtml5',
+                    orientation: 'landscape',
+                    exportOptions: {
+                        columns: ':visible'
+                        //columns: [0, 1, 2, 5]
+                    }
+                },
+                {
+                    extend: 'print',
+                    orientation: 'landscape',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'colvis',
+                    orientation: 'landscape',
+                    collectionLayout: 'fixed three-column'
+                },
+                {
+                    extend: 'colvisGroup',
+                    text: 'Show all columns',
+                    show: ':hidden'
+                },
+            ],
+        });
+        $('#TableVendorInfo').DataTable({
+            dom: 'Blfrtip',
+            responsive: true,
+            colReorder: true,
+            AutoWidth: true,
+            select: true,
+            searching: true,
+            //pageLength: -1,
+            paging: true,
+            order: [[2, "asc"]],
+            lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+            initComplete: function () {
+                this.api().columns().every(function (i) {
+                    var column = this;
+                    if (i == 2 || i == 3) {
+                        var select = $('<select><option value="..."></option></select>')
+                            .appendTo($(column.footer()).empty())
+                            .on('change', function () {
+                                var val = $(this).val();
+
+                                column.search(val, true, false)
+                                    .draw(true);
+                            });
+                        column.data().unique().sort().each(function (d, j) {
+                            select.append('<option value="' + d + '">' + d + '</option>')
+                        });
+                    }
+
+                });
+            },
+            buttons: [
+                {
+                    extend: 'copyHtml5',
+                    orientation: 'landscape',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'excelHtml5',
+                    orientation: 'landscape',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'pdfHtml5',
+                    orientation: 'landscape',
+                    exportOptions: {
+                        columns: ':visible'
+                        //columns: [0, 1, 2, 5]
+                    }
+                },
+                {
+                    extend: 'print',
+                    orientation: 'landscape',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'colvis',
+                    orientation: 'landscape',
+                    collectionLayout: 'fixed three-column'
+                },
+                {
+                    extend: 'colvisGroup',
+                    text: 'Show all columns',
+                    show: ':hidden'
+                },
+            ],
+        });
+        $('#TableCostCenterInfo').DataTable({
+            dom: 'Blfrtip',
+            responsive: true,
+            colReorder: true,
+            AutoWidth: true,
+            select: true,
+            searching: true,
+            //pageLength: -1,
+            paging: true,
+            order: [[2, "asc"]],
+            lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+            initComplete: function () {
+                this.api().columns().every(function (i) {
+                    var column = this;
+                    if (i == 2 || i == 3) {
+                        var select = $('<select><option value="..."></option></select>')
+                            .appendTo($(column.footer()).empty())
+                            .on('change', function () {
+                                var val = $(this).val();
+
+                                column.search(val, true, false)
+                                    .draw(true);
+                            });
+                        column.data().unique().sort().each(function (d, j) {
+                            select.append('<option value="' + d + '">' + d + '</option>')
+                        });
+                    }
+
+                });
+            },
+            buttons: [
+                {
+                    extend: 'copyHtml5',
+                    orientation: 'landscape',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'excelHtml5',
+                    orientation: 'landscape',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'pdfHtml5',
+                    orientation: 'landscape',
+                    exportOptions: {
+                        columns: ':visible'
+                        //columns: [0, 1, 2, 5]
+                    }
+                },
+                {
+                    extend: 'print',
+                    orientation: 'landscape',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'colvis',
+                    orientation: 'landscape',
+                    collectionLayout: 'fixed three-column'
+                },
+                {
+                    extend: 'colvisGroup',
+                    text: 'Show all columns',
+                    show: ':hidden'
+                },
+            ],
+        });
+        $('#TableUtilityInfo').DataTable({
+            dom: 'Blfrtip',
+            responsive: true,
+            colReorder: true,
+            AutoWidth: true,
+            select: true,
+            searching: true,
+            //pageLength: -1,
+            paging: true,
+            order: [[2, "asc"]],
+            lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+            initComplete: function () {
+                this.api().columns().every(function (i) {
+                    var column = this;
+                    if (i == 2 || i == 3) {
+                        var select = $('<select><option value="..."></option></select>')
+                            .appendTo($(column.footer()).empty())
+                            .on('change', function () {
+                                var val = $(this).val();
+
+                                column.search(val, true, false)
+                                    .draw(true);
+                            });
+                        column.data().unique().sort().each(function (d, j) {
+                            select.append('<option value="' + d + '">' + d + '</option>')
+                        });
+                    }
+
+                });
+            },
+            buttons: [
+                {
+                    extend: 'copyHtml5',
+                    orientation: 'landscape',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'excelHtml5',
+                    orientation: 'landscape',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'pdfHtml5',
+                    orientation: 'landscape',
+                    exportOptions: {
+                        columns: ':visible'
+                        //columns: [0, 1, 2, 5]
+                    }
+                },
+                {
+                    extend: 'print',
+                    orientation: 'landscape',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'colvis',
+                    orientation: 'landscape',
+                    collectionLayout: 'fixed three-column'
+                },
+                {
+                    extend: 'colvisGroup',
+                    text: 'Show all columns',
+                    show: ':hidden'
+                },
+            ],
+        });
+        $('#spinner').hide();
+    });
+</script>

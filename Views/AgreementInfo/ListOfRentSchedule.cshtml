@@ -1,0 +1,701 @@
+﻿@model IEnumerable<RMS.Models.AgreementInfoDTO>
+@{
+    ViewBag.Title = "Agreement List";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+@Html.AntiForgeryToken()
+<section class="content" style="padding-top:15px;">
+    <div class="container-fluid">
+        <div class="col-md-12">
+            <div class="card card-info">
+                <div class="card-header">
+                    <h3 class="card-title fas fa-building">&nbsp;&nbsp;List of Basic Agreements - @ViewBag.Caption</h3>
+                    <div id="spinner" style="display: none;padding-top:50px; padding-bottom:20px; padding-left:100px;">
+                        <img id="img-spinner" src="@Url.Content("~/Content/Images/spinner.gif")" alt="Loading" />
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table id="summary" class="display compact table table-striped table-bordered mt-2">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Action</th>
+                                <th>
+                                    @Html.DisplayName("Agr Code")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Agr Name")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Agr Status")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Premise Type")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Premise Name")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Premise Address")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Cluster Group")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Start Date")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("End Date")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Schedule No")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Due Days")
+                                </th>
+                                <th class="text-right">
+                                    @Html.DisplayName("Total Area")
+                                </th>
+                                <th class="text-right">
+                                    @Html.DisplayName("CPU")
+                                </th>
+                                <th class="text-right">
+                                    @Html.DisplayName("Rent Amount")
+                                </th>
+                                <th class="text-right">
+                                    @Html.DisplayName("Security Deposit")
+                                </th>
+                                <th class="text-right">
+                                    @Html.DisplayName("Advance")
+                                </th>
+                                <th class="text-right">
+                                    @Html.DisplayName("Tax %")
+                                </th>
+                                <th class="text-right">
+                                    @Html.DisplayName("Tax")
+                                </th>
+                                <th class="text-right">
+                                    @Html.DisplayName("VAT %")
+                                </th>
+                                <th class="text-right">
+                                    @Html.DisplayName("VAT")
+                                </th>
+                                <th class="text-right">
+                                    @Html.DisplayName("Total Rent")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Create By")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Create Date")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Tax Type")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("VAT Type")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Text")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Cash GL")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Bank GL")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Advance GL")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Adv Adj GL")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Rent GL")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Utility GL")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Tax GL")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("VAT GL")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Service Charge")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Online Tower")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Generator Space")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Car Parking")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Car Parking No")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Edit By")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Edit Date")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Activate By")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Activate Date")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Terminated Status")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Terminated Date")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("IFRS Reporting")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("IFRS Effective Date")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Calculation Method")
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="text-center">
+                                        @Html.ActionLink(" ", "RedirectRentSchedule", new { AgreementSLNo = item.AgreementSLNo, RentScheduleFor = @ViewBag.RentScheduleFor, ShowReport = 1 }, new { @Title = @ViewBag.Caption, @class = "btn btn-info fas fa-list-alt" })
+                                        @if (ViewBag.Caption == "Contract Schedule")
+                                        {
+                                            <a href="#" title="Close Agreement" class="btn btn-danger" style="margin-top:3px;" onclick="return CloseValidator('@item.AgreementSLNo', '@item.AgreementName');">
+                                                <i class="nav-icon fas fa-archive"></i>
+                                            </a>
+                                        }
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.AliasCode)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.AgreementName)
+                                    </td>
+                                    <td>
+                                        @if (item.AgreementStatus == 1)
+                                        {
+                                            @Html.DisplayName("Created")
+                                        }
+
+                                        else if (item.AgreementStatus == 2)
+                                        {
+                                            @Html.DisplayName("Activate")
+                                        }
+                                        else if (item.AgreementStatus == 3)
+                                        {
+                                            @Html.DisplayName("Renewal")
+                                        }
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PremiseType)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PremiseName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PremiseAddress)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ClusterGroup)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.AgreementStartDate, "{0:dd/MM/yyyy}")
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.AgreementEndDate, "{0:dd/MM/yyyy}")
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.AgreementPeriod)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.RentDueDay)
+                                    </td>
+                                    <td class="text-right">
+                                        @Html.DisplayFor(modelItem => item.TotalArea)
+                                    </td>
+                                    <td class="text-right">
+                                        @Html.DisplayFor(modelItem => item.CostPerUnit)
+                                    </td>
+                                    <td class="text-right">
+                                        @Html.DisplayFor(modelItem => item.RentAmount)
+                                    </td>
+                                    <td class="text-right">
+                                        @Html.DisplayFor(modelItem => item.SecurityDepositAmount)
+                                    </td>
+                                    <td class="text-right">
+                                        @Html.DisplayFor(modelItem => item.AdvanceAmount)
+                                    </td>
+                                    <td class="text-right">
+                                        @Html.DisplayFor(modelItem => item.TaxPercentage)
+                                    </td>
+                                    <td class="text-right">
+                                        @Html.DisplayFor(modelItem => item.TaxAmount)
+                                    </td>
+                                    <td class="text-right">
+                                        @Html.DisplayFor(modelItem => item.VATPercentage)
+                                    </td>
+                                    <td class="text-right">
+                                        @Html.DisplayFor(modelItem => item.VATAmount)
+                                    </td>
+                                    <td class="text-right">
+                                        @Html.DisplayFor(modelItem => item.TotalRentAmount)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.UserID)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.EntryDate, "{0:dd/MM/yyyy}")
+                                    </td>
+                                    <td>
+                                        @if (item.TaxType == 1)
+                                        {
+                                            <span>Inclusive</span>
+                                        }
+                                        else if (item.TaxType == 2)
+                                        {
+                                            <span>Exclusive</span>
+                                        }
+                                        else if (item.TaxType == 3)
+                                        {
+                                            <span>Exempted</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (item.VatType == 1)
+                                        {
+                                            <span>Inclusive</span>
+                                        }
+                                        else if (item.VatType == 2)
+                                        {
+                                            <span>Exclusive</span>
+                                        }
+                                        else if (item.VatType == 3)
+                                        {
+                                            <span>Exempted</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.AgreementText)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.CashGLCode)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.BankGLCode)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.AdvanceGLCode)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.AdvanceAdjustmentGLCode)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.RentGLCode)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ServiceChargeGLCode)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.TaxGLCode)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.VATGLCode)
+                                    </td>
+                                    <td class="text-right">
+                                        @Html.DisplayFor(modelItem => item.ServiceCharge)
+                                    </td>
+                                    <td class="text-right">
+                                        @Html.DisplayFor(modelItem => item.OnlineTower)
+                                    </td>
+                                    <td class="text-right">
+                                        @Html.DisplayFor(modelItem => item.GeneratorSpace)
+                                    </td>
+                                    <td class="text-right">
+                                        @Html.DisplayFor(modelItem => item.CarParking)
+                                    </td>
+                                    <td class="text-right">
+                                        @Html.DisplayFor(modelItem => item.CarParkingNo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.EditBy)
+                                    </td>
+                                    <td>
+                                        @if (item.EditDate != null)
+                                        {
+                                            @Convert.ToDateTime(item.EditDate).ToString("dd/MM/yyyy")
+                                        }
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ActivateBy)
+                                    </td>
+                                    <td>
+                                        @if (item.ActivateDate != null)
+                                        {
+                                            @Convert.ToDateTime(item.ActivateDate).ToString("dd/MM/yyyy")
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (item.BlockText == "Open")
+                                        {
+                                            @Html.DisplayFor(modelItem => item.BlockText)
+                                        }
+                                        else
+                                        {
+                                            <span style="color:red; font-weight:bold;">@Html.DisplayFor(modelItem => item.BlockText)</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (item.BlockDate == null)
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            @Convert.ToDateTime(item.BlockDate).ToString("dd/MM/yyyy")
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (item.IsIFRSEnable == true)
+                                        {
+                                            <span>Yes</span>
+                                        }
+                                        else
+                                        {
+                                            <span>No</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (item.IFRSEffectiveDate != null)
+                                        {
+                                            @Html.DisplayFor(modelItem => item.IFRSEffectiveDate, "{0:dd/MM/yyyy}")
+                                        }
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.CalculationMethod)
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                    <span>Click the &nbsp;</span><span style="color:teal;" class="card-title float-lg-none"><i class="fas fa-list-alt"></i>&nbsp;Details</span><span>&nbsp; button at the left to show the details.</span>
+                </div>
+            </div>
+            <!-- /.card -->
+        </div>
+    </div>
+</section>
+<style type="text/css">
+    .required:after {
+        content: "*";
+        font-weight: bold;
+        color: red;
+    }
+</style>
+<style type="text/css" media="screen">
+    #spinner {
+        position: fixed;
+        top: -18%;
+        left: 30%;
+    }
+</style>
+<style type="text/css" media="screen">
+    /*    .dt-button-collection .dt-button.buttons-columnVisibility {
+        background: none !important;
+        background-color: transparent !important;
+        box-shadow: none !important;
+        border: none !important;
+        padding: 0.25em 1em !important;
+        margin: 0 !important;
+        text-align: left !important;
+    }*/
+
+    .dt-button-collection .buttons-columnVisibility:before,
+    .dt-button-collection .buttons-columnVisibility.active span:before {
+        display: block;
+        position: absolute;
+        top: 1.2em;
+        left: 0;
+        width: 12px;
+        height: 12px;
+        box-sizing: border-box;
+    }
+
+    .dt-button-collection .buttons-columnVisibility:before {
+        content: ' ';
+        margin-top: -8px;
+        margin-left: 10px;
+        border: 1px solid black;
+        border-radius: 3px;
+    }
+
+    .dt-button-collection .buttons-columnVisibility.active span:before {
+        color: green;
+        font-family: 'Arial' !important;
+        content: '\2714';
+        margin-top: -15px;
+        margin-left: 12px;
+        text-align: center;
+        text-shadow: 1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
+    }
+
+    .dt-button-collection .buttons-columnVisibility span {
+        margin-left: 17px;
+    }
+</style>
+
+<script src="~/Scripts/jquery-3.6.0.js"></script>
+<script src="~/Template/plugins/jquery-ui/jquery-ui.js"></script>
+<script src="~/Scripts/notify.js"></script>
+<script src="~/Scripts/SweetAlert2/sweetalert2.all.min.js"></script>
+<script src="~/Scripts/SweetAlert2/sweetalert2.min.js"></script>
+
+<script src="~/Template/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/Template/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="~/Template/plugins/jszip/jszip.min.js"></script>
+<script src="~/Template/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="~/Template/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="~/Template/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="~/Template/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="~/Template/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<script src="~/Template/plugins/datatables-select/js/dataTables.select.min.js"></script>
+<script src="~/Template/plugins/datatables-colreorder/js/dataTables.colReorder.min.js"></script>
+
+<link href="~/Template/plugins/jquery-ui/jquery-ui.css" rel="stylesheet" />
+<link href="~/Template/plugins/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="~/Template/plugins/buttons.dataTables.css" rel="stylesheet" />
+<link href="~/Template/plugins/dataTables.bootstrap5.css" rel="stylesheet" />
+
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function () {
+        $('#spinner').show();
+        $('#summary').DataTable({
+            dom: 'Blfrtip',
+            responsive: true,
+            colReorder: true,
+            AutoWidth: true,
+            select: true,
+            searching: true,
+            //pageLength: -1,
+            paging: true,
+            order: [[1, "desc"]],
+            lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+            columnDefs: [
+                //{ className: "dt-center", targets: [0, 1, 2, 3, 4] },
+                { "visible": false, "targets": 3 },
+                { "visible": false, "targets": 6 },
+                { "visible": false, "targets": 7 },
+                { "visible": false, "targets": 10 },
+                { "visible": false, "targets": 11 },
+                { "visible": false, "targets": 14 },
+                { "visible": false, "targets": 15 },
+                { "visible": false, "targets": 17 },
+                { "visible": false, "targets": 19 },
+                { "visible": false, "targets": 24 },
+                { "visible": false, "targets": 25 },
+                { "visible": false, "targets": 26 },
+                { "visible": false, "targets": 27 },
+                { "visible": false, "targets": 28 },
+                { "visible": false, "targets": 29 },
+                { "visible": false, "targets": 30 },
+                { "visible": false, "targets": 31 },
+                { "visible": false, "targets": 32 },
+                { "visible": false, "targets": 33 },
+                { "visible": false, "targets": 34 },
+                { "visible": false, "targets": 35 },
+                { "visible": false, "targets": 36 },
+                { "visible": false, "targets": 37 },
+                { "visible": false, "targets": 38 },
+                { "visible": false, "targets": 39 },
+                { "visible": false, "targets": 40 },
+                { "visible": false, "targets": 41 },
+                { "visible": false, "targets": 42 },
+                { "visible": false, "targets": 43 },
+                { "visible": false, "targets": 44 },
+                { "visible": false, "targets": 45 },
+                { "visible": false, "targets": 47 },
+                { "visible": false, "targets": 48 },
+            ],
+            initComplete: function () {
+                this.api().columns().every(function (i) {
+                    var column = this;
+                    if (i == 4 || i == 22) {
+                        var select = $('<select><option value="..."></option></select>')
+                            .appendTo($(column.footer()).empty())
+                            .on('change', function () {
+                                var val = $(this).val();
+
+                                column.search(val, true, false)
+                                    .draw(true);
+                            });
+                        column.data().unique().sort().each(function (d, j) {
+                            select.append('<option value="' + d + '">' + d + '</option>')
+                        });
+                    }
+
+                });
+            },
+            buttons: [
+                {
+                    extend: 'copyHtml5',
+                    orientation: 'landscape',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'excelHtml5',
+                    orientation: 'landscape',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'pdfHtml5',
+                    orientation: 'landscape',
+                    exportOptions: {
+                        columns: ':visible'
+                        //columns: [0, 1, 2, 5]
+                    }
+                },
+                {
+                    extend: 'print',
+                    orientation: 'landscape',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'colvis',
+                    orientation: 'landscape',
+                    collectionLayout: 'fixed three-column'
+                },
+                {
+                    extend: 'colvisGroup',
+                    text: 'Show all columns',
+                    show: ':hidden'
+                },
+            ],
+        });
+        $('#spinner').hide();
+    });
+</script>
+<script type="text/javascript" charset="utf-8">
+    function CloseValidator(AgreementSLNo, AgreementName) {
+        Swal.fire({
+            title: "Are you sure to close the agreement: " + AgreementName + "?",
+            text: "You won't be able to revert this!",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes,&nbsp;Close Agreement'
+        }).then((result) => {
+            if (result.value) {
+                $('#spinner').show();
+                var headers = { __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val() };
+                $.ajax({
+                    type: "POST",
+                    headers: headers,
+                    url: "/AgreementInfo/Close",
+                    data: { AgreementSLNo: AgreementSLNo },
+                    success: function (response) {
+                        $('#spinner').hide();
+                        if (response.CheckStatus == true) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'The agreement: ' + response.AgreementName + ' has been closed.',
+                                text: 'Redirecting in 3 seconds.',
+                                timer: 3000,
+                                showConfirmButton: false
+                            }).then(function () {
+                                window.location.href = "/AgreementInfo/RedirectAgreementIndex?ViewID=11";
+                            });
+                        }
+                        else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Agreement not closed, execution not possible!',
+                                text: 'Something went wrong!',
+                            })
+                        }
+                    },
+                    failure: function (response) {
+                        alert(response.responseText);
+                    },
+                    error: function (response) {
+                        alert(response.responseText);
+                    }
+                });
+            }
+        });
+    }
+</script>

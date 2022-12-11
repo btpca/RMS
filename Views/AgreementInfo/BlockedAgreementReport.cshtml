@@ -1,0 +1,159 @@
+﻿@model IEnumerable<RMS.Models.AgreementInfoDTO>
+@{
+    ViewBag.Title = "Agreement Hold List";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+@Html.AntiForgeryToken()
+<section class="content" style="padding-top:15px;">
+    <div class="container-fluid">
+        <div class="col-md-12">
+            <div class="card card-info">
+                <div class="card-header">
+                    <h3 class="card-title"><i class="fas fa-lock"></i><span>&nbsp;&nbsp;Agreement Hold List</span></h3>
+                </div>
+                <div class="card-body">
+                    <table id="summary" class="display compact table table-striped table-bordered mt-2">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayName("Agr Code")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Agr Name")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Premise Type")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Premise Name")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Start Date")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("End Date")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Hold Payment")
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.AliasCode)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.AgreementName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PremiseType)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PremiseName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.AgreementStartDate, "{0:dd/MM/yyyy}")
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.AgreementEndDate, "{0:dd/MM/yyyy}")
+                                    </td>
+                                    <td>
+                                        @Html.DisplayName("Yes")
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                    <span>Click the &nbsp;</span><span style="color:darkblue;" class="card-title fas fa-check-circle float-lg-none">&nbsp;Copy-Excel-PDF-Print-Column-Visibility</span><span>&nbsp; button at the top left to export the report.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="~/Scripts/jquery-3.6.0.js"></script>
+<script src="~/Template/plugins/jquery-ui/jquery-ui.js"></script>
+<script src="~/Scripts/notify.js"></script>
+<script src="~/Scripts/SweetAlert2/sweetalert2.all.min.js"></script>
+<script src="~/Scripts/SweetAlert2/sweetalert2.min.js"></script>
+
+<script src="~/Template/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/Template/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="~/Template/plugins/jszip/jszip.min.js"></script>
+<script src="~/Template/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="~/Template/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="~/Template/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="~/Template/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="~/Template/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<script src="~/Template/plugins/datatables-select/js/dataTables.select.min.js"></script>
+
+<link href="~/Template/plugins/jquery-ui/jquery-ui.css" rel="stylesheet" />
+<link href="~/Template/plugins/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="~/Template/plugins/buttons.dataTables.css" rel="stylesheet" />
+<link href="~/Template/plugins/dataTables.bootstrap5.css" rel="stylesheet" />
+
+<!-- Page specific script -->
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function () {
+        $('#spinner').show();
+        $('#summary').DataTable({
+            dom: 'Blfrtip',
+            responsive: true,
+            AutoWidth: true,
+            select: true,
+            searching: true,
+            //pageLength: -1,
+            paging: true,
+            order: [[0, "asc"]],
+            lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+            buttons: [
+                {
+                    extend: 'copyHtml5',
+                    orientation: 'landscape',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'excelHtml5',
+                    orientation: 'landscape',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'pdfHtml5',
+                    orientation: 'landscape',
+                    exportOptions: {
+                        columns: ':visible'
+                        //columns: [0, 1, 2, 5]
+                    }
+                },
+                {
+                    extend: 'print',
+                    orientation: 'landscape',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'colvis',
+                    orientation: 'landscape',
+                    collectionLayout: 'fixed three-column'
+                },
+                {
+                    extend: 'colvisGroup',
+                    text: 'Show all columns',
+                    show: ':hidden'
+                },
+            ],
+        });
+        $('#spinner').hide();
+    });
+</script>

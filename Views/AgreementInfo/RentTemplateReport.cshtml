@@ -1,0 +1,410 @@
+﻿@model IEnumerable<RMS.Models.RentTemplateDTO>
+@{
+    ViewBag.Title = "Rent Template";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+@Html.AntiForgeryToken()
+<section class="content" style="padding-top:15px;">
+    <div class="container-fluid">
+        <div class="col-md-12">
+            <div class="card card-info">
+                <div class="card-header">
+                    <h3 class="card-title"><i class="fas fa-anchor"></i><span>&nbsp;&nbsp;Rent Template - @ViewBag.DateRange</span></h3>
+                    <div id="spinner" style="display: none;padding-top:50px; padding-bottom:20px; padding-left:100px;">
+                        <img id="img-spinner" src="@Url.Content("~/Content/Images/spinner.gif")" alt="Loading" />
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table id="summary" class="display compact table table-striped table-bordered mt-2">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayName("Upl")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Record No")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Invoice Number")
+                                </th>
+                                <th class="text-right">
+                                    @Html.DisplayName("Invoice Amount")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Invoice Date")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Supplier Number")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Supplier Name")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Supplier Site")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Invoice Type")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Requestor")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Invoice Currency Code")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Payment Terms")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Payment Method")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("GL Date")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Invoice Description")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("VAT Challan No")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Challan Date")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("VAT Amount in Mushak")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Vatable Amount")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Line Type")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("FAD SL No")
+                                </th>
+                                <th class="text-right">
+                                    @Html.DisplayName("Line Amount")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Line Description")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("GL/ Dist. Account")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("SOL")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Unit")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("CC")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("VAT Tax Code")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Payment Withholding Group Name")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Withholding Tax Group")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Training Name")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Messages")
+                                </th>
+                                <th class="text-right">
+                                    @Html.DisplayName("Total Invoice")
+                                </th>
+                                <th class="text-right">
+                                    @Html.DisplayName("Advance Adjustment")
+                                </th>
+                                <th class="text-right">
+                                    @Html.DisplayName("VAT Deduction")
+                                </th>
+                                <th class="text-right">
+                                    @Html.DisplayName("Tax Deduction")
+                                </th>
+                                <th class="text-right">
+                                    @Html.DisplayName("Net Payment")
+                                </th>
+                                <th class="text-right">
+                                    @Html.DisplayName("Remaining Advance")
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Upl)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.RecordNo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.InvoiceNumber)
+                                    </td>
+                                    <td class="text-right">
+                                        @Html.DisplayFor(modelItem => item.InvoiceAmount)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.InvoiceDate)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.VendorCode)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.LandlordName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PremisesTypeforAccounts)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.InvoiceType)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Requestor)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.InvoiceCurrencyCode)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PaymentTerms)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PaymentMethod)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.GLDate)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.InvoiceDescription)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.VATChallanNo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ChallanDate)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.VATAmountInMushak)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.VatableAmount)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.LineType)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.FADSLNo)
+                                    </td>
+                                    <td class="text-right">
+                                        @Html.DisplayFor(modelItem => item.CCAmount)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.LineDescription)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.GLCode)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.SOLCode)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.CCCode1)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.CCCode2)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.VATTaxCode)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PaymentWithholdingGroupName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.WithHoldingCode)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.TrainingName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Messages)
+                                    </td>
+                                    <td class="text-right">
+                                        @Html.DisplayFor(modelItem => item.TotalInvoice)
+                                    </td>
+                                    <td class="text-right">
+                                        @Html.DisplayFor(modelItem => item.AdvanceAdjustment)
+                                    </td>
+                                    <td class="text-right">
+                                        @Html.DisplayFor(modelItem => item.VATAmount)
+                                    </td>
+                                    <td class="text-right">
+                                        @Html.DisplayFor(modelItem => item.TaxAmount)
+                                    </td>
+                                    <td class="text-right">
+                                        @Html.DisplayFor(modelItem => item.NetPayment)
+                                    </td>
+                                    <td class="text-right">
+                                        @Html.DisplayFor(modelItem => item.RemainingAdvance)
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer">
+                    <span>Click the &nbsp;</span><span style="color:darkblue;" class="card-title fas fa-check-circle float-lg-none">&nbsp;Copy-Excel-PDF-Print-Column-Visibility</span><span>&nbsp; button at the top left to export the report.</span>
+                    <button type="button" class="btn btn-warning" style="float: right;"
+                            id="btnFormBack" onclick="return BackValidator();">
+                        <i class="fas fa-reply"></i>
+                        <span>&nbsp;Back</span>
+                    </button>
+                </div>
+            </div>
+            <!-- /.card -->
+        </div>
+    </div>
+</section>
+<style type="text/css">
+    .required:after {
+        content: "*";
+        font-weight: bold;
+        color: red;
+    }
+</style>
+<style type="text/css" media="screen">
+    #spinner {
+        position: fixed;
+        top: -18%;
+        left: 30%;
+    }
+</style>
+<style type="text/css" media="screen">
+    /*    .dt-button-collection .dt-button.buttons-columnVisibility {
+        background: none !important;
+        background-color: transparent !important;
+        box-shadow: none !important;
+        border: none !important;
+        padding: 0.25em 1em !important;
+        margin: 0 !important;
+        text-align: left !important;
+    }*/
+
+    .dt-button-collection .buttons-columnVisibility:before,
+    .dt-button-collection .buttons-columnVisibility.active span:before {
+        display: block;
+        position: absolute;
+        top: 1.2em;
+        left: 0;
+        width: 12px;
+        height: 12px;
+        box-sizing: border-box;
+    }
+
+    .dt-button-collection .buttons-columnVisibility:before {
+        content: ' ';
+        margin-top: -8px;
+        margin-left: 10px;
+        border: 1px solid black;
+        border-radius: 3px;
+    }
+
+    .dt-button-collection .buttons-columnVisibility.active span:before {
+        color: green;
+        font-family: 'Arial' !important;
+        content: '\2714';
+        margin-top: -15px;
+        margin-left: 12px;
+        text-align: center;
+        text-shadow: 1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
+    }
+
+    .dt-button-collection .buttons-columnVisibility span {
+        margin-left: 17px;
+    }
+</style>
+
+<script src="~/Scripts/jquery-3.6.0.js"></script>
+<script src="~/Template/plugins/jquery-ui/jquery-ui.js"></script>
+<script src="~/Scripts/notify.js"></script>
+<script src="~/Scripts/SweetAlert2/sweetalert2.all.min.js"></script>
+<script src="~/Scripts/SweetAlert2/sweetalert2.min.js"></script>
+
+<script src="~/Template/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/Template/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="~/Template/plugins/jszip/jszip.min.js"></script>
+<script src="~/Template/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="~/Template/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="~/Template/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="~/Template/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="~/Template/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<script src="~/Template/plugins/datatables-select/js/dataTables.select.min.js"></script>
+
+<link href="~/Template/plugins/jquery-ui/jquery-ui.css" rel="stylesheet" />
+<link href="~/Template/plugins/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="~/Template/plugins/buttons.dataTables.css" rel="stylesheet" />
+<link href="~/Template/plugins/dataTables.bootstrap5.css" rel="stylesheet" />
+
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function () {
+        $('#spinner').show();
+        $('#summary').DataTable({
+            dom: 'Blfrtip',
+            responsive: true,
+            AutoWidth: true,
+            select: true,
+            searching: true,
+            //pageLength: -1,
+            paging: true,
+            //order: [[2, "asc"]],
+            lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+            buttons: [
+                {
+                    extend: 'copyHtml5',
+                    orientation: 'landscape',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'excelHtml5',
+                    orientation: 'landscape',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'pdfHtml5',
+                    orientation: 'landscape',
+                    exportOptions: {
+                        columns: ':visible'
+                        //columns: [0, 1, 2, 5]
+                    }
+                },
+                {
+                    extend: 'print',
+                    orientation: 'landscape',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'colvis',
+                    orientation: 'landscape',
+                    collectionLayout: 'fixed three-column'
+                }
+            ],
+        });
+        $('#spinner').hide();
+    });
+</script>
+<script type="text/javascript">
+    function BackValidator() {
+        window.location.href = "/AgreementInfo/RentTemplate";
+    }
+</script>

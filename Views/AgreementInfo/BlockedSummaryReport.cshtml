@@ -1,0 +1,403 @@
+﻿@model IEnumerable<RMS.Models.IFRSCalculatedSummaryDTO>
+@{
+    ViewBag.Title = "IFRS 16 - Discontinued Summary";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+@Html.AntiForgeryToken()
+<section class="content" style="padding-top:15px;">
+    <div class="container-fluid">
+        <div class="col-md-12">
+            <div class="card card-blue">
+                <div class="card-header">
+                    <h3 class="card-title"><i class="fas fa-certificate"></i>&nbsp;&nbsp;IFRS 16 - Discontinued Summary - @ViewBag.DateRange</h3>
+                    <div id="spinner" style="display: none;padding-top:50px; padding-bottom:20px; padding-left:100px;">
+                        <img id="img-spinner" src="@Url.Content("~/Content/Images/spinner.gif")" alt="Loading" />
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table id="summary" class="display compact table table-striped table-bordered mt-2">
+                        <thead>
+                            <tr>
+                                <th rowspan="2">
+                                    @Html.DisplayName("SL No")
+                                </th>
+                                <th rowspan="2">
+                                    @Html.DisplayName("Agr Code")
+                                </th>
+                                <th rowspan="2">
+                                    @Html.DisplayName("Terminated Status")
+                                </th>
+                                <th rowspan="2">
+                                    @Html.DisplayName("Terminated Date")
+                                </th>
+                                <th rowspan="2">
+                                    @Html.DisplayName("Block Year")
+                                </th>
+                                <th rowspan="2">
+                                    @Html.DisplayName("Block Month")
+                                </th>
+                                <th rowspan="2">
+                                    @Html.DisplayName("Month No")
+                                </th>
+                                <th rowspan="2">
+                                    @Html.DisplayName("Agreement Name")
+                                </th>
+                                <th rowspan="2">
+                                    @Html.DisplayName("Premise Type")
+                                </th>
+                                <th rowspan="2">
+                                    @Html.DisplayName("Premise Name")
+                                </th>
+                                <th rowspan="2">
+                                    @Html.DisplayName("Start Date")
+                                </th>
+                                <th rowspan="2">
+                                    @Html.DisplayName("End Date")
+                                </th>
+                                <th rowspan="2">
+                                    @Html.DisplayName("Schedule No")
+                                </th>
+                                <th rowspan="2" class="text-right">
+                                    @Html.DisplayName("CPU")
+                                </th>
+                                <th rowspan="2" class="text-right">
+                                    @Html.DisplayName("Total Area")
+                                </th>
+                                <th rowspan="2" class="text-right">
+                                    @Html.DisplayName("Advance")
+                                </th>
+                                <th rowspan="2">
+                                    @Html.DisplayName("Due Days")
+                                </th>
+                                <th rowspan="2">
+                                    @Html.DisplayName("Cluster Group")
+                                </th>
+                                <th colspan="5" style="color:red; text-align:center;">@ViewBag.Step1</th>
+                            </tr>
+                            <tr>
+                                <th style="color:red;" class="text-right">
+                                    @Html.DisplayName("Lease")
+                                </th>
+                                <th style="color:red;" class="text-right">
+                                    @Html.DisplayName("Advance")
+                                </th>
+                                <th style="color:red;" class="text-right">
+                                    @Html.DisplayName("Liability")
+                                </th>
+                                <th style="color:red;" class="text-right">
+                                    @Html.DisplayName("Unadjusted Advance")
+                                </th>
+                                <th style="color:red;" class="text-right">
+                                    @Html.DisplayName("Difference")
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.SLNO)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.AliasCode)
+                                    </td>
+                                    <td>
+                                        @if (item.BlockText == "Open")
+                                        {
+                                            @Html.DisplayFor(modelItem => item.BlockText)
+                                        }
+                                        else
+                                        {
+                                            <span style="color:red; font-weight:bold;">@Html.DisplayFor(modelItem => item.BlockText)</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (item.BlockDate == null)
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            @Convert.ToDateTime(item.BlockDate).ToString("dd/MM/yyyy")
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (item.Year > 0)
+                                        {
+                                            @Html.DisplayFor(modelItem => item.Year)
+                                        }
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Month)
+                                    </td>
+                                    <td>
+                                        @if (item.MonthNo > 0)
+                                        {
+                                            @Html.DisplayFor(modelItem => item.MonthNo)
+                                        }
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.AgreementName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PremiseType)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PremiseName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.AgreementStartDate, "{0:dd/MM/yyyy}")
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.AgreementEndDate, "{0:dd/MM/yyyy}")
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.AgreementPeriod)
+                                    </td>
+                                    <td class="text-right">
+                                        @Html.DisplayFor(modelItem => item.CostPerUnit)
+                                    </td>
+                                    <td class="text-right">
+                                        @Html.DisplayFor(modelItem => item.TotalArea)
+                                    </td>
+                                    <td class="text-right">
+                                        @Html.DisplayFor(modelItem => item.AdvanceAmount)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.RentDueDay)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ClusterGroup)
+                                    </td>
+                                    <td class="text-right">
+                                        @Html.DisplayFor(modelItem => item.PreviousROU)
+                                    </td>
+                                    <td class="text-right">
+                                        @Html.DisplayFor(modelItem => item.PreviousAdvance)
+                                    </td>
+                                    <td class="text-right">
+                                        @Html.DisplayFor(modelItem => item.PreviousLease)
+                                    </td>
+                                    <td class="text-right">
+                                        @Html.DisplayFor(modelItem => item.UnadjustedAdvance)
+                                    </td>
+                                    <td class="text-right">
+                                        @Html.DisplayFor(modelItem => item.Difference)
+                                    </td>
+                                </tr>
+                            }
+                            <tr>
+                                <td>@ViewBag.SLNo</td>
+                                <td><b>Total</b></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="text-right"><b>@ViewBag.Sum1</b></td>
+                                <td class="text-right"><b>@ViewBag.Sum2</b></td>
+                                <td class="text-right"><b>@ViewBag.Sum3</b></td>
+                                <td class="text-right"><b>@ViewBag.Sum4</b></td>
+                                <td class="text-right"><b>@ViewBag.Sum5</b></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer">
+                    <span>Click the &nbsp;</span><span style="color:darkblue;" class="card-title fas fa-check-circle float-lg-none">&nbsp;Copy-Excel-PDF-Print-Column-Visibility</span><span>&nbsp; button at the top left to export the report.</span>
+                    <button type="button" class="btn btn-warning" style="float: right;"
+                            id="btnFormBack" onclick="return BackValidator();">
+                        <i class="fas fa-reply"></i>
+                        <span>&nbsp;Back</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<style type="text/css">
+    .form-control {
+        width: auto;
+    }
+
+    .required:after {
+        content: "*";
+        font-weight: bold;
+        color: red;
+    }
+</style>
+<style type="text/css" media="screen">
+    #spinner {
+        position: fixed;
+        top: -18%;
+        left: 30%;
+    }
+</style>
+<style type="text/css" media="screen">
+    /*    .dt-button-collection .dt-button.buttons-columnVisibility {
+        background: none !important;
+        background-color: transparent !important;
+        box-shadow: none !important;
+        border: none !important;
+        padding: 0.25em 1em !important;
+        margin: 0 !important;
+        text-align: left !important;
+    }*/
+
+    .dt-button-collection .buttons-columnVisibility:before,
+    .dt-button-collection .buttons-columnVisibility.active span:before {
+        display: block;
+        position: absolute;
+        top: 1.2em;
+        left: 0;
+        width: 12px;
+        height: 12px;
+        box-sizing: border-box;
+    }
+
+    .dt-button-collection .buttons-columnVisibility:before {
+        content: ' ';
+        margin-top: -8px;
+        margin-left: 10px;
+        border: 1px solid black;
+        border-radius: 3px;
+    }
+
+    .dt-button-collection .buttons-columnVisibility.active span:before {
+        color: green;
+        font-family: 'Arial' !important;
+        content: '\2714';
+        margin-top: -15px;
+        margin-left: 12px;
+        text-align: center;
+        text-shadow: 1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
+    }
+
+    .dt-button-collection .buttons-columnVisibility span {
+        margin-left: 17px;
+    }
+</style>
+
+<script src="~/Scripts/jquery-3.6.0.js"></script>
+<script src="~/Template/plugins/jquery-ui/jquery-ui.js"></script>
+<script src="~/Scripts/notify.js"></script>
+<script src="~/Scripts/SweetAlert2/sweetalert2.all.min.js"></script>
+<script src="~/Scripts/SweetAlert2/sweetalert2.min.js"></script>
+
+<script src="~/Template/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/Template/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="~/Template/plugins/jszip/jszip.min.js"></script>
+<script src="~/Template/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="~/Template/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="~/Template/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="~/Template/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="~/Template/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<script src="~/Template/plugins/datatables-select/js/dataTables.select.min.js"></script>
+
+<link href="~/Template/plugins/jquery-ui/jquery-ui.css" rel="stylesheet" />
+<link href="~/Template/plugins/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="~/Template/plugins/buttons.dataTables.css" rel="stylesheet" />
+<link href="~/Template/plugins/dataTables.bootstrap5.css" rel="stylesheet" />
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="~/Template/plugins/fontawesome-free/css/all.min.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="~/Template/dist/css/adminlte.min.css">
+<!-- overlayScrollbars -->
+<link rel="stylesheet" href="~/Template/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function () {
+        $('#spinner').show();
+        $('#summary').DataTable({
+            dom: 'Blfrtip',
+            responsive: true,
+            AutoWidth: true,
+            select: true,
+            searching: true,
+            //pageLength: -1,
+            paging: true,
+            order: [[1, "asc"]],
+            lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+            columnDefs: [
+                //{ className: "dt-center", targets: [0, 1, 2, 3, 4] },
+                { "visible": false, "targets": 0 },
+                { "visible": false, "targets": 3 },
+                { "visible": false, "targets": 4 },
+                { "visible": false, "targets": 5 },
+                { "visible": false, "targets": 6 },
+                { "visible": false, "targets": 7 },
+                { "visible": false, "targets": 8 },
+                { "visible": false, "targets": 9 },
+                { "visible": false, "targets": 10 },
+                { "visible": false, "targets": 11 },
+                { "visible": false, "targets": 12 },
+                { "visible": false, "targets": 13 },
+                { "visible": false, "targets": 14 },
+                { "visible": false, "targets": 15 },
+                { "visible": false, "targets": 16 },
+                { "visible": false, "targets": 17 },
+            ],
+            buttons: [
+                {
+                    extend: 'copyHtml5',
+                    orientation: 'landscape',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'excelHtml5',
+                    orientation: 'landscape',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'pdfHtml5',
+                    orientation: 'landscape',
+                    exportOptions: {
+                        columns: ':visible'
+                        //columns: [0, 1, 2, 5]
+                    }
+                },
+                {
+                    extend: 'print',
+                    orientation: 'landscape',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'colvis',
+                    orientation: 'landscape',
+                    collectionLayout: 'fixed three-column'
+                },
+                {
+                    extend: 'colvisGroup',
+                    text: 'Show all columns',
+                    show: ':hidden'
+                },
+            ],
+        });
+        $('#spinner').hide();
+    });
+</script>
+
+<script type="text/javascript">
+    function BackValidator() {
+        window.location.href = "/AgreementInfo/BlockedSummary";
+    }
+</script>

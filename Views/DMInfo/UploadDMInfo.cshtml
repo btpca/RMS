@@ -1,0 +1,251 @@
+﻿<div class="container-fluid" style="padding-bottom:25px; margin-bottom:25px;">
+    @{
+        ViewBag.Title = "RMS - Data Mirgration";
+        Layout = "~/Views/Shared/_LayoutMain.cshtml";
+    }
+    @using (Html.BeginForm("UploadData", "DMInfo", FormMethod.Post, new { id = "frmSubmit", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <div id="spinner" style="display: none;padding-top:50px; padding-bottom:20px; padding-left:100px;">
+            <img id="img-spinner" src="@Url.Content("~/Content/Images/spinner.gif")" alt="Loading" />
+        </div>
+        <div class="panel panel-primary">
+            <div class="container-fluid" style="padding-bottom:20px; padding-left:20px;">
+                @*<div class="row pull-right" style="padding-right: 15px; padding-top: 15px; padding-bottom:10px;">
+                        <a class="btn btn-success pull-right" style="width:150px;" href="~/Content/DownloadTemaplate/Vendor Master Data.xlsx">Download Template</a>
+                    </div>*@
+                <h3 style="color:darkblue; padding-top:10px;"><b>RMS - Data Mirgration</b></h3>
+                <hr />
+                <div class="row" style="padding-top:30px; padding-left:300px; padding-bottom:30px;">
+                    <div class="col-xs-12 col-sm-8 col-md-4">
+                        @Html.TextBox("file", "", new { id = "btnFile", type = "file", @class = "control-label", accept = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" })
+                    </div>
+                </div>
+                <hr />
+            </div>
+            <div class="panel-footer" style="text-align:right; margin-top:5px;">
+                <input id="btnSubmit" type="button" value="Upload Data" style="width:150px;" class="btn btn-danger" onclick="return Validator_Upload();" />
+                <input id="btnActivate" type="button" value="Activate Schedule" style="width: 150px; margin-left: 15px;" class="btn btn-success" onclick="return Validator_Activate();" />
+            </div>
+        </div>
+    }
+</div>
+<style type="text/css">
+    .required:after {
+        content: "*";
+        font-weight: bold;
+        color: red;
+    }
+</style>
+<style type="text/css" media="screen">
+    #spinner {
+        position: fixed;
+        top: -18%;
+        left: 30%;
+    }
+</style>
+@section Scripts {
+
+    <script src="~/Scripts/jquery-3.6.0.js"></script>
+    <script src="~/Template/plugins/jquery-ui/jquery-ui.js"></script>
+    <script src="~/Scripts/notify.js"></script>
+    <script src="~/Scripts/SweetAlert2/sweetalert2.all.min.js"></script>
+    <script src="~/Scripts/SweetAlert2/sweetalert2.min.js"></script>
+
+    <script src="~/Template/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Template/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/Template/plugins/jszip/jszip.min.js"></script>
+    <script src="~/Template/plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="~/Template/plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="~/Template/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="~/Template/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="~/Template/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <script src="~/Template/plugins/datatables-select/js/dataTables.select.min.js"></script>
+
+    <link href="~/Template/plugins/jquery-ui/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Template/plugins/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="~/Template/plugins/buttons.dataTables.css" rel="stylesheet" />
+    <link href="~/Template/plugins/dataTables.bootstrap5.css" rel="stylesheet" />
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#spinner').hide();
+
+            $('#btnFile').change(
+                function () {
+                    var fileExtension = ['xls', 'xlsx'];
+                    if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+                        this.value = '';
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Invalid file format selected!',
+                            text: 'Validation Message!',
+                        })
+                        return false;
+                    }
+                });
+        });
+    </script>
+
+    <script>
+        function Validator_Upload() {
+            var File = $("#btnFile").val();
+            if (File == "" || File == null) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'No file chosen!',
+                    text: 'Validation Message!',
+                })
+                return false;
+            }
+            //==
+            Swal.fire({
+                title: "Are you sure to Upload Data?",
+                text: "You won't be able to revert this!",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, Upload Data'
+            }).then((result) => {
+                if (result.value) {
+                    $('#spinner').show();
+                    //==
+                    var fd = new FormData();
+                    var files = $('#btnFile')[0].files;
+                    fd.append('file', files[0]);
+                    //fd.append('CompanyCode', CompanyCode)
+                    $.ajax({
+                        type: "POST",
+                        url: "/DMInfo/UploadData",
+                        data: fd,
+                        contentType: false,
+                        processData: false,
+                        dataType: "json",
+                        success: function (response) {
+                            $('#spinner').hide();
+                            if (response.CheckStatus == true) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Data has been uploaded successfully.',
+                                    html: 'Excel Sheet wise total uploaded rows: <br>' +
+                                        'Agreement_Info     :   ' + response.TotalRows_AgreementInfo + '<br>' +
+                                        'Space_Info     :   ' + response.TotalRows_SpaceInfo + '<br>' +
+                                        'Advance_Info     :   ' + response.TotalRows_AdvanceInfo + '<br>' +
+                                        'Enhancement_Info     :   ' + response.TotalRows_ReviewInfo + '<br>' +
+                                        'Landlord_Info      :   ' + response.TotalRows_LandlordInfo + '<br>' +
+                                        'CostCenter_Info    :   ' + response.TotalRows_CostCenterInfo + '<br>' +
+                                        'Utility_Info       :   ' + response.TotalRows_UtilityInfo,
+                                })
+                            }
+                            else if (response.CheckStatus == false) {
+                                if (response.Type == "AgreementInfo" && response.ColName == "AgreementCode" && response.ErrorType == "Blank") {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Agreeement_Info - AgreementCode spacing found in row ' + response.RowNo,
+                                        text: 'Something went wrong!',
+                                    })
+                                }
+                            }
+                            else if (response.CheckStatus == false) {
+                                if (response.Type == "LandlordInfo" && response.ColName == "AgreementCode" && response.ErrorType == "Blank") {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Landlord_Info - AgreementCode spacing found in row ' + response.RowNo,
+                                        text: 'Something went wrong!',
+                                    })
+                                }
+                            }
+                            else if (response.CheckStatus == false) {
+                                if (response.Type == "CostCenterInfo" && response.ColName == "AgreementCode" && response.ErrorType == "Blank") {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'CostCenter_Info - AgreementCode spacing found in row ' + response.RowNo,
+                                        text: 'Something went wrong!',
+                                    })
+                                }
+                            }
+                            else if (response.CheckStatus == false) {
+                                if (response.Type == "UtilityInfo" && response.ColName == "AgreementCode" && response.ErrorType == "Blank") {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Utility_Info - AgreementCode spacing found in row ' + response.RowNo,
+                                        text: 'Something went wrong!',
+                                    })
+                                }
+                            }
+                            else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error in Data Upload, execution not possible!',
+                                    text: 'Something went wrong!',
+                                })
+                            }
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+                    //==
+                }
+            });
+            //==
+        }
+
+        function Validator_Activate() {
+            Swal.fire({
+                title: "Are you sure to Activate Uploaded Data?",
+                text: "You won't be able to revert this!",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, Activate Agreements'
+            }).then((result) => {
+                if (result.value) {
+                    $('#spinner').show();
+                    var headers = { __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val() };
+                    $.ajax({
+                        type: "POST",
+                        headers: headers,
+                        url: "/DMInfo/Activate_UploadData",
+                        //data: fd,
+                        contentType: false,
+                        processData: false,
+                        dataType: "json",
+                        success: function (response) {
+                            $('#spinner').hide();
+                            if (response.CheckStatus == true) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Agreement has been activated successfully.',
+                                    text: "Schedule activated!",
+                                })
+                            }
+                            else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error in Activate Agreements, execution not possible!',
+                                    text: 'Something went wrong!',
+                                })
+                            }
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+                    //==
+                }
+            });
+            //==
+        }
+    </script>
+}

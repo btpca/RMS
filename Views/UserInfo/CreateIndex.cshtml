@@ -1,0 +1,271 @@
+﻿@model IEnumerable<RMS.Models.UserInfoDTO>
+@{
+    ViewBag.Title = "List of Users";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+@Html.AntiForgeryToken()
+<section class="content-header">
+    <div class="row mb-12">
+        <div class="col-sm-6">
+            @*<h4 style="color:darkviolet;"><b>List of Contracts</b></h4>*@
+        </div>
+        <div class="col-sm-6">
+            <button type="button" title="Create New User" class="btn btn-primary" style="float: right; margin-right: 7px"
+                    id="btnCreateUser" onclick="return CreateValidator();">
+                <i class="fas fa-plus-circle"></i>
+                <span>Create User</span>
+            </button>
+        </div>
+    </div>
+</section>
+<section class="content" style="padding-top:0px;">
+    <div class="container-fluid">
+        <div class="col-md-12">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title"><i class="fas fa-users"></i>&nbsp;&nbsp;List of Users</h3>
+                </div>
+                <div class="card-body">
+                    <table id="summary" class="display compact table table-striped table-bordered mt-2">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Action</th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.UserID)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.FirstName)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.LastName)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Email)
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Contact")
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Designation)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.EntryBy)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.EntryDate)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.EditBy)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.EditDate)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Status)
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="text-center">
+                                        @Html.ActionLink(" ", "RedirectCopyProfile", new { UserSLNo = item.UserSLNo }, new { title = "Create User by Copy Profile", @class = "btn btn-warning nav-icon fas fa-copy" })
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.UserID)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.FirstName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.LastName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Email)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ContactNo1)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Designation)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.EntryBy)
+                                    </td>
+                                    <td>
+                                        @Convert.ToDateTime(item.EntryDate).ToString("dd/MM/yyyy")
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.EditBy)
+                                    </td>
+                                    <td>
+                                        @if (item.EditDate != null)
+                                        {
+                                            @Convert.ToDateTime(item.EditDate).ToString("dd/MM/yyyy")
+                                        }
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.StatusName)
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer">
+                    <span>Click the &nbsp;</span><span style="color:blue;" class="card-title float-lg-none"><i class="fas fa-plus-circle"></i>&nbsp;Create</span><span>&nbsp; button at the top right to create a new user.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<style type="text/css">
+    .required:after {
+        content: "*";
+        font-weight: bold;
+        color: red;
+    }
+</style>
+<style type="text/css" media="screen">
+    #spinner {
+        position: fixed;
+        top: -18%;
+        left: 30%;
+    }
+</style>
+<style type="text/css" media="screen">
+    /*    .dt-button-collection .dt-button.buttons-columnVisibility {
+        background: none !important;
+        background-color: transparent !important;
+        box-shadow: none !important;
+        border: none !important;
+        padding: 0.25em 1em !important;
+        margin: 0 !important;
+        text-align: left !important;
+    }*/
+
+    .dt-button-collection .buttons-columnVisibility:before,
+    .dt-button-collection .buttons-columnVisibility.active span:before {
+        display: block;
+        position: absolute;
+        top: 1.2em;
+        left: 0;
+        width: 12px;
+        height: 12px;
+        box-sizing: border-box;
+    }
+
+    .dt-button-collection .buttons-columnVisibility:before {
+        content: ' ';
+        margin-top: -8px;
+        margin-left: 10px;
+        border: 1px solid black;
+        border-radius: 3px;
+    }
+
+    .dt-button-collection .buttons-columnVisibility.active span:before {
+        color: green;
+        font-family: 'Arial' !important;
+        content: '\2714';
+        margin-top: -15px;
+        margin-left: 12px;
+        text-align: center;
+        text-shadow: 1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
+    }
+
+    .dt-button-collection .buttons-columnVisibility span {
+        margin-left: 17px;
+    }
+</style>
+
+<script src="~/Scripts/jquery-3.6.0.js"></script>
+<script src="~/Template/plugins/jquery-ui/jquery-ui.js"></script>
+<script src="~/Scripts/notify.js"></script>
+<script src="~/Scripts/SweetAlert2/sweetalert2.all.min.js"></script>
+<script src="~/Scripts/SweetAlert2/sweetalert2.min.js"></script>
+
+<script src="~/Template/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/Template/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="~/Template/plugins/jszip/jszip.min.js"></script>
+<script src="~/Template/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="~/Template/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="~/Template/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="~/Template/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="~/Template/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<script src="~/Template/plugins/datatables-select/js/dataTables.select.min.js"></script>
+
+<link href="~/Template/plugins/jquery-ui/jquery-ui.css" rel="stylesheet" />
+<link href="~/Template/plugins/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="~/Template/plugins/buttons.dataTables.css" rel="stylesheet" />
+<link href="~/Template/plugins/dataTables.bootstrap5.css" rel="stylesheet" />
+
+<script type="text/javascript" charset="utf-8">
+        $(document).ready(function () {
+            var AlertMsg = @Html.Raw(Json.Encode(ViewBag.AlertMsg));
+            if (AlertMsg != null) {
+                $.notify(AlertMsg, {
+                    className: 'success',
+                    clickToHide: true,
+                    autoHide: false,
+                    globalPosition: 'right top'
+                });
+            }
+            $('#summary').DataTable({
+                dom: 'Blfrtip',
+                responsive: true,
+                AutoWidth: true,
+                select: true,
+                searching: true,
+                //pageLength: -1,
+                paging: true,
+                order: [[0, "asc"]],
+                lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+
+                buttons: [
+                    {
+                        extend: 'copyHtml5',
+                        orientation: 'landscape',
+                        exportOptions: {
+                            columns: ':visible'
+                        }
+                    },
+                    {
+                        extend: 'excelHtml5',
+                        orientation: 'landscape',
+                        exportOptions: {
+                            columns: ':visible'
+                        }
+                    },
+                    {
+                        extend: 'pdfHtml5',
+                        orientation: 'landscape',
+                        exportOptions: {
+                            columns: ':visible'
+                            //columns: [0, 1, 2, 5]
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        orientation: 'landscape',
+                        exportOptions: {
+                            columns: ':visible'
+                        }
+                    },
+                    {
+                        extend: 'colvis',
+                        orientation: 'landscape',
+                        collectionLayout: 'fixed three-column'
+                    },
+                    {
+                        extend: 'colvisGroup',
+                        text: 'Show all columns',
+                        show: ':hidden'
+                    },
+                ],
+            });
+            $('#btnCreateUser').on('click', function () {
+                window.location.href = "/UserInfo/Create";
+            });
+        });
+</script>

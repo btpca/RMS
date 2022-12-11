@@ -1,0 +1,900 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="~/Content/Images/RMSLogo.png" type="image/x-icon" />
+    <title>RMS</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/Template/plugins/fontawesome-free/css/all.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/Template/dist/css/adminlte.min.css">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="~/Template/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+    <!-- Site wrapper -->
+    <div class="wrapper">
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand navbar-primary navbar-primary">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button">
+                        <i style="color:white" class="fas fa-bars"></i>
+                    </a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <h3 style="color: white">Rental Management System</h3>
+                </li>
+            </ul>
+            <!-- Right navbar links -->
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+                        <i style="color:white" class="fas fa-expand-arrows-alt"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <!-- /.navbar -->
+        <!-- Main Sidebar Container -->
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <!-- Brand Logo -->
+            <a href="@Url.Action("IndexDashboard", "Home")" class="brand-link">
+                <img src="~/Content/Images/RMSLogo.png" alt="RMS Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+                <span class="brand-text font-weight-bold">RMS</span>
+            </a>
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Sidebar user (optional) -->
+                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                    <div class="image">
+                        <img src="~/Content/Images/LoginUser.png" class="img-circle elevation-2" alt="User Image">
+                    </div>
+                    <div class="info">
+                        <a href="javascript:void(0);" class="d-block">@Session["LoginUserID"]</a>
+                    </div>
+                </div>
+                <!-- Sidebar Menu -->
+                <nav class="mt-2">
+                    @*<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">*@
+                    <ul class="nav nav-pills nav-sidebar nav-child-indent flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                        @*==Security*@
+                        <li class="nav-header">Settings</li>
+                        <!-- #region User -->
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-user"></i>
+                                <p>
+                                    User
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="@Url.Action("RedirectUserIndex", "UserInfo", new { ViewID  = 1 })" class="nav-link">
+                                        <i class="nav-icon fas fa-plus-circle"></i>
+                                        <p>Create</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("RedirectUserIndex", "UserInfo", new { ViewID  = 2 })" class="nav-link">
+                                        <i class="nav-icon fas fa-edit"></i>
+                                        <p>Edit</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("ResetPassword", "UserInfo")" class="nav-link">
+                                        <i class="nav-icon fas fa-key"></i>
+                                        <p>Reset Password</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("RedirectUserIndex", "UserInfo", new { ViewID  = 3 })" class="nav-link">
+                                        <i class="nav-icon fas fa-trash-alt"></i>
+                                        <p>Delete</p>
+                                    </a>
+                                <li class="nav-item">
+                                    <a href="#" )" class="nav-link">
+                                        <i class="nav-icon fas fa-copy"></i>
+                                        <p>
+                                            Reports
+                                            <i class="fas fa-angle-left right"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("RedirectUserIndex", "UserInfo", new { ViewID = 4 })" class="nav-link">
+                                                <i class="nav-icon fas fa-file"></i>
+                                                <p>List of Users</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("RedirectUserIndex", "UserInfo", new { ViewID  = 5 })" class="nav-link">
+                                                <i class="nav-icon fas fa-file"></i>
+                                                <p>List of User Details</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("UserSummary", "UserInfo")" class="nav-link">
+                                                <i class="nav-icon fas fa-file"></i>
+                                                <p>User Summary</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("LogRegister", "UserInfo")" class="nav-link">
+                                                <i class="nav-icon fas fa-file"></i>
+                                                <p>Log Register</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- #endregion -->
+                        <!-- #region Setup -->
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-cog"></i>
+                                <p>
+                                    Setup
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="@Url.Action("PremiseTypeIndex", "AgreementInfo")" class="nav-link">
+                                        <i class="nav-icon fas fa-bolt"></i>
+                                        <p>Premise Type</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("LookupIndex", "AgreementInfo")" class="nav-link">
+                                        <i class="nav-icon fas fa-bolt"></i>
+                                        <p>Lookup</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- #endregion -->
+                        @*//==Manage Contracts*@
+                        <li class="nav-header">Manage Contracts</li>
+                        <!-- #region Agreement -->
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-building"></i>
+                                <p>Basic Agreement<i class="fas fa-angle-left right"></i></p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="@Url.Action("RedirectAgreementIndex", "AgreementInfo", new { ViewID  = 0 })" class="nav-link">
+                                        <i class="nav-icon fas fa-map"></i>
+                                        <p>Draft</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("RedirectAgreementIndex", "AgreementInfo", new { ViewID  = 1 })" class="nav-link">
+                                        <i class="nav-icon fas fa-plus-circle"></i>
+                                        <p>Create</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("RedirectAgreementIndex", "AgreementInfo", new { ViewID  = 2 })" class="nav-link">
+                                        <i class="nav-icon fas fa-edit"></i>
+                                        <p>Edit</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("RedirectAgreementIndex", "AgreementInfo", new { ViewID  = 3 })" class="nav-link">
+                                        <i class="nav-icon fas fa-trash-alt"></i>
+                                        <p>Delete</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("RedirectAgreementIndex", "AgreementInfo", new { ViewID  = 4})" class="nav-link">
+                                        <i class="nav-icon fas fa-check-circle"></i>
+                                        <p>Activate</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Block", "AgreementInfo")" class="nav-link">
+                                        <i class="nav-icon fas fa-times-circle"></i>
+                                        <p>Termination</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" )" class="nav-link">
+                                        <i class="nav-icon fas fa-copy"></i>
+                                        <p>
+                                            Reports
+                                            <i class="fas fa-angle-left right"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("RedirectAgreementIndex", "AgreementInfo", new { ViewID = 10})" class="nav-link">
+                                                <i class="nav-icon fas fa-file"></i>
+                                                <p>Contract List</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("RedirectAgreementIndex", "AgreementInfo", new { ViewID =  11})" class="nav-link">
+                                                <i class="nav-icon fas fa-file"></i>
+                                                <p>Contract Schedule</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("RedirectAgreementIndex", "AgreementInfo", new { ViewID = 12 })" class="nav-link">
+                                                <i class="nav-icon fas fa-file"></i>
+                                                <p>Landlord Schedule</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("RedirectAgreementIndex", "AgreementInfo", new { ViewID = 13 })" class="nav-link">
+                                                <i class="nav-icon fas fa-file"></i>
+                                                <p>Cost Center Schedule</p>
+                                            </a>
+                                        </li>
+                                        @*<li class="nav-item">
+                            <a href="@Url.Action("RedirectAgreementIndex", "AgreementInfo", new { ViewID = 24 })" class="nav-link">
+                                <i class="nav-icon fas fa-chevron-right"></i>
+                                <p>Utility Schedule</p>
+                            </a>
+                        </li>*@
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- #endregion -->
+                        <!-- #region Renewal Agreement -->
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-retweet"></i>
+                                <p>Renewal Agreement<i class="fas fa-angle-left right"></i></p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="@Url.Action("RedirectReAgreementIndex", "AgreementInfo", new { ViewID  = 1 })" class="nav-link">
+                                        <i class="nav-icon fas fa-plus-circle"></i>
+                                        <p>Create</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("RedirectReAgreementIndex", "AgreementInfo", new { ViewID  = 2 })" class="nav-link">
+                                        <i class="nav-icon fas fa-edit"></i>
+                                        <p>Edit</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("RedirectReAgreementIndex", "AgreementInfo", new { ViewID  = 3 })" class="nav-link">
+                                        <i class="nav-icon fas fa-trash-alt"></i>
+                                        <p>Delete</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("RedirectReAgreementIndex", "AgreementInfo", new { ViewID  = 4})" class="nav-link">
+                                        <i class="nav-icon fas fa-check-circle"></i>
+                                        <p>Activate</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("ReBlock", "AgreementInfo")" class="nav-link">
+                                        <i class="nav-icon fas fa-times-circle"></i>
+                                        <p>Termination</p>
+                                    </a>
+                                </li>
+                                @*<li class="nav-item">
+                    <a href="@Url.Action("ReUnblock", "AgreementInfo")" class="nav-link">
+                        <i class="nav-icon fas fa-check-circle"></i>
+                        <p>Unblock</p>
+                    </a>
+                </li>*@
+                                <li class="nav-item">
+                                    <a href="#" )" class="nav-link">
+                                        <i class="nav-icon fas fa-copy"></i>
+                                        <p>
+                                            Reports
+                                            <i class="fas fa-angle-left right"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("RedirectReAgreementIndex", "AgreementInfo", new { ViewID = 10})" class="nav-link">
+                                                <i class="nav-icon fas fa-file"></i>
+                                                <p>Contract List</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("RedirectReAgreementIndex", "AgreementInfo", new { ViewID =  11})" class="nav-link">
+                                                <i class="nav-icon fas fa-file"></i>
+                                                <p>Contract Schedule</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("RedirectReAgreementIndex", "AgreementInfo", new { ViewID = 12 })" class="nav-link">
+                                                <i class="nav-icon fas fa-file"></i>
+                                                <p>Landlord Schedule</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("RedirectReAgreementIndex", "AgreementInfo", new { ViewID = 13 })" class="nav-link">
+                                                <i class="nav-icon fas fa-file"></i>
+                                                <p>Cost Center Schedule</p>
+                                            </a>
+                                        </li>
+                                        @*<li class="nav-item">
+                            <a href="@Url.Action("RedirectReAgreementIndex", "AgreementInfo", new { ViewID = 24 })" class="nav-link">
+                                <i class="nav-icon fas fa-file"></i>
+                                <p>Utility Schedule</p>
+                            </a>
+                        </li>*@
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- #endregion -->
+                        <!-- #region Modified Agreement -->
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-random"></i>
+                                <p>
+                                    Modified Agreement<i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="@Url.Action("RedirectModAgreementIndex", "AgreementInfo", new { ViewID  = 1 })" class="nav-link">
+                                        <i class="nav-icon fas fa-plus-circle"></i>
+                                        <p>Create</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("RedirectModAgreementIndex", "AgreementInfo", new { ViewID  = 2 })" class="nav-link">
+                                        <i class="nav-icon fas fa-edit"></i>
+                                        <p>Edit</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("RedirectModAgreementIndex", "AgreementInfo", new { ViewID  = 3 })" class="nav-link">
+                                        <i class="nav-icon fas fa-trash-alt"></i>
+                                        <p>Delete</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("RedirectModAgreementIndex", "AgreementInfo", new { ViewID  = 4})" class="nav-link">
+                                        <i class="nav-icon fas fa-check-circle"></i>
+                                        <p>Activate</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("ModBlock", "AgreementInfo")" class="nav-link">
+                                        <i class="nav-icon fas fa-times-circle"></i>
+                                        <p>Termination</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" )" class="nav-link">
+                                        <i class="nav-icon fas fa-copy"></i>
+                                        <p>
+                                            Reports
+                                            <i class="fas fa-angle-left right"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("RedirectModAgreementIndex", "AgreementInfo", new { ViewID = 10})" class="nav-link">
+                                                <i class="nav-icon fas fa-file"></i>
+                                                <p>Contract List</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("RedirectModAgreementIndex", "AgreementInfo", new { ViewID =  11})" class="nav-link">
+                                                <i class="nav-icon fas fa-file"></i>
+                                                <p>Contract Schedule</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("RedirectModAgreementIndex", "AgreementInfo", new { ViewID = 12 })" class="nav-link">
+                                                <i class="nav-icon fas fa-file"></i>
+                                                <p>Landlord Schedule</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("RedirectModAgreementIndex", "AgreementInfo", new { ViewID = 13 })" class="nav-link">
+                                                <i class="nav-icon fas fa-file"></i>
+                                                <p>Cost Center Schedule</p>
+                                            </a>
+                                        </li>
+                                        @*<li class="nav-item">
+                            <a href="@Url.Action("RedirectModAgreementIndex", "AgreementInfo", new { ViewID = 24 })" class="nav-link">
+                                <i class="nav-icon fas fa-file"></i>
+                                <p>Utility Schedule</p>
+                            </a>
+                        </li>*@
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- #endregion -->
+                        <!-- #region Forecasting -->
+                        <li class="nav-header">Reports</li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("RedirectReAgreementIndex", "AgreementInfo", new { ViewID =  5})" class="nav-link">
+                                <i class="nav-icon fas fa-file"></i>
+                                <p>Active Agreement List</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("RentForecast", "AgreementInfo")" class="nav-link">
+                                <i class="nav-icon fas fa-sitemap"></i>
+                                <p>Rent Forecast</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("AllAgreementDetails", "AgreementInfo")" class="nav-link">
+                                <i class="nav-icon fas fa-copy"></i>
+                                <p>All Agreement Details</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("LeaseInfo", "AgreementInfo" )" class="nav-link">
+                                <i class="nav-icon fas fa-file"></i>
+                                <p>
+                                    Lease Information
+                                </p>
+                            </a>
+                        </li>
+                        <!-- #endregion -->
+                        <li class="nav-header">Financial Accounting</li>
+                        <!-- #region Rent AP -->
+                        <li class="nav-item">
+                            <a href="#" )" class="nav-link">
+                                <i class="nav-icon fas fa-anchor"></i>
+                                <p>
+                                    Rent AP
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="@Url.Action("RentAPExecuteLog", "AgreementInfo" )" class="nav-link">
+                                        <i class="nav-icon fas fa-bolt"></i>
+                                        <p>Execute Log</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("RentAPPostLog", "AgreementInfo" )" class="nav-link">
+                                        <i class="nav-icon fas fa-bolt"></i>
+                                        <p>Post Log</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" )" class="nav-link">
+                                        <i class="nav-icon fas fa-copy"></i>
+                                        <p>
+                                            Reports
+                                            <i class="fas fa-angle-left right"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("RentAPReport", "AgreementInfo")" class="nav-link">
+                                                <i class="nav-icon fas fa-file"></i>
+                                                <p>Rent AP Journal</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- #endregion -->
+                        <!-- #region Utility AP -->
+                        <!--<li class="nav-item">
+        <a href="#" )" class="nav-link">
+            <i class="nav-icon fas fa-briefcase"></i>
+            <p>
+                Utility AP
+                <i class="fas fa-angle-left right"></i>
+            </p>
+        </a>
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="@Url.Action("UtilityAPExecuteLog", "AgreementInfo" )" class="nav-link">
+                    <i class="nav-icon fas fa-chevron-right"></i>
+                    <p>Execute Log</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="@Url.Action("UtilityAPPostLog", "AgreementInfo" )" class="nav-link">
+                    <i class="nav-icon fas fa-chevron-right"></i>
+                    <p>Post Log</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" )" class="nav-link">
+                    <i class="nav-icon fas fa-copy"></i>
+                    <p>
+                        Reports
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="@Url.Action("UtilityAPReport", "AgreementInfo")" class="nav-link">
+                            <i class="nav-icon fas fa-chevron-right"></i>
+                            <p>Utility AP Journal</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </li>-->
+                        <!-- #endregion -->
+                        <!-- #region Hold Payment -->
+                        <li class="nav-item">
+                            <a href="#" )" class="nav-link">
+                                <i class="nav-icon fas fa-wrench"></i>
+                                <p>
+                                    Hold Payment
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="@Url.Action("HoldBlockPayment", "AgreementInfo")" class="nav-link">
+                                        <i class="nav-icon fas fa-lock"></i>
+                                        <p>Hold Payment</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("HoldUnblockPayment", "AgreementInfo")" class="nav-link">
+                                        <i class="nav-icon fas fa-unlock-alt"></i>
+                                        <p>Unhold Payment</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" )" class="nav-link">
+                                        <i class="nav-icon fas fa-copy"></i>
+                                        <p>
+                                            Reports
+                                            <i class="fas fa-angle-left right"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("BlockedAgreementReport", "AgreementInfo")" class="nav-link">
+                                                <i class="nav-icon fas fa-file"></i>
+                                                <p>Agreement Hold List</p>
+                                            </a>
+                                        </li>
+                                        @*<li class="nav-item">
+                            <a href="@Url.Action("RentHoldPayment", "AgreementInfo")" class="nav-link">
+                                <i class="nav-icon fas fa-chevron-right"></i>
+                                <p>Rent Hold Payment</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("UtilityHoldPayment", "AgreementInfo")" class="nav-link">
+                                <i class="nav-icon fas fa-chevron-right"></i>
+                                <p>Utility Hold Payment</p>
+                            </a>
+                        </li>*@
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- #endregion -->
+                        <!-- #region Rent Payment -->
+
+                        <li class="nav-item">
+                            <a href="#" )" class="nav-link">
+                                <i class="nav-icon fas fa-users"></i>
+                                <p>
+                                    Rent Payment
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="@Url.Action("RentVendorPJExecuteLog", "AgreementInfo")" class="nav-link">
+                                        <i class="nav-icon fas fa-bolt"></i>
+                                        <p>Execute Log</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("RentVendorPJPostLog", "AgreementInfo")" class="nav-link">
+                                        <i class="nav-icon fas fa-bolt"></i>
+                                        <p>Post Log</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" )" class="nav-link">
+                                        <i class="nav-icon fas fa-copy"></i>
+                                        <p>
+                                            Reports
+                                            <i class="fas fa-angle-left right"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("RentVendorPJReport", "AgreementInfo")" class="nav-link">
+                                                <i class="nav-icon fas fa-file"></i>
+                                                <p>Rent Pay to Vendor</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("RentGovtPJReport", "AgreementInfo")" class="nav-link">
+                                                <i class="nav-icon fas fa-file"></i>
+                                                <p>Rent Pay to Govt.</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("RentTemplate", "AgreementInfo")" class="nav-link">
+                                                <i class="nav-icon fas fa-file"></i>
+                                                <p>Rent Template</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- #endregion -->
+                        <!-- #region Utility Payment -->
+                        <!--<li class="nav-item">
+        <a href="#" )" class="nav-link">
+            <i class="nav-icon fas fa-map"></i>
+            <p>
+                Utility Payment
+                <i class="fas fa-angle-left right"></i>
+            </p>
+        </a>
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="@Url.Action("UtilityVendorPJExecuteLog", "AgreementInfo")" class="nav-link">
+                    <i class="nav-icon fas fa-chevron-right"></i>
+                    <p>Execute Log</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="@Url.Action("UtilityVendorPJPostLog", "AgreementInfo")" class="nav-link">
+                    <i class="nav-icon fas fa-chevron-right"></i>
+                    <p>Post Log</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" )" class="nav-link">
+                    <i class="nav-icon fas fa-copy"></i>
+                    <p>
+                        Reports
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="@Url.Action("UtilityVendorPJReport", "AgreementInfo")" class="nav-link">
+                            <i class="nav-icon fas fa-chevron-right"></i>
+                            <p>Utility Pay to Vendor</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="@Url.Action("UtilityGovtPJReport", "AgreementInfo")" class="nav-link">
+                            <i class="nav-icon fas fa-chevron-right"></i>
+                            <p>Utility Pay to Govt.</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </li>-->
+                        <!-- #endregion -->
+                        <!-- #region Accounting IFRS -->
+                        <li class="nav-header">IFRS 16 Accounting</li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-certificate"></i>
+                                <p>
+                                    IFRS 16 Reporting
+                                    <i class="fas fa-angle-left right"></i>
+                                    <span class="badge badge-info right"></span>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="@Url.Action("RedirectPVLeaseList", "AgreementInfo" , new { ViewID=14})" class="nav-link">
+                                        <i class="nav-icon fas fa-file"></i>
+                                        <p>
+                                            Lease & ROU Schedule
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("CalculatedSummary", "AgreementInfo" )" class="nav-link">
+                                        <i class="nav-icon fas fa-file"></i>
+                                        <p>
+                                            Periodical Calculation
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("NewSummary", "AgreementInfo" )" class="nav-link">
+                                        <i class="nav-icon fas fa-file"></i>
+                                        <p>
+                                            New Summary
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("ModSummary", "AgreementInfo" )" class="nav-link">
+                                        <i class="nav-icon fas fa-file"></i>
+                                        <p>
+                                            Modified Summary
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("BlockedSummary", "AgreementInfo" )" class="nav-link">
+                                        <i class="nav-icon fas fa-file"></i>
+                                        <p>
+                                            Discontinued Summary
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("JournalEntries", "AgreementInfo" )" class="nav-link">
+                                        <i class="nav-icon fas fa-file"></i>
+                                        <p>
+                                            Journal Entries
+                                        </p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- #endregion -->
+                        <!-- #region GOOD BYE   -->
+                        <li class="nav-header">Good Bye</li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("SignOut", "Home" )" class="nav-link">
+                                <i class="nav-icon fas  fa-power-off"></i>
+                                <p>Sign Out</p>
+                            </a>
+                        </li>
+                        <!-- #endregion -->
+                    </ul>
+                </nav>
+                <!-- /.sidebar-menu -->
+            </div>
+            <!-- /.sidebar -->
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <!--<section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0">Dashboard</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Dashboard</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>-->
+            <!-- /.container-fluid -->
+            <!--</section>-->
+            <!-- Main content -->
+            <section class="content">
+                @RenderBody()
+                @RenderSection("scripts", required: false)
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+        <footer class="main-footer">
+            <div class="float-right d-none d-sm-block">
+                <b>Version 1.8</b>
+            </div>
+            @*<strong>&copy; 2021 <a href="https://www.applablimited.com/">APPLAB LIMITED</a> All Rights Reserved</strong>*@
+        </footer>
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+    </div>
+
+    <!-- ./wrapper -->
+    <!-- jQuery -->
+    @*<script src="~/Template/plugins/jquery/jquery.min.js"></script>*@
+    @*<script src="~/Template/plugins/jquery/jquery-3.5.1.min.js"></script>*@
+
+    <!-- jQuery UI 1.11.4 -->
+    <script src="~/Template/plugins/jquery-ui/jquery-ui.min.js"></script>
+
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>
+        $.widget.bridge('uibutton', $.ui.button)
+    </script>
+    <!-- Bootstrap 4 -->
+    <script src="~/Template/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- overlayScrollbars -->
+    <script src="~/Template/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/Template/dist/js/adminlte.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            //==Disable browser back button
+            function disableBack() {
+                window.history.forward()
+            }
+            window.onload = disableBack();
+            window.onpageshow = function (e) {
+                if (e.persisted)
+                    disableBack();
+            }
+            //==
+        });
+    </script>
+    <script>
+        var _idleSecondsCounter = 1;
+        document.onclick = function () {
+            _idleSecondsCounter = 0;
+        };
+        document.onmousemove = function () {
+            _idleSecondsCounter = 0;
+        };
+        document.onkeypress = function () {
+            _idleSecondsCounter = 0;
+        };
+        window.setInterval(CheckIdleTime, 1170000); //19.50 mnt
+        function CheckIdleTime() {
+            //onmousemove/onclick/onkeypress event fired
+            if (_idleSecondsCounter == 0) {
+                _idleSecondsCounter = 1;
+                $.ajax({
+                    type: "Get",
+                    url: "/Home/PingServer",
+                    success: function (response) {
+                    },
+                    failure: function (response) {
+                        alert(response.responseText);
+                    },
+                    error: function (response) {
+                        alert(response.responseText);
+                    }
+                });
+            }
+        }
+    </script>
+    <script>
+        /** add active class and stay opened when selected */
+        var URLPath = @Html.Raw(Json.Encode(ViewBag.URLPath));
+        //var url = URLPath;
+        if (window.location.port == "80" || window.location.port == "") {
+            var url = window.location.protocol + "//" + window.location.hostname + "/" + URLPath;
+        }
+        else {
+            var url = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/" + URLPath;
+        }
+        if (url != null) {
+            // for sidebar menu entirely but not cover treeview
+            $('ul.nav-sidebar a').filter(function () {
+                return this.href == url;
+            }).addClass('active');
+
+            // for treeview
+            $('ul.nav-treeview a').filter(function () {
+                return this.href == url;
+            }).parentsUntil(".nav-sidebar > .nav-treeview").addClass('menu-open').prev('a').addClass('active');
+        }
+    </script>
+</body>
+</html>
+

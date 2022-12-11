@@ -1,0 +1,231 @@
+﻿@model RMS.Models.CostCenterScheduleDTO
+@{
+    ViewBag.Title = "Lease Information";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+@using (Html.BeginForm("LeaseInfo", "AgreementInfo", FormMethod.Post, new { id = "frmSubmit", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.SubPremiseTypeCheckList, new { id = "txtSubPremiseTypeCheckList" })
+    <section class="content" style="padding-top:15px;">
+        <div class="container-fluid">
+            <div class="col-md-12">
+                <div class="card card-info">
+                    <div class="card-header">
+                        <h3 class="card-title"><i class="fas fa-file"></i><span>&nbsp;&nbsp;Lease Information</span></h3>
+                        <div id="spinner" style="display: none;padding-top:70px; padding-bottom:20px; padding-left:100px;">
+                            <img id="img-spinner" src="@Url.Content("~/Content/Images/spinner.gif")" alt="Loading" />
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <b><span style="color:navy">Date Range by Agreement Start Date</span></b>
+                        <div class="row" style="padding-top:10px; padding-bottom:0px;">
+                            <div class="required col-xs-12 col-sm-4 col-md-3">
+                                @Html.LabelFor(model => model.FromDate, new { @class = "control-label" })
+                            </div>
+                            <div class="col-xs-12 col-sm-8 col-md-3">
+                                @Html.TextBoxFor(model => model.FromDate, "{0:dd/MM/yyyy}", new { autocomplete = "off", @placeholder = "dd/mm/yyyy", @class = "form-control input-sm" })
+                            </div>
+                            <div class="required col-xs-12 col-sm-4 col-md-3" style="padding-left:40px">
+                                @Html.LabelFor(model => model.ToDate, new { @class = "control-label" })
+                            </div>
+                            <div class="col-xs-12 col-sm-8 col-md-3">
+                                @Html.TextBoxFor(model => model.ToDate, "{0:dd/MM/yyyy}", new { autocomplete = "off", @placeholder = "dd/mm/yyyy", @class = "form-control input-sm" })
+                            </div>
+                        </div>
+                        <hr />
+                        <b>By All Agreements</b>
+                        <hr />
+                        <b>OR</b>
+                        <div class="row" style="padding-top:10px;">
+                            <div class="col-xs-12 col-sm-4 col-md-3">
+                                @Html.Label("By Agreement", new { @class = "control-label" })
+                            </div>
+                            <div class="col-xs-12 col-sm-8 col-md-3">
+                                @Html.DropDownListFor(model => model.AgreementSLNoCheckList, new SelectList(ViewBag.AgreementList, "AgreementSLNo", "FullName"), new { data_placeholder = "Select single or multiple Agreements", @multiple = true, @class = "chosen form-control input-sm", style = "width: 350px;", id = "ddlAgreement" })
+                            </div>
+                        </div>
+                        <hr />
+                        <b>OR</b>
+                        <div class="row" style="padding-top:10px;">
+                            <div class="col-xs-12 col-sm-4 col-md-3">
+                                @Html.Label("By Premise Type", new { @class = "control-label" })
+                            </div>
+                            <div class="col-xs-12 col-sm-8 col-md-3">
+                                @Html.DropDownListFor(model => model.PremiseTypeSLNoCheckList, new SelectList(ViewBag.PremiseTypeList, "PremiseTypeSLNo", "FullName"), new { data_placeholder = "Select single or multiple Premise Types", @multiple = true, @class = "chosen form-control input-sm", style = "width: 350px;", id = "ddlPremiseType" })
+                            </div>
+                        </div>
+                        <hr />
+                        <b>OR</b>
+                        <div class="row" style="padding-top:10px;">
+                            <div class="col-xs-12 col-sm-4 col-md-3">
+                                @Html.Label("By Sub Premise Type", new { @class = "control-label" })
+                            </div>
+                            <div class="col-xs-12 col-sm-8 col-md-3">
+                                @Html.DropDownListFor(model => model.SubPremiseTypeCheckList, new SelectList(ViewBag.SubPremiseTypeList, "Description", "Description"), new { data_placeholder = "Select single or multiple Sub Premise Types", @multiple = true, @class = "chosen form-control input-sm", style = "width: 350px;", id = "ddlSubPremiseType" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-info" style="float: right;"
+                                id="btnShowReport" onclick="return Validator();">
+                            <i class="fas fa-bolt"></i>
+                            <span>&nbsp;Show Report</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+<style type="text/css">
+    .required:after {
+        content: "*";
+        font-weight: bold;
+        color: red;
+    }
+</style>
+<style type="text/css" media="screen">
+    #spinner {
+        position: fixed;
+        top: -18%;
+        left: 30%;
+    }
+</style>
+
+<script src="~/Scripts/jquery-3.6.0.js"></script>
+<script src="~/Template/plugins/jquery-ui/jquery-ui.js"></script>
+<script src="~/Scripts/notify.js"></script>
+<script src="~/Scripts/SweetAlert2/sweetalert2.all.min.js"></script>
+<script src="~/Scripts/SweetAlert2/sweetalert2.min.js"></script>
+
+<script src="~/Template/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/Template/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="~/Template/plugins/jszip/jszip.min.js"></script>
+<script src="~/Template/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="~/Template/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="~/Template/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="~/Template/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="~/Template/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<script src="~/Template/plugins/datatables-select/js/dataTables.select.min.js"></script>
+
+<link href="~/Template/plugins/jquery-ui/jquery-ui.css" rel="stylesheet" />
+<link href="~/Template/plugins/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="~/Template/plugins/buttons.dataTables.css" rel="stylesheet" />
+<link href="~/Template/plugins/dataTables.bootstrap5.css" rel="stylesheet" />
+
+<link rel="stylesheet" type="text/css" href="~/Content/chosen.min.css" />
+<script type="text/javascript" src="~/Scripts/chosen.jquery.min.js"></script>
+
+<script type="text/javascript">
+    //$(".chosen").chosen({ max_selected_options: 2 });
+    $(".chosen-deselect").chosen({ allow_single_deselect: true });
+    $(".chosen").chosen().change();
+    $(".chosen").trigger('liszt:updated');
+</script>
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function () {
+        $("#FromDate").blur(function () {
+            var txtVal = $('#FromDate').val();
+            if (txtVal.length != 0 && isDate(txtVal) == false) {
+                $("#FromDate").focus();
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Invalid from date!',
+                    text: 'Validation Message!',
+                })
+            }
+        })
+        $("#ToDate").blur(function () {
+            var txtVal = $('#ToDate').val();
+            if (txtVal.length != 0 && isDate(txtVal) == false) {
+                $("#ToDate").focus();
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Invalid to date!',
+                    text: 'Validation Message!',
+                })
+            }
+        })
+    });
+</script>
+<script>
+    function Validator() {
+        if ($('#FromDate').val() == "") {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Please select the from date!',
+                text: 'Validation Message!',
+            })
+            return false;
+        }
+        if ($('#ToDate').val() == "") {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Please select the to date!',
+                text: 'Validation Message!',
+            })
+            return false;
+        }
+        $('#txtSubPremiseTypeCheckList').val((Array.from(document.getElementById('ddlSubPremiseType').selectedOptions).map(x => x.value)));
+    }
+</script>
+<script>
+    $(function () {
+        $('#FromDate').datepicker({
+            autoclose: true,
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: 'dd/mm/yy',
+            showOn: 'button',
+            buttonImageOnly: true,
+            buttonImage: '/Content/Images/Calendar.gif',
+        })
+        $('#ToDate').datepicker({
+            autoclose: true,
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: 'dd/mm/yy',
+            showOn: 'button',
+            buttonImageOnly: true,
+            buttonImage: '/Content/Images/Calendar.gif',
+        })
+    })
+</script>
+<script>
+    function isDate(txtDate) {
+        var currVal = txtDate;
+        if (currVal == '')
+            return false;
+
+        //Declare Regex
+        var rxDatePattern = /^(\d{1,2})(\/)(\d{1,2})(\/)(\d{4})$/;
+        var dtArray = currVal.match(rxDatePattern); // is format OK?
+        if (dtArray == null)
+            return false;
+
+        //Checks for mm/dd/yyyy format.
+        //dtMonth = dtArray[1];
+        //dtDay = dtArray[3];
+        //dtYear = dtArray[5];
+
+        //Checks for dd/mm/yyyy format.
+        dtDay = dtArray[1];
+        dtMonth = dtArray[3];
+        dtYear = dtArray[5];
+
+        if (dtMonth < 1 || dtMonth > 12)
+            return false;
+        else if (dtDay < 1 || dtDay > 31)
+            return false;
+        else if ((dtMonth == 4 || dtMonth == 6 || dtMonth == 9 || dtMonth == 11) && dtDay == 31)
+            return false;
+        else if (dtMonth == 2) {
+            var isleap = (dtYear % 4 == 0 && (dtYear % 100 != 0 || dtYear % 400 == 0));
+            if (dtDay > 29 || (dtDay == 29 && !isleap))
+                return false;
+        }
+        return true;
+    }
+</script>

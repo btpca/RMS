@@ -1,0 +1,1033 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="packages\Microsoft.Net.Compilers.4.0.1\build\Microsoft.Net.Compilers.props" Condition="Exists('packages\Microsoft.Net.Compilers.4.0.1\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{70204295-0B95-45FE-915C-766E4E165F82}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RMS</RootNamespace>
+    <AssemblyName>RMS</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44335</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>4.0</TypeScriptToolsVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Excel, Version=2.1.2.3, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <HintPath>packages\ExcelDataReader.2.1.2.3\lib\net45\Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=3.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Linq" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Runtime" />
+    <Reference Include="System.Runtime.InteropServices" />
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation" />
+    <Reference Include="System.Threading.Thread" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting">
+      <HintPath>packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http">
+      <HintPath>packages\Microsoft.AspNet.WebApi.Core.5.2.7\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost">
+      <HintPath>packages\Microsoft.AspNet.WebApi.WebHost.5.2.7\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Class\AesOperation.cs" />
+    <Compile Include="Controllers\AgreementInfo\Mvc\AgreementInfoController.cs" />
+    <Compile Include="Controllers\DMInfo\Mvc\DMInfoController.cs" />
+    <Compile Include="Controllers\UserInfo\Mvc\UserInfoController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\Utility\ErrorController.cs" />
+    <Compile Include="DBProcess\RMSDBContext.cs" />
+    <Compile Include="DBProcess\UriLocations.cs" />
+    <Compile Include="DBProcess\ViewPath.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LeaseInfoDTO.cs" />
+    <Compile Include="Models\RentTemplateDTO.cs" />
+    <Compile Include="Models\DM_AdvanceInfo.cs" />
+    <Compile Include="Models\DraftSpaceInfo.cs" />
+    <Compile Include="Models\DM_SpaceInfo.cs" />
+    <Compile Include="Models\DM_ReviewInfo.cs" />
+    <Compile Include="Models\PreviewRentAPJournalInfo.cs" />
+    <Compile Include="Models\PreviewRentAPJournalInfoDTO.cs" />
+    <Compile Include="Models\PreviewRentGovtPJInfo.cs" />
+    <Compile Include="Models\PreviewRentGovtPJInfoDTO.cs" />
+    <Compile Include="Models\PreviewRentVendorPJInfo.cs" />
+    <Compile Include="Models\PreviewRentVendorPJInfoDTO.cs" />
+    <Compile Include="Models\SpaceInfo.cs" />
+    <Compile Include="Models\SpaceInfoDTO.cs" />
+    <Compile Include="Models\EmailAccount.cs" />
+    <Compile Include="Models\BankInfo.cs" />
+    <Compile Include="Models\HOCCSOLInfo.cs" />
+    <Compile Include="Models\CCInfo.cs" />
+    <Compile Include="Models\Lookup.cs" />
+    <Compile Include="Models\LookupDTO.cs" />
+    <Compile Include="Models\SOLInfo.cs" />
+    <Compile Include="Models\DM_CostCenterInfo.cs" />
+    <Compile Include="Models\DM_AgreementInfo.cs" />
+    <Compile Include="Models\DraftAdvanceInfo.cs" />
+    <Compile Include="Models\DraftCostCenterInfo.cs" />
+    <Compile Include="Models\DraftAgreementInfo.cs" />
+    <Compile Include="Models\BorrowingRateDetails.cs" />
+    <Compile Include="Models\FileUploadInfoDTO.cs" />
+    <Compile Include="Models\FileUploadInfo.cs" />
+    <Compile Include="Models\IFRSModSummaryDTO.cs" />
+    <Compile Include="Models\DraftReviewInfo.cs" />
+    <Compile Include="Models\DraftLandlordInfo.cs" />
+    <Compile Include="Models\AdvanceInfo.cs" />
+    <Compile Include="Models\DraftUtilityInfo.cs" />
+    <Compile Include="Models\DM_LandlordInfo.cs" />
+    <Compile Include="Models\ForgotPasswordViewModelDTO.cs" />
+    <Compile Include="Models\UserDetailsDTO.cs" />
+    <Compile Include="Models\UtilityGovtPJInfo.cs" />
+    <Compile Include="Models\RentGovtPJInfo.cs" />
+    <Compile Include="Models\UtilityGovtPJInfoDTO.cs" />
+    <Compile Include="Models\DM_UtilityInfo.cs" />
+    <Compile Include="Models\UtilityVendorPJInfo.cs" />
+    <Compile Include="Models\UtilityVendorPJInfoDTO.cs" />
+    <Compile Include="Models\UtilityVendorPJExecuteLog.cs" />
+    <Compile Include="Models\UtilityVendorPJExecuteLogDTO.cs" />
+    <Compile Include="Models\RentVendorPJInfo.cs" />
+    <Compile Include="Models\RentGovtPJInfoDTO.cs" />
+    <Compile Include="Models\RentVendorPJInfoDTO.cs" />
+    <Compile Include="Models\RentVendorPJExecuteLog.cs" />
+    <Compile Include="Models\RentVendorPJExecuteLogDTO.cs" />
+    <Compile Include="Models\UtilityAPJournalInfo.cs" />
+    <Compile Include="Models\UtilityAPJournalInfoDTO.cs" />
+    <Compile Include="Models\UtilityAPExecuteLog.cs" />
+    <Compile Include="Models\UtilityAPExecuteLogDTO.cs" />
+    <Compile Include="Models\UtilitySchedule.cs" />
+    <Compile Include="Models\UtilityScheduleDTO.cs" />
+    <Compile Include="Models\UtilityInfo.cs" />
+    <Compile Include="Models\UtilityInfoDTO.cs" />
+    <Compile Include="Models\ReviewInfo.cs" />
+    <Compile Include="Models\AdvanceInfoDTO.cs" />
+    <Compile Include="Models\ReviewInfoDTO.cs" />
+    <Compile Include="Models\IFRSCalculatedSummaryDTO.cs" />
+    <Compile Include="Models\IFRSScheduleDTO.cs" />
+    <Compile Include="Models\IFRSSchedule.cs" />
+    <Compile Include="Models\IFRSControlDataInfo.cs" />
+    <Compile Include="Models\CostCenterSchedule.cs" />
+    <Compile Include="Models\BorrowingRateInfo.cs" />
+    <Compile Include="Models\RentAPJournalInfoDTO.cs" />
+    <Compile Include="Models\RentAPJournalInfo.cs" />
+    <Compile Include="Models\LogRegisterDTO.cs" />
+    <Compile Include="Models\RentAPExecuteLog.cs" />
+    <Compile Include="Models\RentAPExecuteLogDTO.cs" />
+    <Compile Include="Models\LandlordSchedule.cs" />
+    <Compile Include="Models\CostCenterScheduleDTO.cs" />
+    <Compile Include="Models\LandlordScheduleDTO.cs" />
+    <Compile Include="Models\ContractScheduleDTO.cs" />
+    <Compile Include="Models\ContractSchedule.cs" />
+    <Compile Include="Models\AgreementInfo.cs" />
+    <Compile Include="Models\AgreementInfoDTO.cs" />
+    <Compile Include="Models\PremiseTypeInfo.cs" />
+    <Compile Include="Models\PremiseTypeInfoDTO.cs" />
+    <Compile Include="Models\CostCenterInfo.cs" />
+    <Compile Include="Models\LandlordInfo.cs" />
+    <Compile Include="Models\CostCenterInfoDTO.cs" />
+    <Compile Include="Models\LandlordInfoDTO.cs" />
+    <Compile Include="Models\ServiceInfoDTO.cs" />
+    <Compile Include="Models\AdvancePaymentDTO.cs" />
+    <Compile Include="Models\LogRegister.cs" />
+    <Compile Include="Models\UserPermission.cs" />
+    <Compile Include="Models\UserPermissionDTO.cs" />
+    <Compile Include="Models\StatusInfo.cs" />
+    <Compile Include="Models\UserInfo.cs" />
+    <Compile Include="Models\UserInfoDTO.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-grid.rtl.css" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css" />
+    <Content Include="Content\bootstrap-utilities.css" />
+    <Content Include="Content\bootstrap-utilities.min.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap.rtl.css" />
+    <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\chosen-sprite%402x.png" />
+    <Content Include="Content\chosen-sprite.png" />
+    <Content Include="Content\chosen.css" />
+    <Content Include="Content\chosen.min.css" />
+    <Content Include="Content\ForgotPasswordStyle.css" />
+    <Content Include="Content\gijgo\combined\gijgo.css" />
+    <Content Include="Content\gijgo\combined\gijgo.min.css" />
+    <Content Include="Content\gijgo\fonts\gijgo-material.svg" />
+    <Content Include="Content\gijgo\modular\checkbox.css" />
+    <Content Include="Content\gijgo\modular\checkbox.min.css" />
+    <Content Include="Content\gijgo\modular\colorpicker.css" />
+    <Content Include="Content\gijgo\modular\colorpicker.min.css" />
+    <Content Include="Content\gijgo\modular\core.css" />
+    <Content Include="Content\gijgo\modular\core.min.css" />
+    <Content Include="Content\gijgo\modular\datepicker.css" />
+    <Content Include="Content\gijgo\modular\datepicker.min.css" />
+    <Content Include="Content\gijgo\modular\datetimepicker.css" />
+    <Content Include="Content\gijgo\modular\datetimepicker.min.css" />
+    <Content Include="Content\gijgo\modular\dialog.css" />
+    <Content Include="Content\gijgo\modular\dialog.min.css" />
+    <Content Include="Content\gijgo\modular\dropdown.css" />
+    <Content Include="Content\gijgo\modular\dropdown.min.css" />
+    <Content Include="Content\gijgo\modular\editor.css" />
+    <Content Include="Content\gijgo\modular\editor.min.css" />
+    <Content Include="Content\gijgo\modular\grid.css" />
+    <Content Include="Content\gijgo\modular\grid.min.css" />
+    <Content Include="Content\gijgo\modular\slider.css" />
+    <Content Include="Content\gijgo\modular\slider.min.css" />
+    <Content Include="Content\gijgo\modular\timepicker.css" />
+    <Content Include="Content\gijgo\modular\timepicker.min.css" />
+    <Content Include="Content\gijgo\modular\tree.css" />
+    <Content Include="Content\gijgo\modular\tree.min.css" />
+    <Content Include="Content\Images\Calendar.gif" />
+    <Content Include="Content\Images\LoginUser.png" />
+    <Content Include="Content\Images\RMSHome.gif" />
+    <Content Include="Content\Images\RMSHome.jpg" />
+    <Content Include="Content\Images\RMSLogo.png" />
+    <Content Include="Content\Images\spinner.gif" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.esm.js" />
+    <Content Include="Scripts\bootstrap.esm.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\chosen.jquery.js" />
+    <Content Include="Scripts\chosen.jquery.min.js" />
+    <Content Include="Scripts\chosen.proto.js" />
+    <Content Include="Scripts\chosen.proto.min.js" />
+    <Content Include="Scripts\dropzone\basic.css" />
+    <Content Include="Scripts\dropzone\basic.min.css" />
+    <Content Include="Scripts\dropzone\dropzone-amd-module.js" />
+    <Content Include="Scripts\dropzone\dropzone-amd-module.min.js" />
+    <Content Include="Scripts\dropzone\dropzone.css" />
+    <Content Include="Scripts\dropzone\dropzone.js" />
+    <Content Include="Scripts\dropzone\dropzone.min.css" />
+    <Content Include="Scripts\dropzone\dropzone.min.js" />
+    <Content Include="Scripts\gijgo\combined\gijgo.js" />
+    <Content Include="Scripts\gijgo\combined\gijgo.min.js" />
+    <Content Include="Scripts\gijgo\combined\messages\messages.bg-bg.js" />
+    <Content Include="Scripts\gijgo\combined\messages\messages.bg-bg.min.js" />
+    <Content Include="Scripts\gijgo\combined\messages\messages.de-de.js" />
+    <Content Include="Scripts\gijgo\combined\messages\messages.de-de.min.js" />
+    <Content Include="Scripts\gijgo\combined\messages\messages.es-es.js" />
+    <Content Include="Scripts\gijgo\combined\messages\messages.es-es.min.js" />
+    <Content Include="Scripts\gijgo\combined\messages\messages.fr-fr.js" />
+    <Content Include="Scripts\gijgo\combined\messages\messages.fr-fr.min.js" />
+    <Content Include="Scripts\gijgo\combined\messages\messages.it-it.js" />
+    <Content Include="Scripts\gijgo\combined\messages\messages.it-it.min.js" />
+    <Content Include="Scripts\gijgo\combined\messages\messages.ja-jp.js" />
+    <Content Include="Scripts\gijgo\combined\messages\messages.ja-jp.min.js" />
+    <Content Include="Scripts\gijgo\combined\messages\messages.pt-br.js" />
+    <Content Include="Scripts\gijgo\combined\messages\messages.pt-br.min.js" />
+    <Content Include="Scripts\gijgo\combined\messages\messages.ru-ru.js" />
+    <Content Include="Scripts\gijgo\combined\messages\messages.ru-ru.min.js" />
+    <Content Include="Scripts\gijgo\combined\messages\messages.tr-tr.js" />
+    <Content Include="Scripts\gijgo\combined\messages\messages.tr-tr.min.js" />
+    <Content Include="Scripts\gijgo\combined\messages\messages.zh-cn.js" />
+    <Content Include="Scripts\gijgo\combined\messages\messages.zh-cn.min.js" />
+    <Content Include="Scripts\gijgo\combined\messages\messages.zh-tw.js" />
+    <Content Include="Scripts\gijgo\combined\messages\messages.zh-tw.min.js" />
+    <Content Include="Scripts\gijgo\modular\checkbox.js" />
+    <Content Include="Scripts\gijgo\modular\checkbox.min.js" />
+    <Content Include="Scripts\gijgo\modular\colorpicker.js" />
+    <Content Include="Scripts\gijgo\modular\colorpicker.min.js" />
+    <Content Include="Scripts\gijgo\modular\core.js" />
+    <Content Include="Scripts\gijgo\modular\core.min.js" />
+    <Content Include="Scripts\gijgo\modular\datepicker.js" />
+    <Content Include="Scripts\gijgo\modular\datepicker.min.js" />
+    <Content Include="Scripts\gijgo\modular\datetimepicker.js" />
+    <Content Include="Scripts\gijgo\modular\datetimepicker.min.js" />
+    <Content Include="Scripts\gijgo\modular\dialog.js" />
+    <Content Include="Scripts\gijgo\modular\dialog.min.js" />
+    <Content Include="Scripts\gijgo\modular\draggable.js" />
+    <Content Include="Scripts\gijgo\modular\draggable.min.js" />
+    <Content Include="Scripts\gijgo\modular\dropdown.js" />
+    <Content Include="Scripts\gijgo\modular\dropdown.min.js" />
+    <Content Include="Scripts\gijgo\modular\droppable.js" />
+    <Content Include="Scripts\gijgo\modular\droppable.min.js" />
+    <Content Include="Scripts\gijgo\modular\editor.js" />
+    <Content Include="Scripts\gijgo\modular\editor.min.js" />
+    <Content Include="Scripts\gijgo\modular\grid.js" />
+    <Content Include="Scripts\gijgo\modular\grid.min.js" />
+    <Content Include="Scripts\gijgo\modular\slider.js" />
+    <Content Include="Scripts\gijgo\modular\slider.min.js" />
+    <Content Include="Scripts\gijgo\modular\timepicker.js" />
+    <Content Include="Scripts\gijgo\modular\timepicker.min.js" />
+    <Content Include="Scripts\gijgo\modular\tree.js" />
+    <Content Include="Scripts\gijgo\modular\tree.min.js" />
+    <Content Include="Content\gijgo\fonts\gijgo-material.woff" />
+    <Content Include="Content\gijgo\fonts\gijgo-material.ttf" />
+    <Content Include="Content\gijgo\fonts\gijgo-material.eot" />
+    <Content Include="Content\bootstrap.rtl.min.css.map" />
+    <Content Include="Content\bootstrap.rtl.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.css.map" />
+    <Content Include="Content\bootstrap-utilities.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <None Include="Properties\PublishProfiles\1 RMS Production Server rms.btp-inc.ca Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\2 RMS Local IIS Server Web Deploy.pubxml" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.esm.min.js.map" />
+    <Content Include="Scripts\bootstrap.esm.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <None Include="Scripts\jquery-3.6.0.intellisense.js" />
+    <Content Include="Scripts\jquery-3.6.0.js" />
+    <Content Include="Scripts\jquery-3.6.0.min.js" />
+    <Content Include="Scripts\jquery-3.6.0.slim.js" />
+    <Content Include="Scripts\jquery-3.6.0.slim.min.js" />
+    <Content Include="Scripts\jquery-3.6.0.slim.min.map" />
+    <Content Include="Scripts\jquery-3.6.0.min.map" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\notify.js" />
+    <Content Include="Scripts\prototype.js" />
+    <Content Include="Scripts\SweetAlert2\sweetalert2.all.min.js" />
+    <Content Include="Scripts\SweetAlert2\sweetalert2.min.css" />
+    <Content Include="Scripts\SweetAlert2\sweetalert2.min.js" />
+    <Content Include="Template\dist\css\adminlte.css" />
+    <Content Include="Template\dist\css\adminlte.css.map" />
+    <Content Include="Template\dist\css\adminlte.min.css" />
+    <Content Include="Template\dist\css\adminlte.min.css.map" />
+    <Content Include="Template\dist\css\alt\adminlte.components.css" />
+    <Content Include="Template\dist\css\alt\adminlte.components.css.map" />
+    <Content Include="Template\dist\css\alt\adminlte.components.min.css" />
+    <Content Include="Template\dist\css\alt\adminlte.components.min.css.map" />
+    <Content Include="Template\dist\css\alt\adminlte.core.css" />
+    <Content Include="Template\dist\css\alt\adminlte.core.css.map" />
+    <Content Include="Template\dist\css\alt\adminlte.core.min.css" />
+    <Content Include="Template\dist\css\alt\adminlte.core.min.css.map" />
+    <Content Include="Template\dist\css\alt\adminlte.extra-components.css" />
+    <Content Include="Template\dist\css\alt\adminlte.extra-components.css.map" />
+    <Content Include="Template\dist\css\alt\adminlte.extra-components.min.css" />
+    <Content Include="Template\dist\css\alt\adminlte.extra-components.min.css.map" />
+    <Content Include="Template\dist\css\alt\adminlte.pages.css" />
+    <Content Include="Template\dist\css\alt\adminlte.pages.css.map" />
+    <Content Include="Template\dist\css\alt\adminlte.pages.min.css" />
+    <Content Include="Template\dist\css\alt\adminlte.pages.min.css.map" />
+    <Content Include="Template\dist\css\alt\adminlte.plugins.css" />
+    <Content Include="Template\dist\css\alt\adminlte.plugins.css.map" />
+    <Content Include="Template\dist\css\alt\adminlte.plugins.min.css" />
+    <Content Include="Template\dist\css\alt\adminlte.plugins.min.css.map" />
+    <Content Include="Template\dist\img\AdminLTELogo.png" />
+    <Content Include="Template\dist\img\avatar.png" />
+    <Content Include="Template\dist\img\avatar2.png" />
+    <Content Include="Template\dist\img\avatar3.png" />
+    <Content Include="Template\dist\img\avatar4.png" />
+    <Content Include="Template\dist\img\avatar5.png" />
+    <Content Include="Template\dist\img\boxed-bg.jpg" />
+    <Content Include="Template\dist\img\boxed-bg.png" />
+    <Content Include="Template\dist\img\credit\american-express.png" />
+    <Content Include="Template\dist\img\credit\cirrus.png" />
+    <Content Include="Template\dist\img\credit\mastercard.png" />
+    <Content Include="Template\dist\img\credit\paypal.png" />
+    <Content Include="Template\dist\img\credit\paypal2.png" />
+    <Content Include="Template\dist\img\credit\visa.png" />
+    <Content Include="Template\dist\img\default-150x150.png" />
+    <Content Include="Template\dist\img\icons.png" />
+    <Content Include="Template\dist\img\photo1.png" />
+    <Content Include="Template\dist\img\photo2.png" />
+    <Content Include="Template\dist\img\photo3.jpg" />
+    <Content Include="Template\dist\img\photo4.jpg" />
+    <Content Include="Template\dist\img\prod-1.jpg" />
+    <Content Include="Template\dist\img\prod-2.jpg" />
+    <Content Include="Template\dist\img\prod-3.jpg" />
+    <Content Include="Template\dist\img\prod-4.jpg" />
+    <Content Include="Template\dist\img\prod-5.jpg" />
+    <Content Include="Template\dist\img\user1-128x128.jpg" />
+    <Content Include="Template\dist\img\user2-160x160.jpg" />
+    <Content Include="Template\dist\img\user3-128x128.jpg" />
+    <Content Include="Template\dist\img\user4-128x128.jpg" />
+    <Content Include="Template\dist\img\user5-128x128.jpg" />
+    <Content Include="Template\dist\img\user6-128x128.jpg" />
+    <Content Include="Template\dist\img\user7-128x128.jpg" />
+    <Content Include="Template\dist\img\user8-128x128.jpg" />
+    <Content Include="Template\dist\js\.eslintrc.json" />
+    <Content Include="Template\dist\js\adminlte.js" />
+    <Content Include="Template\dist\js\adminlte.js.map" />
+    <Content Include="Template\dist\js\adminlte.min.js" />
+    <Content Include="Template\dist\js\adminlte.min.js.map" />
+    <Content Include="Template\dist\js\demo.js" />
+    <Content Include="Template\dist\js\pages\dashboard.js" />
+    <Content Include="Template\dist\js\pages\dashboard2.js" />
+    <Content Include="Template\dist\js\pages\dashboard3.js" />
+    <Content Include="Template\plugins\bootstrap\js\bootstrap.bundle.js" />
+    <Content Include="Template\plugins\bootstrap\js\bootstrap.bundle.min.js" />
+    <Content Include="Template\plugins\bootstrap\js\bootstrap.js" />
+    <Content Include="Template\plugins\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Template\plugins\Browser\es5.js" />
+    <Content Include="Template\plugins\buttons.dataTables.css" />
+    <Content Include="Template\plugins\datatables-autofill\css\autoFill.bootstrap4.css" />
+    <Content Include="Template\plugins\datatables-autofill\css\autoFill.bootstrap4.min.css" />
+    <Content Include="Template\plugins\datatables-autofill\js\autoFill.bootstrap4.js" />
+    <Content Include="Template\plugins\datatables-autofill\js\autoFill.bootstrap4.min.js" />
+    <Content Include="Template\plugins\datatables-autofill\js\dataTables.autoFill.js" />
+    <Content Include="Template\plugins\datatables-autofill\js\dataTables.autoFill.min.js" />
+    <Content Include="Template\plugins\datatables-bs4\css\dataTables.bootstrap4.css" />
+    <Content Include="Template\plugins\datatables-bs4\css\dataTables.bootstrap4.min.css" />
+    <Content Include="Template\plugins\datatables-bs4\js\dataTables.bootstrap4.js" />
+    <Content Include="Template\plugins\datatables-bs4\js\dataTables.bootstrap4.min.js" />
+    <Content Include="Template\plugins\datatables-buttons\css\buttons.bootstrap4.css" />
+    <Content Include="Template\plugins\datatables-buttons\css\buttons.bootstrap4.min.css" />
+    <Content Include="Template\plugins\datatables-buttons\js\buttons.bootstrap4.js" />
+    <Content Include="Template\plugins\datatables-buttons\js\buttons.bootstrap4.min.js" />
+    <Content Include="Template\plugins\datatables-buttons\js\buttons.colVis.js" />
+    <Content Include="Template\plugins\datatables-buttons\js\buttons.colVis.min.js" />
+    <Content Include="Template\plugins\datatables-buttons\js\buttons.flash.js" />
+    <Content Include="Template\plugins\datatables-buttons\js\buttons.flash.min.js" />
+    <Content Include="Template\plugins\datatables-buttons\js\buttons.html5.js" />
+    <Content Include="Template\plugins\datatables-buttons\js\buttons.html5.min.js" />
+    <Content Include="Template\plugins\datatables-buttons\js\buttons.print.js" />
+    <Content Include="Template\plugins\datatables-buttons\js\buttons.print.min.js" />
+    <Content Include="Template\plugins\datatables-buttons\js\dataTables.buttons.js" />
+    <Content Include="Template\plugins\datatables-buttons\js\dataTables.buttons.min.js" />
+    <Content Include="Template\plugins\datatables-colreorder\css\colReorder.bootstrap4.css" />
+    <Content Include="Template\plugins\datatables-colreorder\css\colReorder.bootstrap4.min.css" />
+    <Content Include="Template\plugins\datatables-colreorder\js\colReorder.bootstrap4.js" />
+    <Content Include="Template\plugins\datatables-colreorder\js\colReorder.bootstrap4.min.js" />
+    <Content Include="Template\plugins\datatables-colreorder\js\dataTables.colReorder.js" />
+    <Content Include="Template\plugins\datatables-colreorder\js\dataTables.colReorder.min.js" />
+    <Content Include="Template\plugins\datatables-fixedcolumns\css\fixedColumns.bootstrap4.css" />
+    <Content Include="Template\plugins\datatables-fixedcolumns\css\fixedColumns.bootstrap4.min.css" />
+    <Content Include="Template\plugins\datatables-fixedcolumns\js\dataTables.fixedColumns.js" />
+    <Content Include="Template\plugins\datatables-fixedcolumns\js\dataTables.fixedColumns.min.js" />
+    <Content Include="Template\plugins\datatables-fixedcolumns\js\fixedColumns.bootstrap4.js" />
+    <Content Include="Template\plugins\datatables-fixedcolumns\js\fixedColumns.bootstrap4.min.js" />
+    <Content Include="Template\plugins\datatables-fixedheader\css\fixedHeader.bootstrap4.css" />
+    <Content Include="Template\plugins\datatables-fixedheader\css\fixedHeader.bootstrap4.min.css" />
+    <Content Include="Template\plugins\datatables-fixedheader\js\dataTables.fixedHeader.js" />
+    <Content Include="Template\plugins\datatables-fixedheader\js\dataTables.fixedHeader.min.js" />
+    <Content Include="Template\plugins\datatables-fixedheader\js\fixedHeader.bootstrap4.js" />
+    <Content Include="Template\plugins\datatables-fixedheader\js\fixedHeader.bootstrap4.min.js" />
+    <Content Include="Template\plugins\datatables-keytable\css\keyTable.bootstrap4.css" />
+    <Content Include="Template\plugins\datatables-keytable\css\keyTable.bootstrap4.min.css" />
+    <Content Include="Template\plugins\datatables-keytable\js\dataTables.keyTable.js" />
+    <Content Include="Template\plugins\datatables-keytable\js\dataTables.keyTable.min.js" />
+    <Content Include="Template\plugins\datatables-keytable\js\keyTable.bootstrap4.js" />
+    <Content Include="Template\plugins\datatables-keytable\js\keyTable.bootstrap4.min.js" />
+    <Content Include="Template\plugins\datatables-responsive\css\responsive.bootstrap4.css" />
+    <Content Include="Template\plugins\datatables-responsive\css\responsive.bootstrap4.min.css" />
+    <Content Include="Template\plugins\datatables-responsive\js\dataTables.responsive.js" />
+    <Content Include="Template\plugins\datatables-responsive\js\dataTables.responsive.min.js" />
+    <Content Include="Template\plugins\datatables-responsive\js\responsive.bootstrap4.js" />
+    <Content Include="Template\plugins\datatables-responsive\js\responsive.bootstrap4.min.js" />
+    <Content Include="Template\plugins\datatables-rowgroup\css\rowGroup.bootstrap4.css" />
+    <Content Include="Template\plugins\datatables-rowgroup\css\rowGroup.bootstrap4.min.css" />
+    <Content Include="Template\plugins\datatables-rowgroup\js\dataTables.rowGroup.js" />
+    <Content Include="Template\plugins\datatables-rowgroup\js\dataTables.rowGroup.min.js" />
+    <Content Include="Template\plugins\datatables-rowgroup\js\rowGroup.bootstrap4.js" />
+    <Content Include="Template\plugins\datatables-rowgroup\js\rowGroup.bootstrap4.min.js" />
+    <Content Include="Template\plugins\datatables-rowreorder\css\rowReorder.bootstrap4.css" />
+    <Content Include="Template\plugins\datatables-rowreorder\css\rowReorder.bootstrap4.min.css" />
+    <Content Include="Template\plugins\datatables-rowreorder\js\dataTables.rowReorder.js" />
+    <Content Include="Template\plugins\datatables-rowreorder\js\dataTables.rowReorder.min.js" />
+    <Content Include="Template\plugins\datatables-rowreorder\js\rowReorder.bootstrap4.js" />
+    <Content Include="Template\plugins\datatables-rowreorder\js\rowReorder.bootstrap4.min.js" />
+    <Content Include="Template\plugins\datatables-scroller\css\scroller.bootstrap4.css" />
+    <Content Include="Template\plugins\datatables-scroller\css\scroller.bootstrap4.min.css" />
+    <Content Include="Template\plugins\datatables-scroller\js\dataTables.scroller.js" />
+    <Content Include="Template\plugins\datatables-scroller\js\dataTables.scroller.min.js" />
+    <Content Include="Template\plugins\datatables-scroller\js\scroller.bootstrap4.js" />
+    <Content Include="Template\plugins\datatables-scroller\js\scroller.bootstrap4.min.js" />
+    <Content Include="Template\plugins\datatables-searchpanes\css\searchPanes.bootstrap4.css" />
+    <Content Include="Template\plugins\datatables-searchpanes\css\searchPanes.bootstrap4.min.css" />
+    <Content Include="Template\plugins\datatables-searchpanes\js\dataTables.searchPanes.js" />
+    <Content Include="Template\plugins\datatables-searchpanes\js\dataTables.searchPanes.min.js" />
+    <Content Include="Template\plugins\datatables-searchpanes\js\searchPanes.bootstrap4.js" />
+    <Content Include="Template\plugins\datatables-searchpanes\js\searchPanes.bootstrap4.min.js" />
+    <Content Include="Template\plugins\datatables-select\css\select.bootstrap4.css" />
+    <Content Include="Template\plugins\datatables-select\css\select.bootstrap4.min.css" />
+    <Content Include="Template\plugins\datatables-select\js\dataTables.select.js" />
+    <Content Include="Template\plugins\datatables-select\js\dataTables.select.min.js" />
+    <Content Include="Template\plugins\datatables-select\js\select.bootstrap4.js" />
+    <Content Include="Template\plugins\datatables-select\js\select.bootstrap4.min.js" />
+    <Content Include="Template\plugins\dataTables.bootstrap5.css" />
+    <Content Include="Template\plugins\datatables\jquery.dataTables.js" />
+    <Content Include="Template\plugins\datatables\jquery.dataTables.min.js" />
+    <Content Include="Template\plugins\daterangepicker\daterangepicker.css" />
+    <Content Include="Template\plugins\daterangepicker\daterangepicker.js" />
+    <Content Include="Template\plugins\dropzone\basic.css" />
+    <Content Include="Template\plugins\dropzone\dropzone-amd-module.js" />
+    <Content Include="Template\plugins\dropzone\dropzone.css" />
+    <Content Include="Template\plugins\dropzone\dropzone.js" />
+    <Content Include="Template\plugins\dropzone\dropzone.js.map" />
+    <Content Include="Template\plugins\dropzone\min\basic.min.css" />
+    <Content Include="Template\plugins\dropzone\min\dropzone-amd-module.min.js" />
+    <Content Include="Template\plugins\dropzone\min\dropzone.min.css" />
+    <Content Include="Template\plugins\dropzone\min\dropzone.min.js" />
+    <Content Include="Template\plugins\fontawesome-free\css\all.css" />
+    <Content Include="Template\plugins\fontawesome-free\css\all.min.css" />
+    <Content Include="Template\plugins\fontawesome-free\css\brands.css" />
+    <Content Include="Template\plugins\fontawesome-free\css\brands.min.css" />
+    <Content Include="Template\plugins\fontawesome-free\css\fontawesome.css" />
+    <Content Include="Template\plugins\fontawesome-free\css\fontawesome.min.css" />
+    <Content Include="Template\plugins\fontawesome-free\css\regular.css" />
+    <Content Include="Template\plugins\fontawesome-free\css\regular.min.css" />
+    <Content Include="Template\plugins\fontawesome-free\css\solid.css" />
+    <Content Include="Template\plugins\fontawesome-free\css\solid.min.css" />
+    <Content Include="Template\plugins\fontawesome-free\css\svg-with-js.css" />
+    <Content Include="Template\plugins\fontawesome-free\css\svg-with-js.min.css" />
+    <Content Include="Template\plugins\fontawesome-free\css\v4-shims.css" />
+    <Content Include="Template\plugins\fontawesome-free\css\v4-shims.min.css" />
+    <Content Include="Template\plugins\fontawesome-free\webfonts\fa-brands-400.eot" />
+    <Content Include="Template\plugins\fontawesome-free\webfonts\fa-brands-400.svg" />
+    <Content Include="Template\plugins\fontawesome-free\webfonts\fa-brands-400.ttf" />
+    <Content Include="Template\plugins\fontawesome-free\webfonts\fa-brands-400.woff" />
+    <Content Include="Template\plugins\fontawesome-free\webfonts\fa-brands-400.woff2" />
+    <Content Include="Template\plugins\fontawesome-free\webfonts\fa-regular-400.eot" />
+    <Content Include="Template\plugins\fontawesome-free\webfonts\fa-regular-400.svg" />
+    <Content Include="Template\plugins\fontawesome-free\webfonts\fa-regular-400.ttf" />
+    <Content Include="Template\plugins\fontawesome-free\webfonts\fa-regular-400.woff" />
+    <Content Include="Template\plugins\fontawesome-free\webfonts\fa-regular-400.woff2" />
+    <Content Include="Template\plugins\fontawesome-free\webfonts\fa-solid-900.eot" />
+    <Content Include="Template\plugins\fontawesome-free\webfonts\fa-solid-900.svg" />
+    <Content Include="Template\plugins\fontawesome-free\webfonts\fa-solid-900.ttf" />
+    <Content Include="Template\plugins\fontawesome-free\webfonts\fa-solid-900.woff" />
+    <Content Include="Template\plugins\fontawesome-free\webfonts\fa-solid-900.woff2" />
+    <Content Include="Template\plugins\jquery-ui\images\ui-icons_444444_256x240.png" />
+    <Content Include="Template\plugins\jquery-ui\images\ui-icons_555555_256x240.png" />
+    <Content Include="Template\plugins\jquery-ui\images\ui-icons_777620_256x240.png" />
+    <Content Include="Template\plugins\jquery-ui\images\ui-icons_777777_256x240.png" />
+    <Content Include="Template\plugins\jquery-ui\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Template\plugins\jquery-ui\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Template\plugins\jquery-ui\jquery-ui.css" />
+    <Content Include="Template\plugins\jquery-ui\jquery-ui.js" />
+    <Content Include="Template\plugins\jquery-ui\jquery-ui.min.css" />
+    <Content Include="Template\plugins\jquery-ui\jquery-ui.min.js" />
+    <Content Include="Template\plugins\jquery-ui\jquery-ui.structure.css" />
+    <Content Include="Template\plugins\jquery-ui\jquery-ui.structure.min.css" />
+    <Content Include="Template\plugins\jquery-ui\jquery-ui.theme.css" />
+    <Content Include="Template\plugins\jquery-ui\jquery-ui.theme.min.css" />
+    <Content Include="Template\plugins\jquery-ui\LICENSE.txt" />
+    <Content Include="Template\plugins\jquery-validation\additional-methods.js" />
+    <Content Include="Template\plugins\jquery-validation\additional-methods.min.js" />
+    <Content Include="Template\plugins\jquery-validation\jquery.validate.js" />
+    <Content Include="Template\plugins\jquery-validation\jquery.validate.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_ar.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_ar.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_az.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_az.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_bg.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_bg.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_bn_BD.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_bn_BD.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_ca.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_ca.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_cs.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_cs.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_da.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_da.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_de.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_de.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_el.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_el.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_es.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_es.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_es_AR.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_es_AR.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_es_PE.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_es_PE.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_et.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_et.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_eu.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_eu.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_fa.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_fa.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_fi.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_fi.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_fr.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_fr.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_ge.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_ge.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_gl.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_gl.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_he.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_he.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_hr.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_hr.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_hu.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_hu.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_hy_AM.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_hy_AM.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_id.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_id.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_is.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_is.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_it.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_it.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_ja.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_ja.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_ka.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_ka.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_kk.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_kk.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_ko.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_ko.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_lt.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_lt.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_lv.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_lv.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_mk.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_mk.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_my.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_my.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_nl.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_nl.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_no.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_no.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_pl.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_pl.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_pt_BR.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_pt_BR.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_pt_PT.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_pt_PT.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_ro.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_ro.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_ru.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_ru.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_sd.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_sd.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_si.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_si.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_sk.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_sk.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_sl.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_sl.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_sr.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_sr.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_sr_lat.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_sr_lat.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_sv.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_sv.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_th.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_th.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_tj.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_tj.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_tr.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_tr.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_uk.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_uk.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_ur.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_ur.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_vi.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_vi.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_zh.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_zh.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_zh_TW.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\messages_zh_TW.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\methods_de.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\methods_de.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\methods_es_CL.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\methods_es_CL.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\methods_fi.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\methods_fi.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\methods_it.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\methods_it.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\methods_nl.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\methods_nl.min.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\methods_pt.js" />
+    <Content Include="Template\plugins\jquery-validation\localization\methods_pt.min.js" />
+    <Content Include="Template\plugins\jquery.dataTables.css" />
+    <Content Include="Template\plugins\jquery.dataTables.min.css" />
+    <Content Include="Template\plugins\jquery\jquery-3.5.1.js" />
+    <Content Include="Template\plugins\jquery\jquery-3.5.1.min.js" />
+    <Content Include="Template\plugins\jquery\jquery-3.5.1.slim.js" />
+    <Content Include="Template\plugins\jquery\jquery-3.5.1.slim.min.js" />
+    <Content Include="Template\plugins\jquery\popper-utils.js" />
+    <Content Include="Template\plugins\jszip\jszip.js" />
+    <Content Include="Template\plugins\jszip\jszip.min.js" />
+    <Content Include="Template\plugins\overlayScrollbars\css\OverlayScrollbars.css" />
+    <Content Include="Template\plugins\overlayScrollbars\css\OverlayScrollbars.min.css" />
+    <Content Include="Template\plugins\overlayScrollbars\js\jquery.overlayScrollbars.js" />
+    <Content Include="Template\plugins\overlayScrollbars\js\jquery.overlayScrollbars.min.js" />
+    <Content Include="Template\plugins\overlayScrollbars\js\OverlayScrollbars.js" />
+    <Content Include="Template\plugins\overlayScrollbars\js\OverlayScrollbars.min.js" />
+    <Content Include="Template\plugins\pdfmake\pdfmake.js" />
+    <Content Include="Template\plugins\pdfmake\pdfmake.min.js" />
+    <Content Include="Template\plugins\pdfmake\vfs_fonts.js" />
+    <Content Include="Template\plugins\sweetalert2-theme-bootstrap-4\bootstrap-4.css" />
+    <Content Include="Template\plugins\sweetalert2-theme-bootstrap-4\bootstrap-4.min.css" />
+    <Content Include="Template\plugins\sweetalert2\sweetalert2.all.js" />
+    <Content Include="Template\plugins\sweetalert2\sweetalert2.all.min.js" />
+    <Content Include="Template\plugins\sweetalert2\sweetalert2.css" />
+    <Content Include="Template\plugins\sweetalert2\sweetalert2.js" />
+    <Content Include="Template\plugins\sweetalert2\sweetalert2.min.css" />
+    <Content Include="Template\plugins\sweetalert2\sweetalert2.min.js" />
+    <Content Include="Template\plugins\toastr\toastr.css" />
+    <Content Include="Template\plugins\toastr\toastr.js.map" />
+    <Content Include="Template\plugins\toastr\toastr.min.css" />
+    <Content Include="Template\plugins\toastr\toastr.min.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_LayoutMain.cshtml" />
+    <Content Include="Views\Home\BranchIndex.cshtml" />
+    <Content Include="Views\Home\IndexDashboard.cshtml" />
+    <Content Include="Views\Home\DisplayMessage.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Template\plugins\jquery\jquery-3.5.1.min.map" />
+    <Content Include="Template\plugins\jquery\jquery-3.5.1.slim.min.map" />
+    <Content Include="Views\UserInfo\Create.cshtml" />
+    <Content Include="Views\UserInfo\EditIndex.cshtml" />
+    <Content Include="Views\AgreementInfo\EditIndex.cshtml" />
+    <Content Include="Views\UserInfo\CreateIndex.cshtml" />
+    <Content Include="Views\AgreementInfo\CreateIndex.cshtml" />
+    <Content Include="Views\AgreementInfo\Create.cshtml" />
+    <Content Include="Views\AgreementInfo\Edit.cshtml" />
+    <Content Include="Views\AgreementInfo\DeleteIndex.cshtml" />
+    <Content Include="Views\AgreementInfo\ActivateIndex.cshtml" />
+    <Content Include="Views\AgreementInfo\ListOfAgreements.cshtml" />
+    <Content Include="Views\AgreementInfo\AgreementRentSchedule.cshtml" />
+    <Content Include="Views\AgreementInfo\LandlordRentSchedule.cshtml" />
+    <Content Include="Views\AgreementInfo\CostCenterRentSchedule.cshtml" />
+    <Content Include="Views\AgreementInfo\RentAPExecuteLog.cshtml" />
+    <Content Include="Views\AgreementInfo\RentAPPostLog.cshtml" />
+    <Content Include="Views\AgreementInfo\RentAPLogDetails.cshtml" />
+    <Content Include="Views\AgreementInfo\RentAPJournalReport.cshtml" />
+    <Content Include="Views\AgreementInfo\RentAPJournalDetails.cshtml" />
+    <Content Include="Views\UserInfo\DeleteIndex.cshtml" />
+    <Content Include="Views\UserInfo\ListOfUsers.cshtml" />
+    <Content Include="Views\UserInfo\ListOfUserDetails.cshtml" />
+    <Content Include="Views\UserInfo\LogRegister.cshtml" />
+    <Content Include="Views\AgreementInfo\AgreementDetailsCreate.cshtml" />
+    <Content Include="Views\AgreementInfo\BlockIndex.cshtml" />
+    <Content Include="Views\AgreementInfo\UnblockIndex.cshtml" />
+    <Content Include="Views\AgreementInfo\BorrowingRate.cshtml" />
+    <Content Include="Views\AgreementInfo\IFRSControlData.cshtml" />
+    <Content Include="Views\AgreementInfo\ListOfRentSchedule.cshtml" />
+    <Content Include="Views\AgreementInfo\IFRSLeaseSchedule.cshtml" />
+    <Content Include="Views\Error\Index.cshtml" />
+    <Content Include="Views\AgreementInfo\CalculatedSummary.cshtml" />
+    <Content Include="Views\AgreementInfo\CalculatedSummaryReport.cshtml" />
+    <Content Include="Views\AgreementInfo\Block.cshtml" />
+    <Content Include="Views\AgreementInfo\Unblock.cshtml" />
+    <Content Include="Views\AgreementInfo\NewSummaryReport.cshtml" />
+    <Content Include="Views\AgreementInfo\BlockedSummaryReport.cshtml" />
+    <Content Include="Views\AgreementInfo\RentForecast.cshtml" />
+    <Content Include="Views\AgreementInfo\RentForecastCCReport.cshtml" />
+    <Content Include="Views\AgreementInfo\RentAPReport.cshtml" />
+    <Content Include="Views\AgreementInfo\ReEdit.cshtml" />
+    <Content Include="Views\AgreementInfo\ReCreateIndex.cshtml" />
+    <Content Include="Views\AgreementInfo\ReEditIndex.cshtml" />
+    <Content Include="Views\AgreementInfo\ReDeleteIndex.cshtml" />
+    <Content Include="Views\AgreementInfo\ReActivateIndex.cshtml" />
+    <Content Include="Views\AgreementInfo\ReBlock.cshtml" />
+    <Content Include="Views\AgreementInfo\ReUnblock.cshtml" />
+    <Content Include="Views\AgreementInfo\ReListOfAgreements.cshtml" />
+    <Content Include="Views\AgreementInfo\ReListOfRentSchedule.cshtml" />
+    <Content Include="Views\AgreementInfo\ReAgreementRentSchedule.cshtml" />
+    <Content Include="Views\AgreementInfo\ReLandlordRentSchedule.cshtml" />
+    <Content Include="Views\AgreementInfo\ReCostCenterRentSchedule.cshtml" />
+    <Content Include="Views\AgreementInfo\ReIFRSLeaseSchedule.cshtml" />
+    <Content Include="Views\AgreementInfo\ReAgreementDetailsCreate.cshtml" />
+    <Content Include="Views\AgreementInfo\ModCreateIndex.cshtml" />
+    <Content Include="Views\AgreementInfo\ModDeleteIndex.cshtml" />
+    <Content Include="Views\AgreementInfo\ModEditIndex.cshtml" />
+    <Content Include="Views\AgreementInfo\ModIFRSLeaseSchedule.cshtml" />
+    <Content Include="Views\AgreementInfo\ModLandlordRentSchedule.cshtml" />
+    <Content Include="Views\AgreementInfo\ModListOfAgreements.cshtml" />
+    <Content Include="Views\AgreementInfo\ModListOfRentSchedule.cshtml" />
+    <Content Include="Views\AgreementInfo\ModUnblock.cshtml" />
+    <Content Include="Views\AgreementInfo\ModCostCenterRentSchedule.cshtml" />
+    <Content Include="Views\AgreementInfo\ModBlock.cshtml" />
+    <Content Include="Views\AgreementInfo\ModActivateIndex.cshtml" />
+    <Content Include="Views\AgreementInfo\ModAgreementDetailsCreate.cshtml" />
+    <Content Include="Views\AgreementInfo\ModAgreementRentSchedule.cshtml" />
+    <Content Include="Views\AgreementInfo\ModUnblockIndex.cshtml" />
+    <Content Include="Views\AgreementInfo\ReUnblockIndex.cshtml" />
+    <Content Include="Views\AgreementInfo\ModBlockIndex.cshtml" />
+    <Content Include="Views\AgreementInfo\ReBlockIndex.cshtml" />
+    <Content Include="Views\AgreementInfo\ModSummaryReport.cshtml" />
+    <Content Include="Views\UserInfo\ResetPassword.cshtml" />
+    <Content Include="Views\AgreementInfo\JournalEntries.cshtml" />
+    <Content Include="Views\AgreementInfo\JournalEntriesReport.cshtml" />
+    <Content Include="Views\AgreementInfo\DraftEdit.cshtml" />
+    <Content Include="Views\AgreementInfo\UtilityRentSchedule.cshtml" />
+    <Content Include="Views\AgreementInfo\UtilityAPExecuteLog.cshtml" />
+    <Content Include="Views\AgreementInfo\UtilityAPPostLog.cshtml" />
+    <Content Include="Views\AgreementInfo\UtilityAPLogDetails.cshtml" />
+    <Content Include="Views\AgreementInfo\UtilityAPReport.cshtml" />
+    <Content Include="Views\AgreementInfo\UtilityAPJournalReport.cshtml" />
+    <Content Include="Views\AgreementInfo\UtilityAPJournalDetails.cshtml" />
+    <Content Include="Views\AgreementInfo\HoldUnblockPayment.cshtml" />
+    <Content Include="Views\AgreementInfo\BlockedAgreementReport.cshtml" />
+    <Content Include="Views\AgreementInfo\BlockedVendorReport.cshtml" />
+    <Content Include="Views\AgreementInfo\RentVendorPJExecuteLog.cshtml" />
+    <Content Include="Views\AgreementInfo\RentVendorPJPostLog.cshtml" />
+    <Content Include="Views\AgreementInfo\RentVendorPJLogDetails.cshtml" />
+    <Content Include="Views\AgreementInfo\RentVendorPJReport.cshtml" />
+    <Content Include="Views\AgreementInfo\RentVendorPJInfoReport.cshtml" />
+    <Content Include="Views\AgreementInfo\RentVendorPJInfoDetails.cshtml" />
+    <Content Include="Views\AgreementInfo\RentGovtPJReport.cshtml" />
+    <Content Include="Views\AgreementInfo\RentGovtPJInfoReport.cshtml" />
+    <Content Include="Views\AgreementInfo\RentGovtPJInfoDetails.cshtml" />
+    <Content Include="Views\AgreementInfo\UtilityVendorPJExecuteLog.cshtml" />
+    <Content Include="Views\AgreementInfo\UtilityVendorPJPostLog.cshtml" />
+    <Content Include="Views\AgreementInfo\UtilityVendorPJLogDetails.cshtml" />
+    <Content Include="Views\AgreementInfo\UtilityVendorPJReport.cshtml" />
+    <Content Include="Views\AgreementInfo\UtilityVendorPJInfoReport.cshtml" />
+    <Content Include="Views\AgreementInfo\UtilityVendorPJInfoDetails.cshtml" />
+    <Content Include="Views\AgreementInfo\UtilityGovtPJReport.cshtml" />
+    <Content Include="Views\AgreementInfo\UtilityGovtPJInfoReport.cshtml" />
+    <Content Include="Views\AgreementInfo\UtilityGovtPJInfoDetails.cshtml" />
+    <Content Include="Views\AgreementInfo\ReUtilityRentSchedule.cshtml" />
+    <Content Include="Views\AgreementInfo\ModUtilityRentSchedule.cshtml" />
+    <Content Include="Views\AgreementInfo\RentHoldPayment.cshtml" />
+    <Content Include="Views\AgreementInfo\UtilityHoldPayment.cshtml" />
+    <Content Include="Views\AgreementInfo\HoldAgreementRentSchedule.cshtml" />
+    <Content Include="Views\AgreementInfo\HoldLandlordRentSchedule.cshtml" />
+    <Content Include="Views\AgreementInfo\HoldUtilityRentSchedule.cshtml" />
+    <Content Include="Views\DMInfo\UploadDMInfo.cshtml" />
+    <Content Include="Views\Home\ForgotPassword.cshtml" />
+    <Content Include="Views\Home\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\Home\ResetPassword.cshtml" />
+    <Content Include="Views\AgreementInfo\ModEdit.cshtml" />
+    <Content Include="Views\AgreementInfo\RenewalCreate.cshtml" />
+    <Content Include="Views\AgreementInfo\ModifiedCreate.cshtml" />
+    <Content Include="Views\AgreementInfo\RentForecast_AgreementRentSchedule.cshtml" />
+    <Content Include="Views\AgreementInfo\AllAgreementDetails.cshtml" />
+    <Content Include="Views\UserInfo\UserDetails.cshtml" />
+    <Content Include="Views\UserInfo\Edit.cshtml" />
+    <Content Include="Template\plugins\pdfmake\pdfmake.js.map" />
+    <Content Include="Template\plugins\pdfmake\pdfmake.min.js.map" />
+    <Content Include="Views\UserInfo\UserSummary.cshtml" />
+    <Content Include="Template\plugins\bootstrap\js\bootstrap.bundle.js.map" />
+    <Content Include="Template\plugins\bootstrap\js\bootstrap.bundle.min.js.map" />
+    <Content Include="Template\plugins\bootstrap\js\bootstrap.js.map" />
+    <Content Include="Template\plugins\bootstrap\js\bootstrap.min.js.map" />
+    <Content Include="Views\AgreementInfo\DraftIndex.cshtml" />
+    <Content Include="Views\AgreementInfo\PremiseTypeIndex.cshtml" />
+    <Content Include="Views\AgreementInfo\PremiseTypeCreate.cshtml" />
+    <Content Include="Views\AgreementInfo\PremiseTypeEdit.cshtml" />
+    <Content Include="Views\AgreementInfo\LookupIndex.cshtml" />
+    <Content Include="Views\AgreementInfo\LookupCreate.cshtml" />
+    <Content Include="Views\AgreementInfo\LookupEdit.cshtml" />
+    <Content Include="Views\AgreementInfo\CreateCopyProfile.cshtml" />
+    <Content Include="Views\UserInfo\CreateCopyProfile.cshtml" />
+    <Content Include="Views\AgreementInfo\NewSummary.cshtml" />
+    <Content Include="Views\AgreementInfo\ModSummary.cshtml" />
+    <Content Include="Views\AgreementInfo\BlockedSummary.cshtml" />
+    <Content Include="Views\AgreementInfo\PreviewRentAPJournalDetails.cshtml" />
+    <Content Include="Views\AgreementInfo\PreviewRentVendorPJInfoDetails.cshtml" />
+    <Content Include="Views\AgreementInfo\PreviewRentGovtPJInfoDetails.cshtml" />
+    <Content Include="Views\AgreementInfo\RentTemplate.cshtml" />
+    <Content Include="Views\AgreementInfo\RentTemplateReport.cshtml" />
+    <Content Include="Views\AgreementInfo\HoldBlockPayment.cshtml" />
+    <Content Include="Views\AgreementInfo\PVLeaseList.cshtml" />
+    <Content Include="Views\AgreementInfo\LatestAgreementList.cshtml" />
+    <Content Include="Views\AgreementInfo\LeaseInfo.cshtml" />
+    <Content Include="Views\AgreementInfo\LeaseInfoReport.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>63727</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44335/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <UserProperties template_4plugins_4dropzone_4dropzone_1js_1map__JsonSchema="" />
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets" Condition="Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets'))" />
+    <Error Condition="!Exists('packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('packages\Microsoft.Net.Compilers.4.0.1\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.Net.Compilers.4.0.1\build\Microsoft.Net.Compilers.props'))" />
+  </Target>
+  <Import Project="packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>
